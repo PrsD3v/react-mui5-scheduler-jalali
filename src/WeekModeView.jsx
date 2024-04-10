@@ -7,7 +7,7 @@ import {
 } from "@mui/material"
 import { 
   format, parse, add, differenceInMinutes, isValid 
-} from 'date-fns'
+} from 'date-fns-jalali'
 import EventItem from "./EventItem.jsx"
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({

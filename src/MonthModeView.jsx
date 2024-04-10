@@ -1,12 +1,12 @@
 import React, {useState, useContext} from 'react'
 import PropTypes from 'prop-types'
-import {format, getDay} from 'date-fns'
+import {format, getDay} from 'date-fns-jalali'
 import {useTheme, styled, alpha} from '@mui/material/styles'
 import {
   Paper, Typography, Table, TableBody, TableCell, TableContainer,
   TableHead, TableRow, tableCellClasses, Box
 } from "@mui/material"
-import { getDaysInMonth, isSameMonth } from 'date-fns'
+import { getDaysInMonth, isSameMonth } from 'date-fns-jalali'
 import EventNoteRoundedIcon from '@mui/icons-material/EventNoteRounded'
 import EventItem from "./EventItem.jsx"
 import {useTranslation} from "react-i18next"

@@ -1,6 +1,6 @@
 import React, {useContext, useState} from 'react'
 import PropTypes from 'prop-types'
-import { format, parse } from 'date-fns'
+import { format, parse } from 'date-fns-jalali'
 import { useTranslation } from 'react-i18next'
 import { styled } from '@mui/material/styles'
 import { TextField, Autocomplete, Box } from "@mui/material"

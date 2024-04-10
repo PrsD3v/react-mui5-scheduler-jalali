@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useContext} from 'react'
 import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
-import { format, add, sub, getDaysInMonth, parse } from 'date-fns'
+import { format, add, sub, getDaysInMonth, parse } from 'date-fns-jalali'
 import AdapterDateFns from '@mui/lab/AdapterDateFns'
 import {
   Typography, Toolbar, IconButton, Button, ToggleButton,

@@ -9,6 +9,7 @@ import trES from "./es/common.json"
 import trAR from "./ar/common.json"
 import trJA from "./ja/common.json"
 import trZH from "./zh/common.json"
+import trFA from "./fa/common.json"
 
 const resources = {
   en: { common: trEN },
@@ -18,7 +19,8 @@ const resources = {
   es: { common: trES },
   ar: { common: trAR },
   ja: { common: trJA },
-  zh: { common: trZH }
+  zh: { common: trZH },
+  fa: { common: trFA }
 }
 
 i18n

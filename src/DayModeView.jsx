@@ -6,7 +6,7 @@ import {
   Paper, Typography, Table, TableBody, TableCell, TableContainer,
   TableHead, TableRow, tableCellClasses, Tooltip
 } from "@mui/material"
-import { format, parse, add, differenceInMinutes, isValid } from 'date-fns'
+import { format, parse, add, differenceInMinutes, isValid } from 'date-fns-jalali'
 import EventItem from "./EventItem.jsx"
 import DateFnsLocaleContext from "../locales/dateFnsContext";
 

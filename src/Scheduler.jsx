@@ -16,7 +16,7 @@ import {
   startOfWeek, 
   getWeeksInMonth, 
   isSameDay
-} from 'date-fns'
+} from 'date-fns-jalali'
 import SchedulerToolbar from "./Toolbar.jsx"
 import MonthModeView from "./MonthModeView.jsx"
 import WeekModeView from "./WeekModeView.jsx"
@@ -24,6 +24,7 @@ import DayModeView from "./DayModeView.jsx"
 import TimeLineModeView from "./TimeLineModeView.jsx"
 import DateFnsLocaleContext from '../locales/dateFnsContext'
 import {ar, de, enAU, es, fr, ja, ko, ru, zhCN} from "date-fns/locale"
+import { faIR } from 'date-fns-jalali/locale';
 
 
 /**
@@ -49,9 +50,9 @@ function Scheduler(props) {
   const theme = useTheme()
   const { t, i18n } = useTranslation(['common'])
   const weeks = [
-    t('mon'), t('tue'), t('wed'),
-    t('thu'), t('fri'), t('sat'),
-    t('sun')
+    t('دوشنبه'), t('سه شنبه'), t('چهارشنبه'),
+    t('پنجشنبه'), t('جمعه'), t('شنبه'),
+    t('یکشنبه')
   ]
 
   const [state, setState] = useState({})
@@ -65,24 +66,24 @@ function Scheduler(props) {
   const [weekDays, updateWeekDays]= useReducer((state) => {
     if (options?.startWeekOn?.toUpperCase() === 'SUN') {
       return [
-        t('sun'), t('mon'), t('tue'),
-        t('wed'), t('thu'), t('fri'),
-        t('sat')
+        t('دوشنبه'), t('سه شنبه'), t('چهارشنبه'),
+        t('پنجشنبه'), t('جمعه'), t('شنبه'),
+        t('یکشنبه')
       ]
     }
     return weeks
   }, weeks)
 
-  const isDayMode = mode.toLowerCase() === 'day'
-  const isWeekMode = mode.toLowerCase() === 'week'
-  const isMonthMode = mode.toLowerCase() === 'month'
-  const isTimelineMode = mode.toLowerCase() === 'timeline'
+  const isDayMode = mode.toLowerCase() === 'روز'
+  const isWeekMode = mode.toLowerCase() === 'هفته'
+  const isMonthMode = mode.toLowerCase() === 'ماه'
+  const isTimelineMode = mode.toLowerCase() === 'خط زمان'
   const TransitionMode = (
     options?.transitionMode === 'zoom' ? Zoom :
       options?.transitionMode === 'fade' ? Fade : Slide
   )
 
-  let dateFnsLocale = enAU
+  let dateFnsLocale = faIR
   if (locale === 'fr') { dateFnsLocale = fr }
   if (locale === 'ko') { dateFnsLocale = ko }
   if (locale === 'de') { dateFnsLocale = de }
@@ -91,6 +92,7 @@ function Scheduler(props) {
   if (locale === 'ja') { dateFnsLocale = ja }
   if (locale === 'ru') { dateFnsLocale = ru }
   if (locale === 'zh') { dateFnsLocale = zhCN }
+  if (locale === 'fa') { dateFnsLocale = faIR }
 
   /**
    * @name getMonthHeader

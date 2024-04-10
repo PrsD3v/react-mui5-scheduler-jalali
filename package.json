@@ -1,5 +1,5 @@
 {
-  "name": "react-mui-scheduler",
+  "name": "react-mui-scheduler-jalali",
   "version": "2.0.4",
   "description": "📅 React mui scheduler is a react component based on @mui v5 that allows you to manage data in a calendar",
   "main": "dist/index.esm.js",
@@ -25,6 +25,12 @@
     "url": "https://github.com/rouftom/react-mui-scheduler/issues"
   },
   "dependencies": {
+    "i18next": "^21.6.16",
+    "prop-types": "^15.8.1",
+    "react-i18next": "^11.16.7"
+  },
+  "peerDependencies": {
+    "@date-io/date-fns-jalali": "^3.0.0",
     "@emotion/react": "^11.8.2",
     "@emotion/styled": "^11.8.1",
     "@mui/icons-material": "^5.5.1",
@@ -33,9 +39,7 @@
     "@mui/styles": "^5.5.3",
     "@mui/system": "^5.5.3",
     "date-fns": "^2.28.0",
-    "i18next": "^21.6.16",
-    "prop-types": "^15.8.1",
-    "react-i18next": "^11.16.7"
+    "date-fns-jalali": "^3.6.0-0"
   },
   "devDependencies": {
     "@babel/cli": "^7.17.6",

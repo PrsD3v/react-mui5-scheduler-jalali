@@ -10,7 +10,7 @@ import TimelineContent from '@mui/lab/TimelineContent'
 import TimelineOppositeContent from '@mui/lab/TimelineOppositeContent'
 import TimelineDot from '@mui/lab/TimelineDot'
 import ScheduleIcon from '@mui/icons-material/Schedule'
-import { format, parse } from 'date-fns'
+import { format, parse } from 'date-fns-jalali'
 import DateFnsLocaleContext from "../locales/dateFnsContext"
 
 const StyledContainer = styled(Typography)(({ theme }) => ({

@@ -8,7 +8,7 @@ import i18n from 'i18next';
 import { initReactI18next, useTranslation } from 'react-i18next';
 import { styled, useTheme, alpha } from '@mui/material/styles';
 import { Autocomplete, Box, TextField, Toolbar, Grid, Typography, Hidden, IconButton, Button, Menu, Stack, ToggleButtonGroup, ToggleButton, MenuItem, ListItemIcon, Divider, Collapse, Alert, Paper, TableCell, tableCellClasses, TableRow, TableContainer, Table, TableHead, TableBody, Tooltip, Zoom, Fade, Slide } from '@mui/material';
-import { format, parse, getDaysInMonth, sub, add, isSameMonth, differenceInMinutes, isValid, getWeeksInMonth, startOfMonth, getDay, isSameDay, startOfWeek, startOfDay } from 'date-fns';
+import { format, parse, getDaysInMonth, sub, add, isSameMonth, differenceInMinutes, isValid, getWeeksInMonth, startOfMonth, getDay, isSameDay, startOfWeek, startOfDay } from 'date-fns-jalali';
 import _extends from '@babel/runtime/helpers/extends';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
@@ -34,32 +34,33 @@ import TimelineOppositeContent from '@mui/lab/TimelineOppositeContent';
 import TimelineDot from '@mui/lab/TimelineDot';
 import ScheduleIcon from '@mui/icons-material/Schedule';
 import { enAU, fr, ko, de, es, ar, ja, ru, zhCN } from 'date-fns/locale';
+import { faIR } from 'date-fns-jalali/locale';
 
-var day$7 = "Day";
-var week$7 = "Week";
-var month$7 = "Month";
-var timeline$7 = "Timeline";
-var mon$7 = "Mon";
-var tue$7 = "Tue";
-var wed$7 = "Wed";
-var thu$7 = "Thu";
-var fri$7 = "Fri";
-var sat$7 = "Sat";
-var sun$7 = "Sun";
-var search$7 = "Search...";
+var day$7 = "روز";
+var week$7 = "هفته";
+var month$7 = "ماه";
+var timeline$7 = "خط زمان";
+var mon$7 = "دوشنبه";
+var tue$7 = "سه شنبه";
+var wed$7 = "چهارشنبه";
+var thu$7 = "پنجشنبه";
+var fri$7 = "جمعه";
+var sat$7 = "شنبه";
+var sun$7 = "یکشنبه";
+var search$7 = "جستجو ...";
 var trEN = {
-	day: day$7,
-	week: week$7,
-	month: month$7,
-	timeline: timeline$7,
-	mon: mon$7,
-	tue: tue$7,
-	wed: wed$7,
-	thu: thu$7,
-	fri: fri$7,
-	sat: sat$7,
-	sun: sun$7,
-	search: search$7
+  day: day$7,
+  week: week$7,
+  month: month$7,
+  timeline: timeline$7,
+  mon: mon$7,
+  tue: tue$7,
+  wed: wed$7,
+  thu: thu$7,
+  fri: fri$7,
+  sat: sat$7,
+  sun: sun$7,
+  search: search$7
 };
 
 var day$6 = "Jour";
@@ -75,18 +76,18 @@ var sat$6 = "Sam";
 var sun$6 = "Dim";
 var search$6 = "Chercher...";
 var trFR = {
-	day: day$6,
-	week: week$6,
-	month: month$6,
-	timeline: timeline$6,
-	mon: mon$6,
-	tue: tue$6,
-	wed: wed$6,
-	thu: thu$6,
-	fri: fri$6,
-	sat: sat$6,
-	sun: sun$6,
-	search: search$6
+  day: day$6,
+  week: week$6,
+  month: month$6,
+  timeline: timeline$6,
+  mon: mon$6,
+  tue: tue$6,
+  wed: wed$6,
+  thu: thu$6,
+  fri: fri$6,
+  sat: sat$6,
+  sun: sun$6,
+  search: search$6
 };
 
 var day$5 = "낮";
@@ -102,18 +103,18 @@ var sat$5 = "앉았다";
 var sun$5 = "해";
 var search$5 = "검색...";
 var trKO = {
-	day: day$5,
-	week: week$5,
-	month: month$5,
-	timeline: timeline$5,
-	mon: mon$5,
-	tue: tue$5,
-	wed: wed$5,
-	thu: thu$5,
-	fri: fri$5,
-	sat: sat$5,
-	sun: sun$5,
-	search: search$5
+  day: day$5,
+  week: week$5,
+  month: month$5,
+  timeline: timeline$5,
+  mon: mon$5,
+  tue: tue$5,
+  wed: wed$5,
+  thu: thu$5,
+  fri: fri$5,
+  sat: sat$5,
+  sun: sun$5,
+  search: search$5
 };
 
 var day$4 = "Tag";
@@ -129,18 +130,18 @@ var sat$4 = "Sam";
 var sun$4 = "Sonn";
 var search$4 = "Suchen...";
 var trDE = {
-	day: day$4,
-	week: week$4,
-	month: month$4,
-	timeline: timeline$4,
-	mon: mon$4,
-	tue: tue$4,
-	wed: wed$4,
-	thu: thu$4,
-	fri: fri$4,
-	sat: sat$4,
-	sun: sun$4,
-	search: search$4
+  day: day$4,
+  week: week$4,
+  month: month$4,
+  timeline: timeline$4,
+  mon: mon$4,
+  tue: tue$4,
+  wed: wed$4,
+  thu: thu$4,
+  fri: fri$4,
+  sat: sat$4,
+  sun: sun$4,
+  search: search$4
 };
 
 var day$3 = "Día";
@@ -156,18 +157,18 @@ var sat$3 = "Sáb";
 var sun$3 = "Dom";
 var search$3 = "Buscar...";
 var trES = {
-	day: day$3,
-	week: week$3,
-	month: month$3,
-	timeline: timeline$3,
-	mon: mon$3,
-	tue: tue$3,
-	wed: wed$3,
-	thu: thu$3,
-	fri: fri$3,
-	sat: sat$3,
-	sun: sun$3,
-	search: search$3
+  day: day$3,
+  week: week$3,
+  month: month$3,
+  timeline: timeline$3,
+  mon: mon$3,
+  tue: tue$3,
+  wed: wed$3,
+  thu: thu$3,
+  fri: fri$3,
+  sat: sat$3,
+  sun: sun$3,
+  search: search$3
 };
 
 var day$2 = "يوم";
@@ -183,18 +184,18 @@ var sat$2 = "قعد";
 var sun$2 = "شمس";
 var search$2 = "بحث";
 var trAR = {
-	day: day$2,
-	week: week$2,
-	month: month$2,
-	timeline: timeline$2,
-	mon: mon$2,
-	tue: tue$2,
-	wed: wed$2,
-	thu: thu$2,
-	fri: fri$2,
-	sat: sat$2,
-	sun: sun$2,
-	search: search$2
+  day: day$2,
+  week: week$2,
+  month: month$2,
+  timeline: timeline$2,
+  mon: mon$2,
+  tue: tue$2,
+  wed: wed$2,
+  thu: thu$2,
+  fri: fri$2,
+  sat: sat$2,
+  sun: sun$2,
+  search: search$2
 };
 
 var day$1 = "日";
@@ -210,18 +211,18 @@ var sat$1 = "土";
 var sun$1 = "太陽";
 var search$1 = "探す...";
 var trJA = {
-	day: day$1,
-	week: week$1,
-	month: month$1,
-	timeline: timeline$1,
-	mon: mon$1,
-	tue: tue$1,
-	wed: wed$1,
-	thu: thu$1,
-	fri: fri$1,
-	sat: sat$1,
-	sun: sun$1,
-	search: search$1
+  day: day$1,
+  week: week$1,
+  month: month$1,
+  timeline: timeline$1,
+  mon: mon$1,
+  tue: tue$1,
+  wed: wed$1,
+  thu: thu$1,
+  fri: fri$1,
+  sat: sat$1,
+  sun: sun$1,
+  search: search$1
 };
 
 var day = "天";
@@ -237,18 +238,18 @@ var sat = "星期六";
 var sun = "太阳";
 var search = "寻找...";
 var trZH = {
-	day: day,
-	week: week,
-	month: month,
-	timeline: timeline,
-	mon: mon,
-	tue: tue,
-	wed: wed,
-	thu: thu,
-	fri: fri,
-	sat: sat,
-	sun: sun,
-	search: search
+  day: day,
+  week: week,
+  month: month,
+  timeline: timeline,
+  mon: mon,
+  tue: tue,
+  wed: wed,
+  thu: thu,
+  fri: fri,
+  sat: sat,
+  sun: sun,
+  search: search
 };
 
 var resources = {
@@ -278,25 +279,25 @@ var resources = {
   }
 };
 i18n // pass the i18n instance to react-i18next.
-.use(initReactI18next) // init i18next
-// for all options read: https://www.i18next.com/overview/configuration-options
-.init({
-  resources: resources,
-  lng: localStorage.getItem('i18nextLng'),
-  ns: ["common"],
-  defaultNS: "common",
-  fallbackNS: "common",
-  fallbackLng: ["en", "fr", "dev"],
-  debug: false,
-  interpolation: {
-    escapeValue: false // not needed for react as it escapes by default
+  .use(initReactI18next) // init i18next
+  // for all options read: https://www.i18next.com/overview/configuration-options
+  .init({
+    resources: resources,
+    lng: localStorage.getItem('i18nextLng'),
+    ns: ["common"],
+    defaultNS: "common",
+    fallbackNS: "common",
+    fallbackLng: ["en", "fr", "dev"],
+    debug: false,
+    interpolation: {
+      escapeValue: false // not needed for react as it escapes by default
 
-  },
-  react: {
-    wait: true,
-    useSuspense: false
-  }
-});
+    },
+    react: {
+      wait: true,
+      useSuspense: false
+    }
+  });
 
 var DateFnsLocaleContext = /*#__PURE__*/createContext();
 
@@ -324,22 +325,22 @@ var StyledAutoComplete = styled(Autocomplete)(function (_ref) {
 
 function ToolbarSearchbar(props) {
   var events = props.events,
-      _onInputChange = props.onInputChange;
+    _onInputChange = props.onInputChange;
 
   var _useTranslation = useTranslation(['common']),
-      t = _useTranslation.t;
+    t = _useTranslation.t;
 
   var _useState = useState(''),
-      _useState2 = _slicedToArray(_useState, 2),
-      value = _useState2[0],
-      setValue = _useState2[1];
+    _useState2 = _slicedToArray(_useState, 2),
+    value = _useState2[0],
+    setValue = _useState2[1];
 
   useContext(DateFnsLocaleContext);
 
   var _useState3 = useState(''),
-      _useState4 = _slicedToArray(_useState3, 2),
-      inputValue = _useState4[0],
-      setInputValue = _useState4[1];
+    _useState4 = _slicedToArray(_useState3, 2),
+    inputValue = _useState4[0],
+    setInputValue = _useState4[1];
 
   var handleOnChange = function handleOnChange(event, newValue) {
     setValue(newValue);
@@ -416,49 +417,49 @@ ToolbarSearchbar.defaultProps = {};
 
 function SchedulerToolbar(props) {
   props.locale;
-      var events = props.events,
-      today = props.today,
-      switchMode = props.switchMode,
-      alertProps = props.alertProps,
-      toolbarProps = props.toolbarProps,
-      onModeChange = props.onModeChange,
-      onDateChange = props.onDateChange,
-      onSearchResult = props.onSearchResult,
-      onAlertCloseButtonClicked = props.onAlertCloseButtonClicked;
+  var events = props.events,
+    today = props.today,
+    switchMode = props.switchMode,
+    alertProps = props.alertProps,
+    toolbarProps = props.toolbarProps,
+    onModeChange = props.onModeChange,
+    onDateChange = props.onDateChange,
+    onSearchResult = props.onSearchResult,
+    onAlertCloseButtonClicked = props.onAlertCloseButtonClicked;
   var theme = useTheme();
 
   var _useTranslation = useTranslation(['common']),
-      t = _useTranslation.t;
+    t = _useTranslation.t;
 
   var _useState = useState(switchMode),
-      _useState2 = _slicedToArray(_useState, 2),
-      mode = _useState2[0],
-      setMode = _useState2[1];
+    _useState2 = _slicedToArray(_useState, 2),
+    mode = _useState2[0],
+    setMode = _useState2[1];
 
   var _useState3 = useState(),
-      _useState4 = _slicedToArray(_useState3, 2),
-      searchResult = _useState4[0],
-      setSearchResult = _useState4[1];
+    _useState4 = _slicedToArray(_useState3, 2),
+    searchResult = _useState4[0],
+    setSearchResult = _useState4[1];
 
   var _useState5 = useState(null),
-      _useState6 = _slicedToArray(_useState5, 2),
-      anchorMenuEl = _useState6[0],
-      setAnchorMenuEl = _useState6[1];
+    _useState6 = _slicedToArray(_useState5, 2),
+    anchorMenuEl = _useState6[0],
+    setAnchorMenuEl = _useState6[1];
 
   var _useState7 = useState(null),
-      _useState8 = _slicedToArray(_useState7, 2),
-      anchorDateEl = _useState8[0],
-      setAnchorDateEl = _useState8[1];
+    _useState8 = _slicedToArray(_useState7, 2),
+    anchorDateEl = _useState8[0],
+    setAnchorDateEl = _useState8[1];
 
   var _useState9 = useState(today || new Date()),
-      _useState10 = _slicedToArray(_useState9, 2),
-      selectedDate = _useState10[0],
-      setSelectedDate = _useState10[1];
+    _useState10 = _slicedToArray(_useState9, 2),
+    selectedDate = _useState10[0],
+    setSelectedDate = _useState10[1];
 
   var _useState11 = useState(getDaysInMonth(selectedDate)),
-      _useState12 = _slicedToArray(_useState11, 2),
-      daysInMonth = _useState12[0],
-      setDaysInMonth = _useState12[1];
+    _useState12 = _slicedToArray(_useState11, 2),
+    daysInMonth = _useState12[0],
+    setDaysInMonth = _useState12[1];
 
   var openMenu = Boolean(anchorMenuEl);
   var openDateSelector = Boolean(anchorDateEl);
@@ -797,13 +798,13 @@ SchedulerToolbar.defaultProps = {
 
 function EventItem(props) {
   var event = props.event,
-      rowId = props.rowId,
-      sx = props.sx,
-      boxSx = props.boxSx,
-      elevation = props.elevation;
-      props.isMonthMode;
-      var onClick = props.onClick,
-      onDragStart = props.onDragStart;
+    rowId = props.rowId,
+    sx = props.sx,
+    boxSx = props.boxSx,
+    elevation = props.elevation;
+  props.isMonthMode;
+  var onClick = props.onClick,
+    onDragStart = props.onDragStart;
   return /*#__PURE__*/React.createElement(Paper, {
     sx: sx,
     draggable: true,
@@ -868,23 +869,23 @@ var StyledTableRow$2 = styled(TableRow)(function (_ref3) {
 
 function MonthModeView(props) {
   var rows = props.rows;
-      props.locale;
-      var options = props.options,
-      columns = props.columns,
-      legacyStyle = props.legacyStyle,
-      searchResult = props.searchResult,
-      onTaskClick = props.onTaskClick,
-      onCellClick = props.onCellClick,
-      onEventsChange = props.onEventsChange;
+  props.locale;
+  var options = props.options,
+    columns = props.columns,
+    legacyStyle = props.legacyStyle,
+    searchResult = props.searchResult,
+    onTaskClick = props.onTaskClick,
+    onCellClick = props.onCellClick,
+    onEventsChange = props.onEventsChange;
   var theme = useTheme();
 
   var _useState = useState({}),
-      _useState2 = _slicedToArray(_useState, 2),
-      state = _useState2[0],
-      setState = _useState2[1];
+    _useState2 = _slicedToArray(_useState, 2),
+    state = _useState2[0],
+    setState = _useState2[1];
 
   var _useTranslation = useTranslation(['common']);
-      _useTranslation.t;
+  _useTranslation.t;
 
   var today = new Date();
   var currentDaySx = {
@@ -1196,21 +1197,21 @@ var StyledTableContainer$1 = styled(TableContainer)(function (_ref5) {
 
 function WeekModeView(props) {
   var options = props.options,
-      columns = props.columns,
-      rows = props.rows,
-      searchResult = props.searchResult,
-      onTaskClick = props.onTaskClick,
-      onCellClick = props.onCellClick,
-      onEventsChange = props.onEventsChange;
+    columns = props.columns,
+    rows = props.rows,
+    searchResult = props.searchResult,
+    onTaskClick = props.onTaskClick,
+    onCellClick = props.onCellClick,
+    onEventsChange = props.onEventsChange;
   var theme = useTheme();
 
   var _useState = useState({
     columns: columns,
     rows: rows
   }),
-      _useState2 = _slicedToArray(_useState, 2),
-      state = _useState2[0],
-      setState = _useState2[1];
+    _useState2 = _slicedToArray(_useState, 2),
+    state = _useState2[0],
+    setState = _useState2[1];
 
   var onCellDragOver = function onCellDragOver(e) {
     e.preventDefault();
@@ -1515,21 +1516,21 @@ var StyledTableContainer = styled$1(TableContainer)(function (_ref5) {
 
 function DayModeView(props) {
   var options = props.options,
-      columns = props.columns,
-      rows = props.rows,
-      searchResult = props.searchResult,
-      onTaskClick = props.onTaskClick,
-      onCellClick = props.onCellClick,
-      onEventsChange = props.onEventsChange;
+    columns = props.columns,
+    rows = props.rows,
+    searchResult = props.searchResult,
+    onTaskClick = props.onTaskClick,
+    onCellClick = props.onCellClick,
+    onEventsChange = props.onEventsChange;
   var theme = useTheme();
 
   var _useState = useState({
     columns: columns,
     rows: rows
   }),
-      _useState2 = _slicedToArray(_useState, 2),
-      state = _useState2[0],
-      setState = _useState2[1];
+    _useState2 = _slicedToArray(_useState, 2),
+    state = _useState2[0],
+    setState = _useState2[1];
   /**
    * @name onCellDragOver
    * @param e
@@ -1845,9 +1846,9 @@ function TimeLineModeView(props) {
   var _fileredEvents2;
 
   var options = props.options,
-      rows = props.rows,
-      searchResult = props.searchResult,
-      onTaskClick = props.onTaskClick;
+    rows = props.rows,
+    searchResult = props.searchResult,
+    onTaskClick = props.onTaskClick;
   var dateFnsLocale = useContext(DateFnsLocaleContext);
   /**
    * @name handleTaskClick
@@ -1949,63 +1950,63 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function Scheduler(props) {
   var events = props.events,
-      locale = props.locale,
-      options = props.options,
-      alertProps = props.alertProps,
-      onCellClick = props.onCellClick,
-      legacyStyle = props.legacyStyle,
-      onTaskClick = props.onTaskClick,
-      toolbarProps = props.toolbarProps,
-      onEventsChange = props.onEventsChange,
-      onAlertCloseButtonClicked = props.onAlertCloseButtonClicked;
+    locale = props.locale,
+    options = props.options,
+    alertProps = props.alertProps,
+    onCellClick = props.onCellClick,
+    legacyStyle = props.legacyStyle,
+    onTaskClick = props.onTaskClick,
+    toolbarProps = props.toolbarProps,
+    onEventsChange = props.onEventsChange,
+    onAlertCloseButtonClicked = props.onAlertCloseButtonClicked;
   var today = new Date();
   useTheme();
 
   var _useTranslation = useTranslation(['common']),
-      t = _useTranslation.t,
-      i18n = _useTranslation.i18n;
+    t = _useTranslation.t,
+    i18n = _useTranslation.i18n;
 
   var weeks = [t('mon'), t('tue'), t('wed'), t('thu'), t('fri'), t('sat'), t('sun')];
 
   var _useState = useState({}),
-      _useState2 = _slicedToArray(_useState, 2),
-      state = _useState2[0],
-      setState = _useState2[1];
+    _useState2 = _slicedToArray(_useState, 2),
+    state = _useState2[0],
+    setState = _useState2[1];
 
   var _useState3 = useState(),
-      _useState4 = _slicedToArray(_useState3, 2),
-      searchResult = _useState4[0],
-      setSearchResult = _useState4[1];
+    _useState4 = _slicedToArray(_useState3, 2),
+    searchResult = _useState4[0],
+    setSearchResult = _useState4[1];
 
   var _useState5 = useState(today),
-      _useState6 = _slicedToArray(_useState5, 2),
-      selectedDay = _useState6[0],
-      setSelectedDay = _useState6[1];
+    _useState6 = _slicedToArray(_useState5, 2),
+    selectedDay = _useState6[0],
+    setSelectedDay = _useState6[1];
 
   var _useState7 = useState(alertProps),
-      _useState8 = _slicedToArray(_useState7, 2),
-      alertState = _useState8[0],
-      setAlertState = _useState8[1];
+    _useState8 = _slicedToArray(_useState7, 2),
+    alertState = _useState8[0],
+    setAlertState = _useState8[1];
 
   var _useState9 = useState((options === null || options === void 0 ? void 0 : options.defaultMode) || 'month'),
-      _useState10 = _slicedToArray(_useState9, 2),
-      mode = _useState10[0],
-      setMode = _useState10[1];
+    _useState10 = _slicedToArray(_useState9, 2),
+    mode = _useState10[0],
+    setMode = _useState10[1];
 
   var _useState11 = useState(getDaysInMonth(today)),
-      _useState12 = _slicedToArray(_useState11, 2),
-      daysInMonth = _useState12[0],
-      setDaysInMonth = _useState12[1];
+    _useState12 = _slicedToArray(_useState11, 2),
+    daysInMonth = _useState12[0],
+    setDaysInMonth = _useState12[1];
 
   var _useState13 = useState((options === null || options === void 0 ? void 0 : options.startWeekOn) || 'mon'),
-      _useState14 = _slicedToArray(_useState13, 2),
-      startWeekOn = _useState14[0],
-      setStartWeekOn = _useState14[1];
+    _useState14 = _slicedToArray(_useState13, 2),
+    startWeekOn = _useState14[0],
+    setStartWeekOn = _useState14[1];
 
   var _useState15 = useState(format(today, 'MMMM-yyyy')),
-      _useState16 = _slicedToArray(_useState15, 2),
-      selectedDate = _useState16[0],
-      setSelectedDate = _useState16[1];
+    _useState16 = _slicedToArray(_useState15, 2),
+    selectedDate = _useState16[0],
+    setSelectedDate = _useState16[1];
 
   var _useReducer = useReducer(function (state) {
     var _options$startWeekOn;
@@ -2016,16 +2017,16 @@ function Scheduler(props) {
 
     return weeks;
   }, weeks),
-      _useReducer2 = _slicedToArray(_useReducer, 2),
-      weekDays = _useReducer2[0],
-      updateWeekDays = _useReducer2[1];
+    _useReducer2 = _slicedToArray(_useReducer, 2),
+    weekDays = _useReducer2[0],
+    updateWeekDays = _useReducer2[1];
 
   var isDayMode = mode.toLowerCase() === 'day';
   var isWeekMode = mode.toLowerCase() === 'week';
   var isMonthMode = mode.toLowerCase() === 'month';
   var isTimelineMode = mode.toLowerCase() === 'timeline';
   var TransitionMode = (options === null || options === void 0 ? void 0 : options.transitionMode) === 'zoom' ? Zoom : (options === null || options === void 0 ? void 0 : options.transitionMode) === 'fade' ? Fade : Slide;
-  var dateFnsLocale = enAU;
+  var dateFnsLocale = faIR;
 
   if (locale === 'fr') {
     dateFnsLocale = fr;
@@ -2057,6 +2058,10 @@ function Scheduler(props) {
 
   if (locale === 'zh') {
     dateFnsLocale = zhCN;
+  }
+
+  if (locale === 'ir') {
+    dateFnsLocale = faIR;
   }
   /**
    * @name getMonthHeader
@@ -2095,7 +2100,7 @@ function Scheduler(props) {
     var _lastRow$days;
 
     var rows = [],
-        daysBefore = [];
+      daysBefore = [];
     var iteration = getWeeksInMonth(selectedDay);
     var startOnSunday = (startWeekOn === null || startWeekOn === void 0 ? void 0 : startWeekOn.toUpperCase()) === 'SUN' && t('sun').toUpperCase() === weekDays[0].toUpperCase();
     var monthStartDate = startOfMonth(selectedDay); // First day of month
@@ -2180,9 +2185,9 @@ function Scheduler(props) {
       };
 
       for (var j = 0; // This condition ensure that days will not exceed 31
-      // i === 0 ? 7 - daysBefore?.length means that we substract inserted days
-      // in the first line to 7
-      j < (_i2 === 0 ? 7 - daysBefore.length : 7) && dateDay <= daysInMonth; j++) {
+        // i === 0 ? 7 - daysBefore?.length means that we substract inserted days
+        // in the first line to 7
+        j < (_i2 === 0 ? 7 - daysBefore.length : 7) && dateDay <= daysInMonth; j++) {
         _loop3(j);
       }
 
