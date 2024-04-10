@@ -10,8 +10,8 @@ import { styled, useTheme, alpha } from '@mui/material/styles';
 import { Autocomplete, Box, TextField, Toolbar, Grid, Typography, Hidden, IconButton, Button, Menu, Stack, ToggleButtonGroup, ToggleButton, MenuItem, ListItemIcon, Divider, Collapse, Alert, Paper, TableCell, tableCellClasses, TableRow, TableContainer, Table, TableHead, TableBody, Tooltip, Zoom, Fade, Slide } from '@mui/material';
 import { format, parse, getDaysInMonth, sub, add, isSameMonth, differenceInMinutes, isValid, getWeeksInMonth, startOfMonth, getDay, isSameDay, startOfWeek, startOfDay } from 'date-fns-jalali';
 import _extends from '@babel/runtime/helpers/extends';
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
-import '@date-io/date-fns-jalali';
+import '@mui/lab/AdapterDateFns';
+import AdapterJalali from '@date-io/date-fns-jalali';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import StaticDatePicker from '@mui/lab/StaticDatePicker';
 import CloseIcon from '@mui/icons-material/Close';
@@ -640,7 +640,7 @@ function SchedulerToolbar(props) {
     }
   }, /*#__PURE__*/React.createElement(LocalizationProvider, {
     locale: dateFnsLocale,
-    dateAdapter: AdapterDateFns
+    dateAdapter: AdapterJalali
   }, /*#__PURE__*/React.createElement(StaticDatePicker, {
     displayStaticWrapperAs: "desktop",
     value: selectedDate,
