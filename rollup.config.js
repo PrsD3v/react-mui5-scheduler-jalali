@@ -29,6 +29,7 @@ MODE.map((m) => {
       "@mui/material",
       "@mui/system",
       "date-fns",
+      "date-fns-jalali",
       "prop-types",
       /@babel\/runtime/
     ],

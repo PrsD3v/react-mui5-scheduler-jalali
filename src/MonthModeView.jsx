@@ -1,6 +1,6 @@
 import React, {useState, useContext} from 'react'
 import PropTypes from 'prop-types'
-import {format, getDay} from 'date-fns-jalali'
+import {format, getDay} from 'date-fns'
 import {useTheme, styled, alpha} from '@mui/material/styles'
 import {
   Paper, Typography, Table, TableBody, TableCell, TableContainer,

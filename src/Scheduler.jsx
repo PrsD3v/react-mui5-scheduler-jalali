@@ -24,7 +24,7 @@ import DayModeView from "./DayModeView.jsx"
 import TimeLineModeView from "./TimeLineModeView.jsx"
 import DateFnsLocaleContext from '../locales/dateFnsContext'
 import {ar, de, enAU, es, fr, ja, ko, ru, zhCN} from "date-fns/locale"
-import { faIR } from 'date-fns-jalali/locale';
+import {faIR} from "date-fns-jalali/locale"
 
 
 /**
@@ -50,9 +50,9 @@ function Scheduler(props) {
   const theme = useTheme()
   const { t, i18n } = useTranslation(['common'])
   const weeks = [
-    t('دوشنبه'), t('سه شنبه'), t('چهارشنبه'),
-    t('پنجشنبه'), t('جمعه'), t('شنبه'),
-    t('یکشنبه')
+    t('mon'), t('tue'), t('wed'),
+    t('thu'), t('fri'), t('sat'),
+    t('sun')
   ]
 
   const [state, setState] = useState({})
@@ -66,24 +66,24 @@ function Scheduler(props) {
   const [weekDays, updateWeekDays]= useReducer((state) => {
     if (options?.startWeekOn?.toUpperCase() === 'SUN') {
       return [
-        t('دوشنبه'), t('سه شنبه'), t('چهارشنبه'),
-        t('پنجشنبه'), t('جمعه'), t('شنبه'),
-        t('یکشنبه')
+        t('sun'), t('mon'), t('tue'),
+        t('wed'), t('thu'), t('fri'),
+        t('sat')
       ]
     }
     return weeks
   }, weeks)
 
-  const isDayMode = mode.toLowerCase() === 'روز'
-  const isWeekMode = mode.toLowerCase() === 'هفته'
-  const isMonthMode = mode.toLowerCase() === 'ماه'
-  const isTimelineMode = mode.toLowerCase() === 'خط زمان'
+  const isDayMode = mode.toLowerCase() === 'day'
+  const isWeekMode = mode.toLowerCase() === 'week'
+  const isMonthMode = mode.toLowerCase() === 'month'
+  const isTimelineMode = mode.toLowerCase() === 'timeline'
   const TransitionMode = (
     options?.transitionMode === 'zoom' ? Zoom :
       options?.transitionMode === 'fade' ? Fade : Slide
   )
 
-  let dateFnsLocale = faIR
+  let dateFnsLocale = enAU
   if (locale === 'fr') { dateFnsLocale = fr }
   if (locale === 'ko') { dateFnsLocale = ko }
   if (locale === 'de') { dateFnsLocale = de }

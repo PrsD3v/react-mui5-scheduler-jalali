@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
 import { format, add, sub, getDaysInMonth, parse } from 'date-fns-jalali'
 import AdapterDateFns from '@mui/lab/AdapterDateFns'
+import AdapterJalali from "@date-io/date-fns-jalali";
 import {
   Typography, Toolbar, IconButton, Button, ToggleButton,
   TextField, Hidden, Alert, Collapse, ToggleButtonGroup,
@@ -139,7 +140,6 @@ function SchedulerToolbar (props) {
       setMode(switchMode)
     }
   }, [switchMode])
-  
   return (
     <Toolbar 
       variant="dense" 
@@ -209,7 +209,7 @@ function SchedulerToolbar (props) {
             >
               <LocalizationProvider
                 locale={dateFnsLocale}
-                dateAdapter={AdapterDateFns}
+                dateAdapter={AdapterJalali}
               >
                 <StaticDatePicker
                   displayStaticWrapperAs="desktop"
