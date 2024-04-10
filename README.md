@@ -21,7 +21,7 @@ React mui scheduler is a react component based on @mui v5 that allows you to man
 ## 🚀 Installation
 
 ```nodejs
-  npm install react-mui-scheduler
+  npm install react-mui-scheduler @mui/material @mui/system @mui/lab @mui/styles @mui/icons-material @emotion/react @emotion/styled date-fns date-fns-jalali  @date-io/date-fns-jalali
 ```
 
 ## 💻 Usage
@@ -217,6 +217,7 @@ For more details about date formats, see [date-fns docs](https://date-fns.org/v2
 ## 🙏🏻 A Special Thanks to
 
 - Muller Roufaou ([rouftom](http://github.com/rouftom))
+- Mahdi Amiri ([OwlPro](http://github.com/owlpro))
 
 ## 😁 Authors
 
