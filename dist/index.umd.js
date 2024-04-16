@@ -1907,9 +1907,11 @@
       selectedDate = _useState16[0],
       setSelectedDate = _useState16[1];
     var _useReducer = React.useReducer(function (state) {
-        var _options$startWeekOn;
+        var _options$startWeekOn, _options$startWeekOn2;
         if ((options === null || options === void 0 ? void 0 : (_options$startWeekOn = options.startWeekOn) === null || _options$startWeekOn === void 0 ? void 0 : _options$startWeekOn.toUpperCase()) === 'SUN') {
           return [t('sun'), t('mon'), t('tue'), t('wed'), t('thu'), t('fri'), t('sat')];
+        } else if ((options === null || options === void 0 ? void 0 : (_options$startWeekOn2 = options.startWeekOn) === null || _options$startWeekOn2 === void 0 ? void 0 : _options$startWeekOn2.toUpperCase()) === 'SAT') {
+          return [t('sat'), t('sun'), t('mon'), t('tue'), t('wed'), t('thu'), t('fri')];
         }
         return weeks;
       }, weeks),
@@ -1986,17 +1988,18 @@
         daysBefore = [];
       var iteration = dateFnsJalali.getWeeksInMonth(selectedDay);
       var startOnSunday = (startWeekOn === null || startWeekOn === void 0 ? void 0 : startWeekOn.toUpperCase()) === 'SUN' && t('sun').toUpperCase() === weekDays[0].toUpperCase();
+      var startOnSaturday = (startWeekOn === null || startWeekOn === void 0 ? void 0 : startWeekOn.toUpperCase()) === 'SAT' && t('sat').toUpperCase() === weekDays[0].toUpperCase();
       var monthStartDate = dateFnsJalali.startOfMonth(selectedDay); // First day of month
       var monthStartDay = dateFnsJalali.getDay(monthStartDate); // Index of the day in week
       var dateDay = parseInt(dateFnsJalali.format(monthStartDate, 'dd')); // Month start day
       // Condition check helper
       var checkCondition = function checkCondition(v) {
-        return startOnSunday ? v <= monthStartDay : v < monthStartDay;
+        return startOnSunday ? v <= monthStartDay : startOnSaturday ? v - 1 <= monthStartDay : v < monthStartDay;
       };
       if (monthStartDay >= 1) {
         var _loop = function _loop() {
           var subDate = dateFnsJalali.sub(monthStartDate, {
-            days: monthStartDay - i + (startOnSunday ? 1 : 0)
+            days: monthStartDay - i + (startOnSunday ? 1 : startOnSaturday ? 2 : 0)
           });
           var day = parseInt(dateFnsJalali.format(subDate, 'dd'));
           var data = events.filter(function (event) {
@@ -2015,7 +2018,7 @@
         for (var i = 1; checkCondition(i); i++) {
           _loop();
         }
-      } else if (!startOnSunday) {
+      } else if (!startOnSunday || !startOnSaturday) {
         var _loop2 = function _loop2() {
           var subDate = dateFnsJalali.sub(monthStartDate, {
             days: _i

@@ -71,6 +71,13 @@ function Scheduler(props) {
         t('sat')
       ]
     }
+  else if (options?.startWeekOn?.toUpperCase() === 'SAT') {
+      return [
+        t('sat'), t('sun'), t('mon'),
+        t('tue'),t('wed'), t('thu'),
+        t('fri'),
+      ]
+    }
     return weeks
   }, weeks)
 
@@ -129,12 +136,16 @@ function Scheduler(props) {
       startWeekOn?.toUpperCase() === 'SUN' &&
       t('sun').toUpperCase() === weekDays[0].toUpperCase()
     )
+    let startOnSaturday = (
+      startWeekOn?.toUpperCase() === 'SAT' &&
+      t('sat').toUpperCase() === weekDays[0].toUpperCase()
+    )
     let monthStartDate = startOfMonth(selectedDay)        // First day of month
     let monthStartDay = getDay(monthStartDate)            // Index of the day in week
     let dateDay = parseInt(format(monthStartDate, 'dd'))  // Month start day
     // Condition check helper
     const checkCondition = (v) => (
-      startOnSunday ? v <= monthStartDay : v < monthStartDay
+      startOnSunday ? v <= monthStartDay : startOnSaturday ? v-1 <= monthStartDay : v < monthStartDay
     )
     if (monthStartDay >= 1) {
       // Add days of precedent month
@@ -143,7 +154,7 @@ function Scheduler(props) {
       for (let i = 1; checkCondition(i); i++) {
         let subDate = sub(
           monthStartDate,
-          {days: monthStartDay - i + (startOnSunday ? 1 : 0)}
+          {days: monthStartDay - i + (startOnSunday ? 1 : startOnSaturday ? 2 : 0)}
         )
         let day = parseInt(format(subDate, 'dd'))
         let data = events.filter((event) => (
@@ -159,7 +170,7 @@ function Scheduler(props) {
           data: data
         })
       }
-    } else if (!startOnSunday) {
+    } else if (!startOnSunday || !startOnSaturday) {
       for (let i = 6; i > 0; i--) {
         let subDate = sub(monthStartDate, {days: i})
         let day = parseInt(format(subDate, 'dd'))
