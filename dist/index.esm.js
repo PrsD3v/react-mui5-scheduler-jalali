@@ -1026,6 +1026,7 @@ function MonthModeView(props) {
     event.stopPropagation();
     onTaskClick && onTaskClick(event, task);
   };
+  var filterDays = options.filterDays || [];
   return /*#__PURE__*/React.createElement(TableContainer, {
     component: Paper,
     sx: {
@@ -1060,7 +1061,9 @@ function MonthModeView(props) {
           }
         }
       }
-    }, row === null || row === void 0 ? void 0 : (_row$days = row.days) === null || _row$days === void 0 ? void 0 : _row$days.map(function (day, indexD) {
+    }, row === null || row === void 0 ? void 0 : (_row$days = row.days) === null || _row$days === void 0 ? void 0 : _row$days.filter(function (day) {
+      return (filterDays === null || filterDays === void 0 ? void 0 : filterDays.indexOf(day.dayName)) < 0;
+    }).map(function (day, indexD) {
       var _columns$indexD, _columns$indexD$heade, _day$data2, _day$data3;
       var currentDay = day.day === today.getUTCDate() && isSameMonth(day.date, today);
       return /*#__PURE__*/React.createElement(StyledTableCell$2, {
@@ -1981,7 +1984,7 @@ function Scheduler(props) {
   /**
    * @name getMonthRows
    * @description
-   * @return {[id: string,  day: number, date: date, data: array]}
+   * @return {[id: string,  day: number, date: date, data: array, dayName: string]}
    */
   var getMonthRows = function getMonthRows() {
     var _lastRow$days;
@@ -1990,6 +1993,12 @@ function Scheduler(props) {
     var iteration = getWeeksInMonth(selectedDay);
     var startOnSunday = (startWeekOn === null || startWeekOn === void 0 ? void 0 : startWeekOn.toUpperCase()) === 'SUN' && t('sun').toUpperCase() === weekDays[0].toUpperCase();
     var startOnSaturday = (startWeekOn === null || startWeekOn === void 0 ? void 0 : startWeekOn.toUpperCase()) === 'SAT' && t('sat').toUpperCase() === weekDays[0].toUpperCase();
+    var getDayName = function getDayName(date) {
+      var days = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
+      var d = new Date(date);
+      var dayName = days[d.getDay()];
+      return dayName;
+    };
     var monthStartDate = startOfMonth(selectedDay); // First day of month
     var monthStartDay = getDay(monthStartDate); // Index of the day in week
     var dateDay = parseInt(format(monthStartDate, 'dd')); // Month start day
@@ -2010,7 +2019,8 @@ function Scheduler(props) {
           id: "day_-".concat(day),
           day: day,
           date: subDate,
-          data: data
+          data: data,
+          dayName: getDayName(subDate)
         });
       };
       // Add days of precedent month
@@ -2032,7 +2042,8 @@ function Scheduler(props) {
           id: "day_-".concat(day),
           day: day,
           date: subDate,
-          data: data
+          data: data,
+          dayName: getDayName(subDate)
         });
       };
       for (var _i = 6; _i > 0; _i--) {
@@ -2058,7 +2069,8 @@ function Scheduler(props) {
           id: "day_-".concat(dateDay),
           date: date,
           data: data,
-          day: dateDay
+          day: dateDay,
+          dayName: getDayName(date)
         });
         dateDay++;
       };
@@ -2102,7 +2114,8 @@ function Scheduler(props) {
           id: "day_-".concat(d),
           date: addDate,
           day: d,
-          data: data
+          data: data,
+          dayName: getDayName(addDate)
         });
       }
       rows[iteration - 1].days = rows[iteration - 1].days.concat(lastDaysData);

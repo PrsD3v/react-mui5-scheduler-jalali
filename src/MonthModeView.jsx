@@ -202,6 +202,8 @@ function MonthModeView (props) {
     event.stopPropagation()
     onTaskClick && onTaskClick(event, task)
   }
+
+  const filterDays = options.filterDays || []
   
   return (
     <TableContainer component={Paper} sx={{ boxShadow: 'none' }}>
@@ -236,7 +238,7 @@ function MonthModeView (props) {
                   }
                 }}
               >
-                {row?.days?.map((day, indexD) => {
+                {row?.days?.filter(day => filterDays?.indexOf(day.dayName) < 0).map((day, indexD) => {
                   const currentDay = (
                     day.day === today.getUTCDate() && isSameMonth(day.date, today)
                   )

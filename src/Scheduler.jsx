@@ -127,7 +127,7 @@ function Scheduler(props) {
   /**
    * @name getMonthRows
    * @description
-   * @return {[id: string,  day: number, date: date, data: array]}
+   * @return {[id: string,  day: number, date: date, data: array, dayName: string]}
    */
   const getMonthRows = () => {
     let rows = [], daysBefore = []
@@ -140,6 +140,14 @@ function Scheduler(props) {
       startWeekOn?.toUpperCase() === 'SAT' &&
       t('sat').toUpperCase() === weekDays[0].toUpperCase()
     )
+
+    const getDayName = (date) => {
+      const days = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
+      const d = new Date(date);
+      const dayName = days[d.getDay()];
+      return dayName
+    }
+
     let monthStartDate = startOfMonth(selectedDay)        // First day of month
     let monthStartDay = getDay(monthStartDate)            // Index of the day in week
     let dateDay = parseInt(format(monthStartDate, 'dd'))  // Month start day
@@ -167,7 +175,8 @@ function Scheduler(props) {
           id: `day_-${day}`,
           day: day,
           date: subDate,
-          data: data
+          data: data,
+          dayName: getDayName(subDate)
         })
       }
     } else if (!startOnSunday || !startOnSaturday) {
@@ -181,7 +190,8 @@ function Scheduler(props) {
           id: `day_-${day}`,
           day: day,
           date: subDate,
-          data: data
+          data: data,
+          dayName: getDayName(subDate)
         })
       }
     }
@@ -217,7 +227,8 @@ function Scheduler(props) {
           id: `day_-${dateDay}`,
           date, 
           data,
-          day: dateDay
+          day: dateDay,
+          dayName: getDayName(date)
         })
         dateDay++
       }
@@ -253,7 +264,8 @@ function Scheduler(props) {
           id: `day_-${d}`, 
           date: addDate, 
           day: d, 
-          data
+          data,
+          dayName: getDayName(addDate)
         })
       }
       rows[iteration-1].days = rows[iteration-1].days.concat(lastDaysData)
