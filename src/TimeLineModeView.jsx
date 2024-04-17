@@ -10,7 +10,8 @@ import TimelineContent from '@mui/lab/TimelineContent'
 import TimelineOppositeContent from '@mui/lab/TimelineOppositeContent'
 import TimelineDot from '@mui/lab/TimelineDot'
 import ScheduleIcon from '@mui/icons-material/Schedule'
-import { format, parse } from 'date-fns-jalali'
+import { format as jalaliFormat, parse as jalaliParse } from 'date-fns-jalali'
+import { format, parse } from 'date-fns'
 import DateFnsLocaleContext from "../locales/dateFnsContext"
 
 const StyledContainer = styled(Typography)(({ theme }) => ({
@@ -80,7 +81,15 @@ function TimeLineModeView (props) {
                 color="text.secondary"
               >
                 {task?.date &&
-                format(
+                options?.adapter === 'jalali' ? jalaliFormat(
+                  jalaliParse(
+                    task?.date,
+                    'yyyy-MM-dd',
+                    new Date()
+                  ),
+                  'PPP',
+                  { locale: dateFnsLocale }
+                ) : format(
                   parse(
                     task?.date,
                     'yyyy-MM-dd',

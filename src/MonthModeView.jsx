@@ -6,7 +6,8 @@ import {
   Paper, Typography, Table, TableBody, TableCell, TableContainer,
   TableHead, TableRow, tableCellClasses, Box
 } from "@mui/material"
-import { getDaysInMonth, isSameMonth } from 'date-fns-jalali'
+import { getDaysInMonth, isSameMonth } from 'date-fns'
+import { getDaysInMonth as jalaliGetDaysInMonth, isSameMonth as jalaliIsSameMonth } from 'date-fns-jalali'
 import EventNoteRoundedIcon from '@mui/icons-material/EventNoteRounded'
 import EventItem from "./EventItem.jsx"
 import {useTranslation} from "react-i18next"
@@ -72,7 +73,7 @@ function MonthModeView (props) {
     //padding: '1px 7px',
     //width: 'fit-content'
   }
-
+  console.log(props.rows);
   const onCellDragOver = (e) => {
     e.preventDefault()
   }
@@ -203,8 +204,7 @@ function MonthModeView (props) {
     onTaskClick && onTaskClick(event, task)
   }
 
-  const filterDays = options.filterDays || []
-  
+  const hiddenDays = options?.hiddenDays || []
   return (
     <TableContainer component={Paper} sx={{ boxShadow: 'none' }}>
       <Table
@@ -214,7 +214,7 @@ function MonthModeView (props) {
       >
         {legacyStyle && <TableHead sx={{height: 24}}>
           <StyledTableRow>
-            {columns?.map((column, index) => (
+            {columns?.filter(column => hiddenDays?.indexOf(column.dayName) < 0 )?.map((column, index) => (
                 <StyledTableCell 
                   align="center" 
                   key={column?.headerName+ '-' +index}
@@ -238,9 +238,9 @@ function MonthModeView (props) {
                   }
                 }}
               >
-                {row?.days?.filter(day => filterDays?.indexOf(day.dayName) < 0).map((day, indexD) => {
+                {row?.days?.filter(day => hiddenDays?.indexOf(day.dayName) < 0).map((day, indexD) => {
                   const currentDay = (
-                    day.day === today.getUTCDate() && isSameMonth(day.date, today)
+                    options?.adapter === 'jalali' ?  day.day === today.getUTCDate() && jalaliIsSameMonth(day.date, today) : day.day === today.getUTCDate() && isSameMonth(day.date, today) 
                   )
                   return (
                     <StyledTableCell
@@ -256,7 +256,7 @@ function MonthModeView (props) {
                     >
                       <Box sx={{height: '100%', overflowY: 'visible'}}>
                         {!legacyStyle &&
-                        index === 0 && columns[indexD]?.headerName?.toUpperCase()}.
+                        index === 0 && columns?.filter(column => hiddenDays?.indexOf(column.dayName) < 0 )[indexD]?.headerName?.toUpperCase()}.
                         <Typography
                           variant="body2"
                           sx={{

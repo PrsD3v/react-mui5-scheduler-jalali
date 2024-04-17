@@ -6,7 +6,8 @@ import {
   Paper, Typography, Table, TableBody, TableCell, TableContainer,
   TableHead, TableRow, tableCellClasses, Tooltip
 } from "@mui/material"
-import { format, parse, add, differenceInMinutes, isValid } from 'date-fns-jalali'
+import { format as jalaliFormat, parse as jalaliParse, add as jalaliAdd, differenceInMinutes as jalaliDifferenceInMinutes, isValid as jalaliIsValid } from 'date-fns-jalali'
+import { format, parse, add, differenceInMinutes, isValid } from 'date-fns'
 import EventItem from "./EventItem.jsx"
 import DateFnsLocaleContext from "../locales/dateFnsContext";
 
@@ -148,29 +149,38 @@ function DayModeView (props) {
       let hourLabel = hourRegExp.exec(label)[0]
       // Event's end hour
       let endHour =  hourRegExp.exec(transfert.item.endHour)[0]
-      let endHourDate = parse(endHour, 'HH:mm', day.date)
+      let endHourDate = options?.adapter === 'jalali' ? jalaliParse(endHour, 'HH:mm', day.date) : parse(endHour, 'HH:mm', day.date)
       // Event start hour
       let startHour =  hourRegExp.exec(transfert.item.startHour)[0]
-      let startHourDate = parse(startHour, 'HH:mm', day.date)
+      let startHourDate = options?.adapter ? jalaliParse(startHour, 'HH:mm', day.date) : parse(startHour, 'HH:mm', day.date)
       // Minutes difference between end and start event hours
-      let minutesDiff = differenceInMinutes(endHourDate, startHourDate)
+      let minutesDiff = options?.adapter === 'jalali' ? jalaliDifferenceInMinutes(endHourDate, startHourDate) :  differenceInMinutes(endHourDate, startHourDate)
       // New event end hour according to it new cell
-      let newEndHour = add(
+      let newEndHour = options?.adapter === 'jalali' ? jalaliAdd(
+        jalaliParse(hourLabel, 'HH:mm', day.date), {minutes: minutesDiff}
+      ) : add(
         parse(hourLabel, 'HH:mm', day.date), {minutes: minutesDiff}
       )
   
-      if (!isValid(startHourDate)) {
+      if (!isValid(startHourDate) && options?.adapter !== 'jalali') {
         startHourDate = day.date
         minutesDiff = differenceInMinutes(endHourDate, startHourDate)
         newEndHour = add(
           parse(hourLabel, 'HH:mm', day.date), {minutes: minutesDiff}
         )
       }
+      else if (!jalaliIsValid(startHourDate) && options?.adapter === 'jalali') {
+        startHourDate = day.date
+        minutesDiff = jalaliDifferenceInMinutes(endHourDate, startHourDate)
+        newEndHour = jalaliAdd(
+          jalaliParse(hourLabel, 'HH:mm', day.date), {minutes: minutesDiff}
+        )
+      }
 
       prevEventCell?.data?.splice(transfert?.item?.itemIndex, 1)
       transfert.item.startHour = label
-      transfert.item.endHour = format(newEndHour, 'HH:mm aaa')
-      transfert.item.date = format(day.date, 'yyyy-MM-dd')
+      transfert.item.endHour = options?.adapter === 'jalali' ? jalaliFormat(newEndHour, 'HH:mm aaa') :  format(newEndHour, 'HH:mm aaa')
+      transfert.item.date = options?.adapter === 'jalali' ? jalaliFormat(day.date, 'yyyy-MM-dd') : format(day.date, 'yyyy-MM-dd')
       day.data.push(transfert.item)
       setState({...state, rows: rowsData})
       onEventsChange && onEventsChange(transfert.item)

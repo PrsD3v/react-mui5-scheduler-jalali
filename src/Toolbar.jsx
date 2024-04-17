@@ -1,7 +1,8 @@
 import React, {useState, useEffect, useContext} from 'react'
 import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
-import { format, add, sub, getDaysInMonth, parse } from 'date-fns-jalali'
+import { format, add, sub, getDaysInMonth, parse } from 'date-fns'
+import { format as jalaliFormat, add as jalaliAdd, sub as jalaliSub, getDaysInMonth as jalaliGetDaysInMonth, parse as jalaliParse } from 'date-fns-jalali'
 import AdapterDateFns from '@mui/lab/AdapterDateFns'
 import AdapterJalali from "@date-io/date-fns-jalali";
 import {
@@ -38,7 +39,8 @@ function SchedulerToolbar (props) {
     onModeChange,
     onDateChange,
     onSearchResult,
-    onAlertCloseButtonClicked
+    onAlertCloseButtonClicked,
+    options
   } = props
 
   const theme = useTheme()
@@ -48,7 +50,7 @@ function SchedulerToolbar (props) {
   const [anchorMenuEl, setAnchorMenuEl] = useState(null)
   const [anchorDateEl, setAnchorDateEl] = useState(null)
   const [selectedDate, setSelectedDate] = useState(today || new Date())
-  const [daysInMonth, setDaysInMonth] = useState(getDaysInMonth(selectedDate))
+  const [daysInMonth, setDaysInMonth] = options?.adapter === 'jalali' ? useState(jalaliGetDaysInMonth(selectedDate)) : useState(getDaysInMonth(selectedDate))
   
   const openMenu = Boolean(anchorMenuEl)
   const openDateSelector = Boolean(anchorDateEl)
@@ -112,7 +114,7 @@ function SchedulerToolbar (props) {
       options = { days: 1 }  
     }
     let newDate = method(selectedDate, options)
-    setDaysInMonth(getDaysInMonth(newDate))
+    setDaysInMonth(options?.adapter === 'jalali' ? jalaliGetDaysInMonth(newDate) : getDaysInMonth(newDate))
     setSelectedDate(newDate)
   }
   
@@ -162,7 +164,7 @@ function SchedulerToolbar (props) {
               <IconButton
                 sx={{  ml: 0, mr: -.1 }}
                 {...commonIconButtonProps}
-                onClick={() => handleChangeDate(sub)}
+                onClick={() => handleChangeDate(options?.adapter === 'jalali' ? jalaliSub : sub)}
               >
                 <ChevronLeftIcon />
               </IconButton>
@@ -176,7 +178,11 @@ function SchedulerToolbar (props) {
                 sx={{ color: 'text.primary'}}
                 aria-expanded={openDateSelector ? 'true' : undefined}
               >
-                {format(
+                {options?.adapter === 'jalali' ? jalaliFormat(
+                  selectedDate, 
+                  isMonthMode ? 'MMMM-yyyy' : 'PPP',
+                  { locale: dateFnsLocale }
+                ) : format(
                   selectedDate, 
                   isMonthMode ? 'MMMM-yyyy' : 'PPP',
                   { locale: dateFnsLocale }
@@ -185,7 +191,7 @@ function SchedulerToolbar (props) {
               <IconButton
                 sx={{ ml: .2 }}
                 {...commonIconButtonProps}
-                onClick={() => handleChangeDate(add)}
+                onClick={() => handleChangeDate(options?.adapter === 'jalali' ? jalaliAdd : add)}
               >
                 <ChevronRightIcon />
               </IconButton>
@@ -209,13 +215,13 @@ function SchedulerToolbar (props) {
             >
               <LocalizationProvider
                 locale={dateFnsLocale}
-                dateAdapter={AdapterJalali}
+                dateAdapter={options?.adapter === 'jalali' ? AdapterJalali : AdapterDateFns}
               >
                 <StaticDatePicker
                   displayStaticWrapperAs="desktop"
                   value={selectedDate}
                   onChange={(newValue) => {
-                    setDaysInMonth(getDaysInMonth(newValue))
+                    setDaysInMonth(options?.adapter === 'jalali' ? jalaliGetDaysInMonth(newValue) : getDaysInMonth(newValue))
                     setSelectedDate(newValue)
                     handleCloseDateSelector()
                   }}
@@ -235,13 +241,14 @@ function SchedulerToolbar (props) {
             }}>
             {toolbarProps?.showSearchBar &&
             <ToolbarSearchbar
+              options={options}
               events={events}
               onInputChange={(newValue) => {
                 let newDate = new Date()
                 if (newValue?.date) {
-                  newDate = parse(newValue.date, 'yyyy-MM-dd', today)
+                  newDate = options?.adapter === 'jalali' ? jalaliParse(newValue.date, 'yyyy-MM-dd', today) : parse(newValue.date, 'yyyy-MM-dd', today)
                 }
-                setDaysInMonth(getDaysInMonth(newDate))
+                setDaysInMonth(options?.adapter === 'jalali' ? jalaliGetDaysInMonth(newDate) :getDaysInMonth(newDate))
                 setSelectedDate(newDate)
                 setSearchResult(newValue)
               }}

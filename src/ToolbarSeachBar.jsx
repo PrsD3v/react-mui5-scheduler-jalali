@@ -1,6 +1,7 @@
 import React, {useContext, useState} from 'react'
 import PropTypes from 'prop-types'
-import { format, parse } from 'date-fns-jalali'
+import { format, parse } from 'date-fns'
+import { format as jalaliFormat, parse as jalaliParse } from 'date-fns-jalali'
 import { useTranslation } from 'react-i18next'
 import { styled } from '@mui/material/styles'
 import { TextField, Autocomplete, Box } from "@mui/material"
@@ -24,7 +25,7 @@ const StyledAutoComplete = styled(Autocomplete)(({ theme }) => ({
 }))
 
 function ToolbarSearchbar (props) {
-  const {events, onInputChange} = props
+  const {events, onInputChange, options} = props
   const { t } = useTranslation(['common'])
   const [value, setValue] = useState('')
   const dateFnsLocale = useContext(DateFnsLocaleContext)
@@ -72,7 +73,10 @@ function ToolbarSearchbar (props) {
       }}
       renderOption={(props, option) => (
         <Box component="li" sx={{fontSize: 12}} {...props}>
-          {format(
+          {options?.adapter ? jalaliFormat(
+            jalaliParse(option?.date, 'yyyy-MM-dd', new Date()),
+            'dd-MMMM-yyyy'
+          ): format(
             parse(option?.date, 'yyyy-MM-dd', new Date()),
             'dd-MMMM-yyyy'
           )}
