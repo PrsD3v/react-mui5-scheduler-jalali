@@ -1904,10 +1904,10 @@
       onAlertCloseButtonClicked = props.onAlertCloseButtonClicked;
     var today = new Date();
     styles.useTheme();
-    var _useTranslation = reactI18next.useTranslation(['common']),
+    var _useTranslation = reactI18next.useTranslation(["common"]),
       t = _useTranslation.t,
       i18n = _useTranslation.i18n;
-    var weeks = [t('mon'), t('tue'), t('wed'), t('thu'), t('fri'), t('sat'), t('sun')];
+    var weeks = [t("mon"), t("tue"), t("wed"), t("thu"), t("fri"), t("sat"), t("sun")];
     var _useState = React.useState({}),
       _useState2 = _slicedToArray__default["default"](_useState, 2),
       state = _useState2[0],
@@ -1924,66 +1924,66 @@
       _useState8 = _slicedToArray__default["default"](_useState7, 2),
       alertState = _useState8[0],
       setAlertState = _useState8[1];
-    var _useState9 = React.useState((options === null || options === void 0 ? void 0 : options.defaultMode) || 'month'),
+    var _useState9 = React.useState((options === null || options === void 0 ? void 0 : options.defaultMode) || "month"),
       _useState10 = _slicedToArray__default["default"](_useState9, 2),
       mode = _useState10[0],
       setMode = _useState10[1];
-    var _ref = (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? React.useState(dateFnsJalali.getDaysInMonth(today)) : React.useState(dateFns.getDaysInMonth(today)),
+    var _ref = (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? React.useState(dateFnsJalali.getDaysInMonth(today)) : React.useState(dateFns.getDaysInMonth(today)),
       _ref2 = _slicedToArray__default["default"](_ref, 2),
       daysInMonth = _ref2[0],
       setDaysInMonth = _ref2[1];
-    var _useState11 = React.useState((options === null || options === void 0 ? void 0 : options.startWeekOn) || 'mon'),
+    var _useState11 = React.useState((options === null || options === void 0 ? void 0 : options.startWeekOn) || "mon"),
       _useState12 = _slicedToArray__default["default"](_useState11, 2),
       startWeekOn = _useState12[0],
       setStartWeekOn = _useState12[1];
-    var _useState13 = React.useState((options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? dateFnsJalali.format(today, 'MMMM-yyyy') : dateFns.format(today, 'MMMM-yyyy')),
+    var _useState13 = React.useState((options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? dateFnsJalali.format(today, "MMMM-yyyy") : dateFns.format(today, "MMMM-yyyy")),
       _useState14 = _slicedToArray__default["default"](_useState13, 2),
       selectedDate = _useState14[0],
       setSelectedDate = _useState14[1];
     var _useReducer = React.useReducer(function (state) {
         var _options$startWeekOn, _options$startWeekOn2;
-        if ((options === null || options === void 0 ? void 0 : (_options$startWeekOn = options.startWeekOn) === null || _options$startWeekOn === void 0 ? void 0 : _options$startWeekOn.toUpperCase()) === 'SUN') {
-          return [t('sun'), t('mon'), t('tue'), t('wed'), t('thu'), t('fri'), t('sat')];
-        } else if ((options === null || options === void 0 ? void 0 : (_options$startWeekOn2 = options.startWeekOn) === null || _options$startWeekOn2 === void 0 ? void 0 : _options$startWeekOn2.toUpperCase()) === 'SAT') {
-          return [t('sat'), t('sun'), t('mon'), t('tue'), t('wed'), t('thu'), t('fri')];
+        if ((options === null || options === void 0 ? void 0 : (_options$startWeekOn = options.startWeekOn) === null || _options$startWeekOn === void 0 ? void 0 : _options$startWeekOn.toUpperCase()) === "SUN") {
+          return [t("sun"), t("mon"), t("tue"), t("wed"), t("thu"), t("fri"), t("sat")];
+        } else if ((options === null || options === void 0 ? void 0 : (_options$startWeekOn2 = options.startWeekOn) === null || _options$startWeekOn2 === void 0 ? void 0 : _options$startWeekOn2.toUpperCase()) === "SAT") {
+          return [t("sat"), t("sun"), t("mon"), t("tue"), t("wed"), t("thu"), t("fri")];
         }
         return weeks;
       }, weeks),
       _useReducer2 = _slicedToArray__default["default"](_useReducer, 2),
       weekDays = _useReducer2[0],
       updateWeekDays = _useReducer2[1];
-    var isDayMode = mode.toLowerCase() === 'day';
-    var isWeekMode = mode.toLowerCase() === 'week';
-    var isMonthMode = mode.toLowerCase() === 'month';
-    var isTimelineMode = mode.toLowerCase() === 'timeline';
-    var TransitionMode = (options === null || options === void 0 ? void 0 : options.transitionMode) === 'zoom' ? material.Zoom : (options === null || options === void 0 ? void 0 : options.transitionMode) === 'fade' ? material.Fade : material.Slide;
+    var isDayMode = mode.toLowerCase() === "day";
+    var isWeekMode = mode.toLowerCase() === "week";
+    var isMonthMode = mode.toLowerCase() === "month";
+    var isTimelineMode = mode.toLowerCase() === "timeline";
+    var TransitionMode = (options === null || options === void 0 ? void 0 : options.transitionMode) === "zoom" ? material.Zoom : (options === null || options === void 0 ? void 0 : options.transitionMode) === "fade" ? material.Fade : material.Slide;
     var dateFnsLocale = locale$1.enAU;
-    if (locale$2 === 'fr') {
+    if (locale$2 === "fr") {
       dateFnsLocale = locale$1.fr;
     }
-    if (locale$2 === 'ko') {
+    if (locale$2 === "ko") {
       dateFnsLocale = locale$1.ko;
     }
-    if (locale$2 === 'de') {
+    if (locale$2 === "de") {
       dateFnsLocale = locale$1.de;
     }
-    if (locale$2 === 'es') {
+    if (locale$2 === "es") {
       dateFnsLocale = locale$1.es;
     }
-    if (locale$2 === 'ar') {
+    if (locale$2 === "ar") {
       dateFnsLocale = locale$1.ar;
     }
-    if (locale$2 === 'ja') {
+    if (locale$2 === "ja") {
       dateFnsLocale = locale$1.ja;
     }
-    if (locale$2 === 'ru') {
+    if (locale$2 === "ru") {
       dateFnsLocale = locale$1.ru;
     }
-    if (locale$2 === 'zh') {
+    if (locale$2 === "zh") {
       dateFnsLocale = locale$1.zhCN;
     }
-    if (locale$2 === 'fa') {
-      dateFnsLocale = (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? locale.faIR : locale$1.faIR;
+    if (locale$2 === "fa") {
+      dateFnsLocale = (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? locale.faIR : locale$1.faIR;
     }
 
     /**
@@ -2003,23 +2003,23 @@
           flex: 1,
           sortable: false,
           editable: false,
-          align: 'center',
+          align: "center",
           headerName: day,
-          headerAlign: 'center',
+          headerAlign: "center",
           field: "rowday".concat(i + 1),
-          headerClassName: 'scheduler-theme--header',
+          headerClassName: "scheduler-theme--header",
           dayName: days[i]
         };
       });
     };
     var getDays = function getDays() {
-      var startOnSun = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
-      var startOnMon = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
-      var startOnSat = ['sat', 'sun', 'mon', 'tue', 'wed', 'thu', 'fri'];
+      var startOnSun = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
+      var startOnMon = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"];
+      var startOnSat = ["sat", "sun", "mon", "tue", "wed", "thu", "fri"];
       switch (startWeekOn) {
-        case 'sat':
+        case "sat":
           return startOnSat;
-        case 'sun':
+        case "sun":
           return startOnSun;
         default:
           return startOnMon;
@@ -2034,38 +2034,38 @@
       var _lastRow$days;
       var rows = [],
         daysBefore = [];
-      var iteration = (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? dateFnsJalali.getWeeksInMonth(selectedDay) : dateFns.getWeeksInMonth(selectedDay);
-      console.log(1, iteration);
-      var startOnSunday = (startWeekOn === null || startWeekOn === void 0 ? void 0 : startWeekOn.toUpperCase()) === 'SUN' && t('sun').toUpperCase() === weekDays[0].toUpperCase();
-      var startOnSaturday = (startWeekOn === null || startWeekOn === void 0 ? void 0 : startWeekOn.toUpperCase()) === 'SAT' && t('sat').toUpperCase() === weekDays[0].toUpperCase();
+      var iteration = (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? dateFnsJalali.getWeeksInMonth(selectedDay) : dateFns.getWeeksInMonth(selectedDay);
+      // console.log(1, iteration);
+      var startOnSunday = (startWeekOn === null || startWeekOn === void 0 ? void 0 : startWeekOn.toUpperCase()) === "SUN" && t("sun").toUpperCase() === weekDays[0].toUpperCase();
+      var startOnSaturday = (startWeekOn === null || startWeekOn === void 0 ? void 0 : startWeekOn.toUpperCase()) === "SAT" && t("sat").toUpperCase() === weekDays[0].toUpperCase();
       var getDayName = function getDayName(date) {
-        var days = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
+        var days = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
         var d = new Date(date);
         var dayName = days[d.getDay()];
         return dayName;
       };
-      var monthStartDate = (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? dateFnsJalali.startOfMonth(selectedDay) : dateFns.startOfMonth(selectedDay); // First day of month
-      console.log(2, monthStartDate);
-      var monthStartDay = (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? dateFnsJalali.getDay(monthStartDate) : dateFns.getDay(monthStartDate); // Index of the day in week
-      console.log(3, monthStartDay);
-      var dateDay = (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? parseInt(dateFnsJalali.format(monthStartDate, 'dd')) : parseInt(dateFns.format(monthStartDate, 'dd')); // Month start day
-      console.log(4, dateDay);
+      var monthStartDate = (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? dateFnsJalali.startOfMonth(selectedDay) : dateFns.startOfMonth(selectedDay); // First day of month
+      // console.log(2, monthStartDate);
+      var monthStartDay = (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? dateFnsJalali.getDay(monthStartDate) : dateFns.getDay(monthStartDate); // Index of the day in week
+      // console.log(3, monthStartDay);
+      var dateDay = (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? parseInt(dateFnsJalali.format(monthStartDate, "dd")) : parseInt(dateFns.format(monthStartDate, "dd")); // Month start day
+      // console.log(4, dateDay);
       // Condition check helper
       var checkCondition = function checkCondition(v) {
         return startOnSunday ? v <= monthStartDay : startOnSaturday ? v - 1 <= monthStartDay : v < monthStartDay;
       };
       if (monthStartDay >= 1) {
         var _loop = function _loop() {
-          var subDate = (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? dateFnsJalali.sub(monthStartDate, {
+          var subDate = (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? dateFnsJalali.sub(monthStartDate, {
             days: monthStartDay - i + (startOnSunday ? 1 : startOnSaturday ? 2 : 0)
           }) : dateFns.sub(monthStartDate, {
             days: monthStartDay - i + (startOnSunday ? 1 : startOnSaturday ? 2 : 0)
           });
           // console.log(5, subDate);
-          var day = (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? parseInt(dateFnsJalali.format(subDate, 'dd')) : parseInt(dateFns.format(subDate, 'dd'));
+          var day = (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? parseInt(dateFnsJalali.format(subDate, "dd")) : parseInt(dateFns.format(subDate, "dd"));
           // console.log(6, day);
           var data = events.filter(function (event) {
-            return (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? dateFnsJalali.isSameDay(subDate, dateFnsJalali.parse(event === null || event === void 0 ? void 0 : event.date, 'yyyy-MM-dd', new Date())) : dateFns.isSameDay(subDate, dateFns.parse(event === null || event === void 0 ? void 0 : event.date, 'yyyy-MM-dd', new Date()));
+            return (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? dateFnsJalali.isSameDay(subDate, dateFnsJalali.parse(event === null || event === void 0 ? void 0 : event.date, "yyyy-MM-dd", new Date())) : dateFns.isSameDay(subDate, dateFns.parse(event === null || event === void 0 ? void 0 : event.date, "yyyy-MM-dd", new Date()));
           });
           // console.log(7, data);
           daysBefore.push({
@@ -2084,16 +2084,16 @@
         }
       } else if (!startOnSunday || !startOnSaturday) {
         var _loop2 = function _loop2() {
-          var subDate = (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? dateFnsJalali.sub(monthStartDate, {
+          var subDate = (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? dateFnsJalali.sub(monthStartDate, {
             days: _i
           }) : dateFns.sub(monthStartDate, {
             days: _i
           });
           // console.log(8, subDate);
-          var day = (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? parseInt(dateFnsJalali.format(subDate, 'dd')) : parseInt(dateFns.format(subDate, 'dd'));
+          var day = (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? parseInt(dateFnsJalali.format(subDate, "dd")) : parseInt(dateFns.format(subDate, "dd"));
           // console.log(9, day);
           var data = events.filter(function (event) {
-            return (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? dateFnsJalali.isSameDay(subDate, dateFnsJalali.parse(event === null || event === void 0 ? void 0 : event.date, 'yyyy-MM-dd', new Date())) : dateFns.isSameDay(subDate, dateFns.parse(event === null || event === void 0 ? void 0 : event.date, 'yyyy-MM-dd', new Date()));
+            return (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? dateFnsJalali.isSameDay(subDate, dateFnsJalali.parse(event === null || event === void 0 ? void 0 : event.date, "yyyy-MM-dd", new Date())) : dateFns.isSameDay(subDate, dateFns.parse(event === null || event === void 0 ? void 0 : event.date, "yyyy-MM-dd", new Date()));
           });
           // console.log(10, data);
           daysBefore.push({
@@ -2119,10 +2119,10 @@
       for (var _i2 = 0; _i2 < iteration; _i2++) {
         var obj = [];
         var _loop3 = function _loop3() {
-          var date = (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? dateFnsJalali.parse("".concat(dateDay, "-").concat(selectedDate), 'dd-MMMM-yyyy', new Date()) : dateFns.parse("".concat(dateDay, "-").concat(selectedDate), 'dd-MMMM-yyyy', new Date());
-          // console.log(11, date);
+          var date = (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? dateFnsJalali.parse("".concat(dateDay, "-").concat(selectedDate), "dd-MMMM-yyyy", new Date()) : dateFns.parse("".concat(dateDay, "-").concat(selectedDate), "dd-MMMM-yyyy", new Date());
+          console.log(11, selectedDate);
           var data = events.filter(function (event) {
-            return (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? dateFnsJalali.isSameDay(date, (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? dateFnsJalali.parse(event === null || event === void 0 ? void 0 : event.date, 'yyyy-MM-dd', new Date()) : dateFns.parse(event === null || event === void 0 ? void 0 : event.date, 'yyyy-MM-dd', new Date())) : dateFns.isSameDay(date, (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? dateFnsJalali.parse(event === null || event === void 0 ? void 0 : event.date, 'yyyy-MM-dd', new Date()) : dateFns.parse(event === null || event === void 0 ? void 0 : event.date, 'yyyy-MM-dd', new Date()));
+            return (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? dateFnsJalali.isSameDay(date, (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? dateFnsJalali.parse(event === null || event === void 0 ? void 0 : event.date, "yyyy-MM-dd", new Date()) : dateFns.parse(event === null || event === void 0 ? void 0 : event.date, "yyyy-MM-dd", new Date())) : dateFns.isSameDay(date, (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? dateFnsJalali.parse(event === null || event === void 0 ? void 0 : event.date, "yyyy-MM-dd", new Date()) : dateFns.parse(event === null || event === void 0 ? void 0 : event.date, "yyyy-MM-dd", new Date()));
           });
           // console.log(12, data);
           obj.push({
@@ -2162,17 +2162,17 @@
         var day = lastRow.days[(lastRow === null || lastRow === void 0 ? void 0 : (_lastRow$days2 = lastRow.days) === null || _lastRow$days2 === void 0 ? void 0 : _lastRow$days2.length) - 1];
         var addDate = day.date;
         for (var _i3 = dateDay; _i3 < dateDay + lastRowDaysdiff; _i3++) {
-          addDate = (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? dateFnsJalali.add(addDate, {
+          addDate = (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? dateFnsJalali.add(addDate, {
             days: 1
           }) : dateFns.add(addDate, {
             days: 1
           });
           // console.log(13, addDate);
-          var d = (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? dateFnsJalali.format(addDate, 'dd') : dateFns.format(addDate, 'dd');
+          var d = (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? dateFnsJalali.format(addDate, "dd") : dateFns.format(addDate, "dd");
           // console.log(14, d);
           // eslint-disable-next-line
           var data = events.filter(function (event) {
-            return options.adapter === 'jalali' ? dateFnsJalali.isSameDay(addDate, dateFnsJalali.parse(event === null || event === void 0 ? void 0 : event.date, 'yyyy-MM-dd', new Date())) : dateFns.isSameDay(addDate, dateFns.parse(event === null || event === void 0 ? void 0 : event.date, 'yyyy-MM-dd', new Date()));
+            return options.adapter === "jalali" ? dateFnsJalali.isSameDay(addDate, dateFnsJalali.parse(event === null || event === void 0 ? void 0 : event.date, "yyyy-MM-dd", new Date())) : dateFns.isSameDay(addDate, dateFns.parse(event === null || event === void 0 ? void 0 : event.date, "yyyy-MM-dd", new Date()));
           });
           lastDaysData.push({
             id: "day_-".concat(d),
@@ -2194,32 +2194,32 @@
      */
     var getWeekHeader = function getWeekHeader() {
       var data = [];
-      var weekStart = (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? dateFnsJalali.startOfWeek(selectedDay, {
-        weekStartsOn: startWeekOn === 'mon' ? 1 : 0
+      var weekStart = (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? dateFnsJalali.startOfWeek(selectedDay, {
+        weekStartsOn: startWeekOn === "mon" ? 1 : 0
       }) : dateFns.startOfWeek(selectedDay, {
-        weekStartsOn: startWeekOn === 'mon' ? 1 : 0
+        weekStartsOn: startWeekOn === "mon" ? 1 : 0
       });
       for (var i = 0; i < 7; i++) {
-        var date = (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? dateFnsJalali.add(weekStart, {
+        var date = (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? dateFnsJalali.add(weekStart, {
           days: i
         }) : dateFns.add(weekStart, {
           days: i
         });
         data.push({
           date: date,
-          weekDay: (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? dateFnsJalali.format(date, 'iii', {
+          weekDay: (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? dateFnsJalali.format(date, "iii", {
             locale: dateFnsLocale
-          }) : dateFns.format(date, 'iii', {
-            locale: dateFnsLocale
-          }),
-          day: (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? dateFnsJalali.format(date, 'dd', {
-            locale: dateFnsLocale
-          }) : dateFns.format(date, 'dd', {
+          }) : dateFns.format(date, "iii", {
             locale: dateFnsLocale
           }),
-          month: (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? dateFns.format(date, 'MM', {
+          day: (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? dateFnsJalali.format(date, "dd", {
             locale: dateFnsLocale
-          }) : dateFns.format(date, 'MM', {
+          }) : dateFns.format(date, "dd", {
+            locale: dateFnsLocale
+          }),
+          month: (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? dateFns.format(date, "MM", {
+            locale: dateFnsLocale
+          }) : dateFns.format(date, "MM", {
             locale: dateFnsLocale
           })
         });
@@ -2229,10 +2229,10 @@
     var getWeekRows = function getWeekRows() {
       var HOURS = 24; //* 2
       var data = [];
-      var dayStartHour = (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? dateFnsJalali.startOfDay(selectedDay) : dateFns.startOfDay(selectedDay);
+      var dayStartHour = (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? dateFnsJalali.startOfDay(selectedDay) : dateFns.startOfDay(selectedDay);
       var _loop4 = function _loop4() {
         var id = "line_".concat(i);
-        var label = (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? dateFnsJalali.format(dayStartHour, 'HH:mm aaa') : dateFns.format(dayStartHour, 'HH:mm aaa');
+        var label = (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? dateFnsJalali.format(dayStartHour, "HH:mm aaa") : dateFns.format(dayStartHour, "HH:mm aaa");
 
         //TODO Add everyday event capability
         //if (i === 0) {
@@ -2253,8 +2253,8 @@
           columns.map(function (column, index) {
             var data = events.filter(function (event) {
               var _event$startHour;
-              var eventDate = (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? dateFnsJalali.parse(event === null || event === void 0 ? void 0 : event.date, 'yyyy-MM-dd', new Date()) : dateFns.parse(event === null || event === void 0 ? void 0 : event.date, 'yyyy-MM-dd', new Date());
-              return (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? dateFnsJalali.isSameDay(column === null || column === void 0 ? void 0 : column.date, eventDate) : dateFns.isSameDay(column === null || column === void 0 ? void 0 : column.date, eventDate) && (event === null || event === void 0 ? void 0 : (_event$startHour = event.startHour) === null || _event$startHour === void 0 ? void 0 : _event$startHour.toUpperCase()) === (label === null || label === void 0 ? void 0 : label.toUpperCase());
+              var eventDate = (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? dateFnsJalali.parse(event === null || event === void 0 ? void 0 : event.date, "yyyy-MM-dd", new Date()) : dateFns.parse(event === null || event === void 0 ? void 0 : event.date, "yyyy-MM-dd", new Date());
+              return (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? dateFnsJalali.isSameDay(column === null || column === void 0 ? void 0 : column.date, eventDate) : dateFns.isSameDay(column === null || column === void 0 ? void 0 : column.date, eventDate) && (event === null || event === void 0 ? void 0 : (_event$startHour = event.startHour) === null || _event$startHour === void 0 ? void 0 : _event$startHour.toUpperCase()) === (label === null || label === void 0 ? void 0 : label.toUpperCase());
             });
             obj.days.push({
               id: "column-".concat(index, "_m-").concat(column.month, "_d-").concat(column.day, "_").concat(id),
@@ -2264,7 +2264,7 @@
           });
           // Label affectation
           data.push(obj); // End processing bloc
-          dayStartHour = (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? dateFnsJalali.add(dayStartHour, {
+          dayStartHour = (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? dateFnsJalali.add(dayStartHour, {
             minutes: 60
           }) : dateFns.add(dayStartHour, {
             minutes: 60
@@ -2282,19 +2282,19 @@
     var getDayHeader = function getDayHeader() {
       return [{
         date: selectedDay,
-        weekDay: (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? dateFnsJalali.format(selectedDay, 'iii', {
+        weekDay: (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? dateFnsJalali.format(selectedDay, "iii", {
           locale: dateFnsLocale
-        }) : dateFns.format(selectedDay, 'iii', {
-          locale: dateFnsLocale
-        }),
-        day: (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? dateFnsJalali.format(selectedDay, 'dd', {
-          locale: dateFnsLocale
-        }) : dateFns.format(selectedDay, 'dd', {
+        }) : dateFns.format(selectedDay, "iii", {
           locale: dateFnsLocale
         }),
-        month: (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? dateFnsJalali.format(selectedDay, 'MM', {
+        day: (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? dateFnsJalali.format(selectedDay, "dd", {
           locale: dateFnsLocale
-        }) : dateFns.format(selectedDay, 'MM', {
+        }) : dateFns.format(selectedDay, "dd", {
+          locale: dateFnsLocale
+        }),
+        month: (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? dateFnsJalali.format(selectedDay, "MM", {
+          locale: dateFnsLocale
+        }) : dateFns.format(selectedDay, "MM", {
           locale: dateFnsLocale
         })
       }];
@@ -2302,10 +2302,10 @@
     var getDayRows = function getDayRows() {
       var HOURS = 24;
       var data = [];
-      var dayStartHour = (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? dateFnsJalali.startOfDay(selectedDay) : dateFns.startOfDay(selectedDay);
+      var dayStartHour = (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? dateFnsJalali.startOfDay(selectedDay) : dateFns.startOfDay(selectedDay);
       var _loop5 = function _loop5() {
         var id = "line_".concat(i);
-        var label = (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? dateFnsJalali.format(dayStartHour, 'HH:mm aaa') : dateFns.format(dayStartHour, 'HH:mm aaa');
+        var label = (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? dateFnsJalali.format(dayStartHour, "HH:mm aaa") : dateFns.format(dayStartHour, "HH:mm aaa");
         if (i > 0) {
           var obj = {
             id: id,
@@ -2316,8 +2316,8 @@
           var column = columns[0];
           var matchedEvents = events.filter(function (event) {
             var _event$startHour2;
-            var eventDate = (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? dateFnsJalali.parse(event === null || event === void 0 ? void 0 : event.date, 'yyyy-MM-dd', new Date()) : dateFns.parse(event === null || event === void 0 ? void 0 : event.date, 'yyyy-MM-dd', new Date());
-            return (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? dateFnsJalali.isSameDay(column === null || column === void 0 ? void 0 : column.date, eventDate) : dateFns.isSameDay(column === null || column === void 0 ? void 0 : column.date, eventDate) && (event === null || event === void 0 ? void 0 : (_event$startHour2 = event.startHour) === null || _event$startHour2 === void 0 ? void 0 : _event$startHour2.toUpperCase()) === (label === null || label === void 0 ? void 0 : label.toUpperCase());
+            var eventDate = (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? dateFnsJalali.parse(event === null || event === void 0 ? void 0 : event.date, "yyyy-MM-dd", new Date()) : dateFns.parse(event === null || event === void 0 ? void 0 : event.date, "yyyy-MM-dd", new Date());
+            return (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? dateFnsJalali.isSameDay(column === null || column === void 0 ? void 0 : column.date, eventDate) : dateFns.isSameDay(column === null || column === void 0 ? void 0 : column.date, eventDate) && (event === null || event === void 0 ? void 0 : (_event$startHour2 = event.startHour) === null || _event$startHour2 === void 0 ? void 0 : _event$startHour2.toUpperCase()) === (label === null || label === void 0 ? void 0 : label.toUpperCase());
           });
           obj.days.push({
             id: "column-_m-".concat(column === null || column === void 0 ? void 0 : column.month, "_d-").concat(column === null || column === void 0 ? void 0 : column.day, "_").concat(id),
@@ -2325,7 +2325,7 @@
             data: matchedEvents
           });
           data.push(obj);
-          dayStartHour = (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? dateFnsJalali.add(dayStartHour, {
+          dayStartHour = (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? dateFnsJalali.add(dayStartHour, {
             minutes: 60
           }) : dateFns.add(dayStartHour, {
             minutes: 60
@@ -2357,7 +2357,7 @@
     var handleDateChange = function handleDateChange(day, date) {
       setDaysInMonth(day);
       setSelectedDay(date);
-      setSelectedDate((options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? dateFns.format(date, 'MMMM-yyyy') : dateFns.format(date, 'MMMM-yyyy'));
+      setSelectedDate((options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? dateFnsJalali.format(date, "MMMM-yyyy") : dateFns.format(date, "MMMM-yyyy"));
     };
 
     /**
@@ -2399,7 +2399,7 @@
                   setTimeout(function () {
                     setAlertState(_objectSpread(_objectSpread({}, alertState), {}, {
                       open: false,
-                      message: ''
+                      message: ""
                     }));
                   }, alertState.delay);
                 }
@@ -2444,7 +2444,7 @@
     React.useEffect(function () {
       if (locale$2 !== i18n.language) {
         //localStorage.getItem('i18nextLng')
-        localStorage.setItem('i18nextLng', locale$2.toLowerCase());
+        localStorage.setItem("i18nextLng", locale$2.toLowerCase());
         i18n.changeLanguage(locale$2.toLowerCase());
         updateWeekDays();
       }
@@ -2570,7 +2570,7 @@
     onAlertCloseButtonClicked: PropTypes__default["default"].func
   };
   Scheduler.defaultProps = {
-    locale: 'en',
+    locale: "en",
     legacyStyle: false
   };
 

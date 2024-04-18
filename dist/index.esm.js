@@ -1904,10 +1904,10 @@ function Scheduler(props) {
     onAlertCloseButtonClicked = props.onAlertCloseButtonClicked;
   var today = new Date();
   useTheme();
-  var _useTranslation = useTranslation(['common']),
+  var _useTranslation = useTranslation(["common"]),
     t = _useTranslation.t,
     i18n = _useTranslation.i18n;
-  var weeks = [t('mon'), t('tue'), t('wed'), t('thu'), t('fri'), t('sat'), t('sun')];
+  var weeks = [t("mon"), t("tue"), t("wed"), t("thu"), t("fri"), t("sat"), t("sun")];
   var _useState = useState({}),
     _useState2 = _slicedToArray(_useState, 2),
     state = _useState2[0],
@@ -1924,66 +1924,66 @@ function Scheduler(props) {
     _useState8 = _slicedToArray(_useState7, 2),
     alertState = _useState8[0],
     setAlertState = _useState8[1];
-  var _useState9 = useState((options === null || options === void 0 ? void 0 : options.defaultMode) || 'month'),
+  var _useState9 = useState((options === null || options === void 0 ? void 0 : options.defaultMode) || "month"),
     _useState10 = _slicedToArray(_useState9, 2),
     mode = _useState10[0],
     setMode = _useState10[1];
-  var _ref = (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? useState(getDaysInMonth(today)) : useState(getDaysInMonth$1(today)),
+  var _ref = (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? useState(getDaysInMonth(today)) : useState(getDaysInMonth$1(today)),
     _ref2 = _slicedToArray(_ref, 2),
     daysInMonth = _ref2[0],
     setDaysInMonth = _ref2[1];
-  var _useState11 = useState((options === null || options === void 0 ? void 0 : options.startWeekOn) || 'mon'),
+  var _useState11 = useState((options === null || options === void 0 ? void 0 : options.startWeekOn) || "mon"),
     _useState12 = _slicedToArray(_useState11, 2),
     startWeekOn = _useState12[0],
     setStartWeekOn = _useState12[1];
-  var _useState13 = useState((options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? format(today, 'MMMM-yyyy') : format$1(today, 'MMMM-yyyy')),
+  var _useState13 = useState((options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? format(today, "MMMM-yyyy") : format$1(today, "MMMM-yyyy")),
     _useState14 = _slicedToArray(_useState13, 2),
     selectedDate = _useState14[0],
     setSelectedDate = _useState14[1];
   var _useReducer = useReducer(function (state) {
       var _options$startWeekOn, _options$startWeekOn2;
-      if ((options === null || options === void 0 ? void 0 : (_options$startWeekOn = options.startWeekOn) === null || _options$startWeekOn === void 0 ? void 0 : _options$startWeekOn.toUpperCase()) === 'SUN') {
-        return [t('sun'), t('mon'), t('tue'), t('wed'), t('thu'), t('fri'), t('sat')];
-      } else if ((options === null || options === void 0 ? void 0 : (_options$startWeekOn2 = options.startWeekOn) === null || _options$startWeekOn2 === void 0 ? void 0 : _options$startWeekOn2.toUpperCase()) === 'SAT') {
-        return [t('sat'), t('sun'), t('mon'), t('tue'), t('wed'), t('thu'), t('fri')];
+      if ((options === null || options === void 0 ? void 0 : (_options$startWeekOn = options.startWeekOn) === null || _options$startWeekOn === void 0 ? void 0 : _options$startWeekOn.toUpperCase()) === "SUN") {
+        return [t("sun"), t("mon"), t("tue"), t("wed"), t("thu"), t("fri"), t("sat")];
+      } else if ((options === null || options === void 0 ? void 0 : (_options$startWeekOn2 = options.startWeekOn) === null || _options$startWeekOn2 === void 0 ? void 0 : _options$startWeekOn2.toUpperCase()) === "SAT") {
+        return [t("sat"), t("sun"), t("mon"), t("tue"), t("wed"), t("thu"), t("fri")];
       }
       return weeks;
     }, weeks),
     _useReducer2 = _slicedToArray(_useReducer, 2),
     weekDays = _useReducer2[0],
     updateWeekDays = _useReducer2[1];
-  var isDayMode = mode.toLowerCase() === 'day';
-  var isWeekMode = mode.toLowerCase() === 'week';
-  var isMonthMode = mode.toLowerCase() === 'month';
-  var isTimelineMode = mode.toLowerCase() === 'timeline';
-  var TransitionMode = (options === null || options === void 0 ? void 0 : options.transitionMode) === 'zoom' ? Zoom : (options === null || options === void 0 ? void 0 : options.transitionMode) === 'fade' ? Fade : Slide;
+  var isDayMode = mode.toLowerCase() === "day";
+  var isWeekMode = mode.toLowerCase() === "week";
+  var isMonthMode = mode.toLowerCase() === "month";
+  var isTimelineMode = mode.toLowerCase() === "timeline";
+  var TransitionMode = (options === null || options === void 0 ? void 0 : options.transitionMode) === "zoom" ? Zoom : (options === null || options === void 0 ? void 0 : options.transitionMode) === "fade" ? Fade : Slide;
   var dateFnsLocale = enAU;
-  if (locale === 'fr') {
+  if (locale === "fr") {
     dateFnsLocale = fr;
   }
-  if (locale === 'ko') {
+  if (locale === "ko") {
     dateFnsLocale = ko;
   }
-  if (locale === 'de') {
+  if (locale === "de") {
     dateFnsLocale = de;
   }
-  if (locale === 'es') {
+  if (locale === "es") {
     dateFnsLocale = es;
   }
-  if (locale === 'ar') {
+  if (locale === "ar") {
     dateFnsLocale = ar;
   }
-  if (locale === 'ja') {
+  if (locale === "ja") {
     dateFnsLocale = ja;
   }
-  if (locale === 'ru') {
+  if (locale === "ru") {
     dateFnsLocale = ru;
   }
-  if (locale === 'zh') {
+  if (locale === "zh") {
     dateFnsLocale = zhCN;
   }
-  if (locale === 'fa') {
-    dateFnsLocale = (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? faIR : faIR$1;
+  if (locale === "fa") {
+    dateFnsLocale = (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? faIR : faIR$1;
   }
 
   /**
@@ -2003,23 +2003,23 @@ function Scheduler(props) {
         flex: 1,
         sortable: false,
         editable: false,
-        align: 'center',
+        align: "center",
         headerName: day,
-        headerAlign: 'center',
+        headerAlign: "center",
         field: "rowday".concat(i + 1),
-        headerClassName: 'scheduler-theme--header',
+        headerClassName: "scheduler-theme--header",
         dayName: days[i]
       };
     });
   };
   var getDays = function getDays() {
-    var startOnSun = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
-    var startOnMon = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
-    var startOnSat = ['sat', 'sun', 'mon', 'tue', 'wed', 'thu', 'fri'];
+    var startOnSun = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
+    var startOnMon = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"];
+    var startOnSat = ["sat", "sun", "mon", "tue", "wed", "thu", "fri"];
     switch (startWeekOn) {
-      case 'sat':
+      case "sat":
         return startOnSat;
-      case 'sun':
+      case "sun":
         return startOnSun;
       default:
         return startOnMon;
@@ -2034,38 +2034,38 @@ function Scheduler(props) {
     var _lastRow$days;
     var rows = [],
       daysBefore = [];
-    var iteration = (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? getWeeksInMonth(selectedDay) : getWeeksInMonth$1(selectedDay);
-    console.log(1, iteration);
-    var startOnSunday = (startWeekOn === null || startWeekOn === void 0 ? void 0 : startWeekOn.toUpperCase()) === 'SUN' && t('sun').toUpperCase() === weekDays[0].toUpperCase();
-    var startOnSaturday = (startWeekOn === null || startWeekOn === void 0 ? void 0 : startWeekOn.toUpperCase()) === 'SAT' && t('sat').toUpperCase() === weekDays[0].toUpperCase();
+    var iteration = (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? getWeeksInMonth(selectedDay) : getWeeksInMonth$1(selectedDay);
+    // console.log(1, iteration);
+    var startOnSunday = (startWeekOn === null || startWeekOn === void 0 ? void 0 : startWeekOn.toUpperCase()) === "SUN" && t("sun").toUpperCase() === weekDays[0].toUpperCase();
+    var startOnSaturday = (startWeekOn === null || startWeekOn === void 0 ? void 0 : startWeekOn.toUpperCase()) === "SAT" && t("sat").toUpperCase() === weekDays[0].toUpperCase();
     var getDayName = function getDayName(date) {
-      var days = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
+      var days = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
       var d = new Date(date);
       var dayName = days[d.getDay()];
       return dayName;
     };
-    var monthStartDate = (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? startOfMonth(selectedDay) : startOfMonth$1(selectedDay); // First day of month
-    console.log(2, monthStartDate);
-    var monthStartDay = (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? getDay(monthStartDate) : getDay$1(monthStartDate); // Index of the day in week
-    console.log(3, monthStartDay);
-    var dateDay = (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? parseInt(format(monthStartDate, 'dd')) : parseInt(format$1(monthStartDate, 'dd')); // Month start day
-    console.log(4, dateDay);
+    var monthStartDate = (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? startOfMonth(selectedDay) : startOfMonth$1(selectedDay); // First day of month
+    // console.log(2, monthStartDate);
+    var monthStartDay = (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? getDay(monthStartDate) : getDay$1(monthStartDate); // Index of the day in week
+    // console.log(3, monthStartDay);
+    var dateDay = (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? parseInt(format(monthStartDate, "dd")) : parseInt(format$1(monthStartDate, "dd")); // Month start day
+    // console.log(4, dateDay);
     // Condition check helper
     var checkCondition = function checkCondition(v) {
       return startOnSunday ? v <= monthStartDay : startOnSaturday ? v - 1 <= monthStartDay : v < monthStartDay;
     };
     if (monthStartDay >= 1) {
       var _loop = function _loop() {
-        var subDate = (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? sub(monthStartDate, {
+        var subDate = (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? sub(monthStartDate, {
           days: monthStartDay - i + (startOnSunday ? 1 : startOnSaturday ? 2 : 0)
         }) : sub$1(monthStartDate, {
           days: monthStartDay - i + (startOnSunday ? 1 : startOnSaturday ? 2 : 0)
         });
         // console.log(5, subDate);
-        var day = (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? parseInt(format(subDate, 'dd')) : parseInt(format$1(subDate, 'dd'));
+        var day = (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? parseInt(format(subDate, "dd")) : parseInt(format$1(subDate, "dd"));
         // console.log(6, day);
         var data = events.filter(function (event) {
-          return (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? isSameDay(subDate, parse(event === null || event === void 0 ? void 0 : event.date, 'yyyy-MM-dd', new Date())) : isSameDay$1(subDate, parse$1(event === null || event === void 0 ? void 0 : event.date, 'yyyy-MM-dd', new Date()));
+          return (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? isSameDay(subDate, parse(event === null || event === void 0 ? void 0 : event.date, "yyyy-MM-dd", new Date())) : isSameDay$1(subDate, parse$1(event === null || event === void 0 ? void 0 : event.date, "yyyy-MM-dd", new Date()));
         });
         // console.log(7, data);
         daysBefore.push({
@@ -2084,16 +2084,16 @@ function Scheduler(props) {
       }
     } else if (!startOnSunday || !startOnSaturday) {
       var _loop2 = function _loop2() {
-        var subDate = (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? sub(monthStartDate, {
+        var subDate = (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? sub(monthStartDate, {
           days: _i
         }) : sub$1(monthStartDate, {
           days: _i
         });
         // console.log(8, subDate);
-        var day = (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? parseInt(format(subDate, 'dd')) : parseInt(format$1(subDate, 'dd'));
+        var day = (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? parseInt(format(subDate, "dd")) : parseInt(format$1(subDate, "dd"));
         // console.log(9, day);
         var data = events.filter(function (event) {
-          return (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? isSameDay(subDate, parse(event === null || event === void 0 ? void 0 : event.date, 'yyyy-MM-dd', new Date())) : isSameDay$1(subDate, parse$1(event === null || event === void 0 ? void 0 : event.date, 'yyyy-MM-dd', new Date()));
+          return (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? isSameDay(subDate, parse(event === null || event === void 0 ? void 0 : event.date, "yyyy-MM-dd", new Date())) : isSameDay$1(subDate, parse$1(event === null || event === void 0 ? void 0 : event.date, "yyyy-MM-dd", new Date()));
         });
         // console.log(10, data);
         daysBefore.push({
@@ -2119,10 +2119,10 @@ function Scheduler(props) {
     for (var _i2 = 0; _i2 < iteration; _i2++) {
       var obj = [];
       var _loop3 = function _loop3() {
-        var date = (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? parse("".concat(dateDay, "-").concat(selectedDate), 'dd-MMMM-yyyy', new Date()) : parse$1("".concat(dateDay, "-").concat(selectedDate), 'dd-MMMM-yyyy', new Date());
-        // console.log(11, date);
+        var date = (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? parse("".concat(dateDay, "-").concat(selectedDate), "dd-MMMM-yyyy", new Date()) : parse$1("".concat(dateDay, "-").concat(selectedDate), "dd-MMMM-yyyy", new Date());
+        console.log(11, selectedDate);
         var data = events.filter(function (event) {
-          return (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? isSameDay(date, (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? parse(event === null || event === void 0 ? void 0 : event.date, 'yyyy-MM-dd', new Date()) : parse$1(event === null || event === void 0 ? void 0 : event.date, 'yyyy-MM-dd', new Date())) : isSameDay$1(date, (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? parse(event === null || event === void 0 ? void 0 : event.date, 'yyyy-MM-dd', new Date()) : parse$1(event === null || event === void 0 ? void 0 : event.date, 'yyyy-MM-dd', new Date()));
+          return (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? isSameDay(date, (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? parse(event === null || event === void 0 ? void 0 : event.date, "yyyy-MM-dd", new Date()) : parse$1(event === null || event === void 0 ? void 0 : event.date, "yyyy-MM-dd", new Date())) : isSameDay$1(date, (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? parse(event === null || event === void 0 ? void 0 : event.date, "yyyy-MM-dd", new Date()) : parse$1(event === null || event === void 0 ? void 0 : event.date, "yyyy-MM-dd", new Date()));
         });
         // console.log(12, data);
         obj.push({
@@ -2162,17 +2162,17 @@ function Scheduler(props) {
       var day = lastRow.days[(lastRow === null || lastRow === void 0 ? void 0 : (_lastRow$days2 = lastRow.days) === null || _lastRow$days2 === void 0 ? void 0 : _lastRow$days2.length) - 1];
       var addDate = day.date;
       for (var _i3 = dateDay; _i3 < dateDay + lastRowDaysdiff; _i3++) {
-        addDate = (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? add(addDate, {
+        addDate = (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? add(addDate, {
           days: 1
         }) : add$1(addDate, {
           days: 1
         });
         // console.log(13, addDate);
-        var d = (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? format(addDate, 'dd') : format$1(addDate, 'dd');
+        var d = (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? format(addDate, "dd") : format$1(addDate, "dd");
         // console.log(14, d);
         // eslint-disable-next-line
         var data = events.filter(function (event) {
-          return options.adapter === 'jalali' ? isSameDay(addDate, parse(event === null || event === void 0 ? void 0 : event.date, 'yyyy-MM-dd', new Date())) : isSameDay$1(addDate, parse$1(event === null || event === void 0 ? void 0 : event.date, 'yyyy-MM-dd', new Date()));
+          return options.adapter === "jalali" ? isSameDay(addDate, parse(event === null || event === void 0 ? void 0 : event.date, "yyyy-MM-dd", new Date())) : isSameDay$1(addDate, parse$1(event === null || event === void 0 ? void 0 : event.date, "yyyy-MM-dd", new Date()));
         });
         lastDaysData.push({
           id: "day_-".concat(d),
@@ -2194,32 +2194,32 @@ function Scheduler(props) {
    */
   var getWeekHeader = function getWeekHeader() {
     var data = [];
-    var weekStart = (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? startOfWeek(selectedDay, {
-      weekStartsOn: startWeekOn === 'mon' ? 1 : 0
+    var weekStart = (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? startOfWeek(selectedDay, {
+      weekStartsOn: startWeekOn === "mon" ? 1 : 0
     }) : startOfWeek$1(selectedDay, {
-      weekStartsOn: startWeekOn === 'mon' ? 1 : 0
+      weekStartsOn: startWeekOn === "mon" ? 1 : 0
     });
     for (var i = 0; i < 7; i++) {
-      var date = (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? add(weekStart, {
+      var date = (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? add(weekStart, {
         days: i
       }) : add$1(weekStart, {
         days: i
       });
       data.push({
         date: date,
-        weekDay: (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? format(date, 'iii', {
+        weekDay: (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? format(date, "iii", {
           locale: dateFnsLocale
-        }) : format$1(date, 'iii', {
-          locale: dateFnsLocale
-        }),
-        day: (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? format(date, 'dd', {
-          locale: dateFnsLocale
-        }) : format$1(date, 'dd', {
+        }) : format$1(date, "iii", {
           locale: dateFnsLocale
         }),
-        month: (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? format$1(date, 'MM', {
+        day: (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? format(date, "dd", {
           locale: dateFnsLocale
-        }) : format$1(date, 'MM', {
+        }) : format$1(date, "dd", {
+          locale: dateFnsLocale
+        }),
+        month: (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? format$1(date, "MM", {
+          locale: dateFnsLocale
+        }) : format$1(date, "MM", {
           locale: dateFnsLocale
         })
       });
@@ -2229,10 +2229,10 @@ function Scheduler(props) {
   var getWeekRows = function getWeekRows() {
     var HOURS = 24; //* 2
     var data = [];
-    var dayStartHour = (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? startOfDay(selectedDay) : startOfDay$1(selectedDay);
+    var dayStartHour = (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? startOfDay(selectedDay) : startOfDay$1(selectedDay);
     var _loop4 = function _loop4() {
       var id = "line_".concat(i);
-      var label = (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? format(dayStartHour, 'HH:mm aaa') : format$1(dayStartHour, 'HH:mm aaa');
+      var label = (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? format(dayStartHour, "HH:mm aaa") : format$1(dayStartHour, "HH:mm aaa");
 
       //TODO Add everyday event capability
       //if (i === 0) {
@@ -2253,8 +2253,8 @@ function Scheduler(props) {
         columns.map(function (column, index) {
           var data = events.filter(function (event) {
             var _event$startHour;
-            var eventDate = (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? parse(event === null || event === void 0 ? void 0 : event.date, 'yyyy-MM-dd', new Date()) : parse$1(event === null || event === void 0 ? void 0 : event.date, 'yyyy-MM-dd', new Date());
-            return (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? isSameDay(column === null || column === void 0 ? void 0 : column.date, eventDate) : isSameDay$1(column === null || column === void 0 ? void 0 : column.date, eventDate) && (event === null || event === void 0 ? void 0 : (_event$startHour = event.startHour) === null || _event$startHour === void 0 ? void 0 : _event$startHour.toUpperCase()) === (label === null || label === void 0 ? void 0 : label.toUpperCase());
+            var eventDate = (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? parse(event === null || event === void 0 ? void 0 : event.date, "yyyy-MM-dd", new Date()) : parse$1(event === null || event === void 0 ? void 0 : event.date, "yyyy-MM-dd", new Date());
+            return (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? isSameDay(column === null || column === void 0 ? void 0 : column.date, eventDate) : isSameDay$1(column === null || column === void 0 ? void 0 : column.date, eventDate) && (event === null || event === void 0 ? void 0 : (_event$startHour = event.startHour) === null || _event$startHour === void 0 ? void 0 : _event$startHour.toUpperCase()) === (label === null || label === void 0 ? void 0 : label.toUpperCase());
           });
           obj.days.push({
             id: "column-".concat(index, "_m-").concat(column.month, "_d-").concat(column.day, "_").concat(id),
@@ -2264,7 +2264,7 @@ function Scheduler(props) {
         });
         // Label affectation
         data.push(obj); // End processing bloc
-        dayStartHour = (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? add(dayStartHour, {
+        dayStartHour = (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? add(dayStartHour, {
           minutes: 60
         }) : add$1(dayStartHour, {
           minutes: 60
@@ -2282,19 +2282,19 @@ function Scheduler(props) {
   var getDayHeader = function getDayHeader() {
     return [{
       date: selectedDay,
-      weekDay: (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? format(selectedDay, 'iii', {
+      weekDay: (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? format(selectedDay, "iii", {
         locale: dateFnsLocale
-      }) : format$1(selectedDay, 'iii', {
-        locale: dateFnsLocale
-      }),
-      day: (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? format(selectedDay, 'dd', {
-        locale: dateFnsLocale
-      }) : format$1(selectedDay, 'dd', {
+      }) : format$1(selectedDay, "iii", {
         locale: dateFnsLocale
       }),
-      month: (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? format(selectedDay, 'MM', {
+      day: (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? format(selectedDay, "dd", {
         locale: dateFnsLocale
-      }) : format$1(selectedDay, 'MM', {
+      }) : format$1(selectedDay, "dd", {
+        locale: dateFnsLocale
+      }),
+      month: (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? format(selectedDay, "MM", {
+        locale: dateFnsLocale
+      }) : format$1(selectedDay, "MM", {
         locale: dateFnsLocale
       })
     }];
@@ -2302,10 +2302,10 @@ function Scheduler(props) {
   var getDayRows = function getDayRows() {
     var HOURS = 24;
     var data = [];
-    var dayStartHour = (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? startOfDay(selectedDay) : startOfDay$1(selectedDay);
+    var dayStartHour = (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? startOfDay(selectedDay) : startOfDay$1(selectedDay);
     var _loop5 = function _loop5() {
       var id = "line_".concat(i);
-      var label = (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? format(dayStartHour, 'HH:mm aaa') : format$1(dayStartHour, 'HH:mm aaa');
+      var label = (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? format(dayStartHour, "HH:mm aaa") : format$1(dayStartHour, "HH:mm aaa");
       if (i > 0) {
         var obj = {
           id: id,
@@ -2316,8 +2316,8 @@ function Scheduler(props) {
         var column = columns[0];
         var matchedEvents = events.filter(function (event) {
           var _event$startHour2;
-          var eventDate = (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? parse(event === null || event === void 0 ? void 0 : event.date, 'yyyy-MM-dd', new Date()) : parse$1(event === null || event === void 0 ? void 0 : event.date, 'yyyy-MM-dd', new Date());
-          return (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? isSameDay(column === null || column === void 0 ? void 0 : column.date, eventDate) : isSameDay$1(column === null || column === void 0 ? void 0 : column.date, eventDate) && (event === null || event === void 0 ? void 0 : (_event$startHour2 = event.startHour) === null || _event$startHour2 === void 0 ? void 0 : _event$startHour2.toUpperCase()) === (label === null || label === void 0 ? void 0 : label.toUpperCase());
+          var eventDate = (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? parse(event === null || event === void 0 ? void 0 : event.date, "yyyy-MM-dd", new Date()) : parse$1(event === null || event === void 0 ? void 0 : event.date, "yyyy-MM-dd", new Date());
+          return (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? isSameDay(column === null || column === void 0 ? void 0 : column.date, eventDate) : isSameDay$1(column === null || column === void 0 ? void 0 : column.date, eventDate) && (event === null || event === void 0 ? void 0 : (_event$startHour2 = event.startHour) === null || _event$startHour2 === void 0 ? void 0 : _event$startHour2.toUpperCase()) === (label === null || label === void 0 ? void 0 : label.toUpperCase());
         });
         obj.days.push({
           id: "column-_m-".concat(column === null || column === void 0 ? void 0 : column.month, "_d-").concat(column === null || column === void 0 ? void 0 : column.day, "_").concat(id),
@@ -2325,7 +2325,7 @@ function Scheduler(props) {
           data: matchedEvents
         });
         data.push(obj);
-        dayStartHour = (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? add(dayStartHour, {
+        dayStartHour = (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? add(dayStartHour, {
           minutes: 60
         }) : add$1(dayStartHour, {
           minutes: 60
@@ -2357,7 +2357,7 @@ function Scheduler(props) {
   var handleDateChange = function handleDateChange(day, date) {
     setDaysInMonth(day);
     setSelectedDay(date);
-    setSelectedDate((options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? format$1(date, 'MMMM-yyyy') : format$1(date, 'MMMM-yyyy'));
+    setSelectedDate((options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? format(date, "MMMM-yyyy") : format$1(date, "MMMM-yyyy"));
   };
 
   /**
@@ -2399,7 +2399,7 @@ function Scheduler(props) {
                 setTimeout(function () {
                   setAlertState(_objectSpread(_objectSpread({}, alertState), {}, {
                     open: false,
-                    message: ''
+                    message: ""
                   }));
                 }, alertState.delay);
               }
@@ -2444,7 +2444,7 @@ function Scheduler(props) {
   useEffect(function () {
     if (locale !== i18n.language) {
       //localStorage.getItem('i18nextLng')
-      localStorage.setItem('i18nextLng', locale.toLowerCase());
+      localStorage.setItem("i18nextLng", locale.toLowerCase());
       i18n.changeLanguage(locale.toLowerCase());
       updateWeekDays();
     }
@@ -2570,7 +2570,7 @@ Scheduler.propTypes = {
   onAlertCloseButtonClicked: PropTypes.func
 };
 Scheduler.defaultProps = {
-  locale: 'en',
+  locale: "en",
   legacyStyle: false
 };
 
