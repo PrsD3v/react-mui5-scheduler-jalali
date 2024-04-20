@@ -1075,7 +1075,7 @@ function MonthModeView(props) {
       return (hiddenDays === null || hiddenDays === void 0 ? void 0 : hiddenDays.indexOf(day.dayName)) < 0;
     }).map(function (day, indexD) {
       var _columns$filter$index, _columns$filter$index2, _day$data2, _day$data3;
-      var currentDay = (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? day.day === today.getUTCDate() && isSameMonth(day.date, today) : day.day === today.getUTCDate() && isSameMonth$1(day.date, today);
+      var currentDay = (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? day.day === parseInt(format(today, 'dd')) && isSameMonth(day.date, today) : day.day === today.getUTCDate() && isSameMonth$1(day.date, today);
       return /*#__PURE__*/React.createElement(StyledTableCell$2, {
         scope: "row",
         align: "center",
@@ -2035,7 +2035,6 @@ function Scheduler(props) {
     var rows = [],
       daysBefore = [];
     var iteration = (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? getWeeksInMonth(selectedDay) : getWeeksInMonth$1(selectedDay);
-    // console.log(1, iteration);
     var startOnSunday = (startWeekOn === null || startWeekOn === void 0 ? void 0 : startWeekOn.toUpperCase()) === "SUN" && t("sun").toUpperCase() === weekDays[0].toUpperCase();
     var startOnSaturday = (startWeekOn === null || startWeekOn === void 0 ? void 0 : startWeekOn.toUpperCase()) === "SAT" && t("sat").toUpperCase() === weekDays[0].toUpperCase();
     var getDayName = function getDayName(date) {
@@ -2045,11 +2044,8 @@ function Scheduler(props) {
       return dayName;
     };
     var monthStartDate = (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? startOfMonth(selectedDay) : startOfMonth$1(selectedDay); // First day of month
-    // console.log(2, monthStartDate);
     var monthStartDay = (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? getDay(monthStartDate) : getDay$1(monthStartDate); // Index of the day in week
-    // console.log(3, monthStartDay);
     var dateDay = (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? parseInt(format(monthStartDate, "dd")) : parseInt(format$1(monthStartDate, "dd")); // Month start day
-    // console.log(4, dateDay);
     // Condition check helper
     var checkCondition = function checkCondition(v) {
       return startOnSunday ? v <= monthStartDay : startOnSaturday ? v - 1 <= monthStartDay : v < monthStartDay;
@@ -2061,13 +2057,10 @@ function Scheduler(props) {
         }) : sub$1(monthStartDate, {
           days: monthStartDay - i + (startOnSunday ? 1 : startOnSaturday ? 2 : 0)
         });
-        // console.log(5, subDate);
         var day = (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? parseInt(format(subDate, "dd")) : parseInt(format$1(subDate, "dd"));
-        // console.log(6, day);
         var data = events.filter(function (event) {
           return (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? isSameDay(subDate, parse(event === null || event === void 0 ? void 0 : event.date, "yyyy-MM-dd", new Date())) : isSameDay$1(subDate, parse$1(event === null || event === void 0 ? void 0 : event.date, "yyyy-MM-dd", new Date()));
         });
-        // console.log(7, data);
         daysBefore.push({
           id: "day_-".concat(day),
           day: day,
@@ -2089,13 +2082,10 @@ function Scheduler(props) {
         }) : sub$1(monthStartDate, {
           days: _i
         });
-        // console.log(8, subDate);
         var day = (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? parseInt(format(subDate, "dd")) : parseInt(format$1(subDate, "dd"));
-        // console.log(9, day);
         var data = events.filter(function (event) {
           return (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? isSameDay(subDate, parse(event === null || event === void 0 ? void 0 : event.date, "yyyy-MM-dd", new Date())) : isSameDay$1(subDate, parse$1(event === null || event === void 0 ? void 0 : event.date, "yyyy-MM-dd", new Date()));
         });
-        // console.log(10, data);
         daysBefore.push({
           id: "day_-".concat(day),
           day: day,
@@ -2120,11 +2110,9 @@ function Scheduler(props) {
       var obj = [];
       var _loop3 = function _loop3() {
         var date = (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? parse("".concat(dateDay, "-").concat(selectedDate), "dd-MMMM-yyyy", new Date()) : parse$1("".concat(dateDay, "-").concat(selectedDate), "dd-MMMM-yyyy", new Date());
-        console.log(11, selectedDate);
         var data = events.filter(function (event) {
           return (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? isSameDay(date, (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? parse(event === null || event === void 0 ? void 0 : event.date, "yyyy-MM-dd", new Date()) : parse$1(event === null || event === void 0 ? void 0 : event.date, "yyyy-MM-dd", new Date())) : isSameDay$1(date, (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? parse(event === null || event === void 0 ? void 0 : event.date, "yyyy-MM-dd", new Date()) : parse$1(event === null || event === void 0 ? void 0 : event.date, "yyyy-MM-dd", new Date()));
         });
-        // console.log(12, data);
         obj.push({
           id: "day_-".concat(dateDay),
           date: date,
@@ -2167,9 +2155,7 @@ function Scheduler(props) {
         }) : add$1(addDate, {
           days: 1
         });
-        // console.log(13, addDate);
         var d = (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? format(addDate, "dd") : format$1(addDate, "dd");
-        // console.log(14, d);
         // eslint-disable-next-line
         var data = events.filter(function (event) {
           return options.adapter === "jalali" ? isSameDay(addDate, parse(event === null || event === void 0 ? void 0 : event.date, "yyyy-MM-dd", new Date())) : isSameDay$1(addDate, parse$1(event === null || event === void 0 ? void 0 : event.date, "yyyy-MM-dd", new Date()));

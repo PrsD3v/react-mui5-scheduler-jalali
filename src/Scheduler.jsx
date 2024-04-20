@@ -203,7 +203,6 @@ function Scheduler(props) {
       options?.adapter === "jalali"
         ? jalaliGetWeeksInMonth(selectedDay)
         : getWeeksInMonth(selectedDay);
-    // console.log(1, iteration);
     let startOnSunday =
       startWeekOn?.toUpperCase() === "SUN" &&
       t("sun").toUpperCase() === weekDays[0].toUpperCase();
@@ -221,17 +220,14 @@ function Scheduler(props) {
       options?.adapter === "jalali"
         ? jalaliStartOfMonth(selectedDay)
         : startOfMonth(selectedDay); // First day of month
-    // console.log(2, monthStartDate);
     let monthStartDay =
       options?.adapter === "jalali"
         ? jalaliGetDay(monthStartDate)
         : getDay(monthStartDate); // Index of the day in week
-    // console.log(3, monthStartDay);
     let dateDay =
       options?.adapter === "jalali"
         ? parseInt(jalaliFormat(monthStartDate, "dd"))
         : parseInt(format(monthStartDate, "dd")); // Month start day
-    // console.log(4, dateDay);
     // Condition check helper
     const checkCondition = (v) =>
       startOnSunday
@@ -258,12 +254,10 @@ function Scheduler(props) {
                   i +
                   (startOnSunday ? 1 : startOnSaturday ? 2 : 0),
               });
-        // console.log(5, subDate);
         let day =
           options?.adapter === "jalali"
             ? parseInt(jalaliFormat(subDate, "dd"))
             : parseInt(format(subDate, "dd"));
-        // console.log(6, day);
         let data = events.filter((event) =>
           options?.adapter === "jalali"
             ? jalaliIsSameDay(
@@ -272,7 +266,6 @@ function Scheduler(props) {
               )
             : isSameDay(subDate, parse(event?.date, "yyyy-MM-dd", new Date()))
         );
-        // console.log(7, data);
         daysBefore.push({
           id: `day_-${day}`,
           day: day,
@@ -287,12 +280,10 @@ function Scheduler(props) {
           options?.adapter === "jalali"
             ? jalaliSub(monthStartDate, { days: i })
             : sub(monthStartDate, { days: i });
-        // console.log(8, subDate);
         let day =
           options?.adapter === "jalali"
             ? parseInt(jalaliFormat(subDate, "dd"))
             : parseInt(format(subDate, "dd"));
-        // console.log(9, day);
         let data = events.filter((event) =>
           options?.adapter === "jalali"
             ? jalaliIsSameDay(
@@ -301,7 +292,6 @@ function Scheduler(props) {
               )
             : isSameDay(subDate, parse(event?.date, "yyyy-MM-dd", new Date()))
         );
-        // console.log(10, data);
         daysBefore.push({
           id: `day_-${day}`,
           day: day,
@@ -336,7 +326,6 @@ function Scheduler(props) {
                 new Date()
               )
             : parse(`${dateDay}-${selectedDate}`, "dd-MMMM-yyyy", new Date());
-        console.log(11, selectedDate);
         let data = events.filter((event) =>
           options?.adapter === "jalali"
             ? jalaliIsSameDay(
@@ -352,7 +341,6 @@ function Scheduler(props) {
                   : parse(event?.date, "yyyy-MM-dd", new Date())
               )
         );
-        // console.log(12, data);
         obj.push({
           id: `day_-${dateDay}`,
           date,
@@ -385,12 +373,10 @@ function Scheduler(props) {
           options?.adapter === "jalali"
             ? jalaliAdd(addDate, { days: 1 })
             : add(addDate, { days: 1 });
-        // console.log(13, addDate);
         let d =
           options?.adapter === "jalali"
             ? jalaliFormat(addDate, "dd")
             : format(addDate, "dd");
-        // console.log(14, d);
         // eslint-disable-next-line
         let data = events.filter((event) =>
           options.adapter === "jalali"

@@ -7,7 +7,7 @@ import {
   TableHead, TableRow, tableCellClasses, Box
 } from "@mui/material"
 import { getDaysInMonth, isSameMonth } from 'date-fns'
-import { getDaysInMonth as jalaliGetDaysInMonth, isSameMonth as jalaliIsSameMonth } from 'date-fns-jalali'
+import { getDaysInMonth as jalaliGetDaysInMonth, isSameMonth as jalaliIsSameMonth, format as jalaliFormat } from 'date-fns-jalali'
 import EventNoteRoundedIcon from '@mui/icons-material/EventNoteRounded'
 import EventItem from "./EventItem.jsx"
 import {useTranslation} from "react-i18next"
@@ -240,7 +240,7 @@ function MonthModeView (props) {
               >
                 {row?.days?.filter(day => hiddenDays?.indexOf(day.dayName) < 0).map((day, indexD) => {
                   const currentDay = (
-                    options?.adapter === 'jalali' ?  day.day === today.getUTCDate() && jalaliIsSameMonth(day.date, today) : day.day === today.getUTCDate() && isSameMonth(day.date, today) 
+                    options?.adapter === 'jalali' ?  day.day === parseInt(jalaliFormat(today, 'dd')) && jalaliIsSameMonth(day.date, today) : day.day === today.getUTCDate() && isSameMonth(day.date, today) 
                   )
                   return (
                     <StyledTableCell
