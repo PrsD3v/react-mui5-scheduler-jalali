@@ -73,7 +73,6 @@ function MonthModeView (props) {
     //padding: '1px 7px',
     //width: 'fit-content'
   }
-  console.log(props.rows);
   const onCellDragOver = (e) => {
     e.preventDefault()
   }
