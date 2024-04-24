@@ -593,6 +593,9 @@ function SchedulerToolbar(props) {
     }
   }, /*#__PURE__*/React.createElement(Hidden, {
     smDown: true
+  }, /*#__PURE__*/React.createElement(Box, {
+    display: "flex",
+    flexDirection: options !== null && options !== void 0 && options.rtl ? 'row-reverse' : 'row'
   }, /*#__PURE__*/React.createElement(IconButton, _extends({
     sx: {
       ml: 0,
@@ -602,7 +605,7 @@ function SchedulerToolbar(props) {
     onClick: function onClick() {
       return handleChangeDate((options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? sub : sub$1);
     }
-  }), (options === null || options === void 0 ? void 0 : options.rtl) === true ? /*#__PURE__*/React.createElement(ChevronRightIcon, null) : /*#__PURE__*/React.createElement(ChevronLeftIcon, null)), /*#__PURE__*/React.createElement(Button, {
+  }), /*#__PURE__*/React.createElement(ChevronLeftIcon, null)), /*#__PURE__*/React.createElement(Button, {
     size: "small",
     id: "basic-button",
     "aria-haspopup": "true"
@@ -626,7 +629,7 @@ function SchedulerToolbar(props) {
     onClick: function onClick() {
       return handleChangeDate((options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? add : add$1);
     }
-  }), (options === null || options === void 0 ? void 0 : options.rtl) === true ? /*#__PURE__*/React.createElement(ChevronLeftIcon, null) : /*#__PURE__*/React.createElement(ChevronRightIcon, null))), /*#__PURE__*/React.createElement(Hidden, {
+  }), /*#__PURE__*/React.createElement(ChevronRightIcon, null)))), /*#__PURE__*/React.createElement(Hidden, {
     smUp: true
   }, /*#__PURE__*/React.createElement(IconButton, _extends({
     sx: {

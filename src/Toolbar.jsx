@@ -8,7 +8,7 @@ import AdapterJalali from "@date-io/date-fns-jalali";
 import {
   Typography, Toolbar, IconButton, Button, ToggleButton,
   TextField, Hidden, Alert, Collapse, ToggleButtonGroup,
-  Divider, ListItemIcon, Menu, MenuItem, Grid, Stack
+  Divider, ListItemIcon, Menu, MenuItem, Grid, Stack, Box
 } from "@mui/material"
 import { useTheme } from "@mui/material/styles"
 import LocalizationProvider from '@mui/lab/LocalizationProvider'
@@ -162,17 +162,13 @@ function SchedulerToolbar (props) {
           {toolbarProps.showDatePicker &&
           <Typography component="div" sx={{display: 'flex'}}>
             <Hidden smDown>
-              <IconButton
+            <Box display='flex' flexDirection={options?.rtl ? 'row-reverse' : 'row'}>
+            <IconButton
                 sx={{  ml: 0, mr: -.1 }}
                 {...commonIconButtonProps}
                 onClick={() => handleChangeDate(options?.adapter === 'jalali' ? jalaliSub : sub)}
               >
-                {options?.rtl === true 
-                ? 
-                <ChevronRightIcon />
-                :
                 <ChevronLeftIcon />
-              }
               </IconButton>
               <Button
                 size="small"
@@ -199,13 +195,9 @@ function SchedulerToolbar (props) {
                 {...commonIconButtonProps}
                 onClick={() => handleChangeDate(options?.adapter === 'jalali' ? jalaliAdd : add)}
               >
-            {options?.rtl === true 
-                ? 
-                <ChevronLeftIcon />
-                :
               <ChevronRightIcon />
-              }
               </IconButton>
+            </Box>
             </Hidden>
             <Hidden smUp>
               <IconButton

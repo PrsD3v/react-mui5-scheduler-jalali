@@ -593,6 +593,9 @@
       }
     }, /*#__PURE__*/React__default["default"].createElement(material.Hidden, {
       smDown: true
+    }, /*#__PURE__*/React__default["default"].createElement(material.Box, {
+      display: "flex",
+      flexDirection: options !== null && options !== void 0 && options.rtl ? 'row-reverse' : 'row'
     }, /*#__PURE__*/React__default["default"].createElement(material.IconButton, _extends__default["default"]({
       sx: {
         ml: 0,
@@ -602,7 +605,7 @@
       onClick: function onClick() {
         return handleChangeDate((options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? dateFnsJalali.sub : dateFns.sub);
       }
-    }), (options === null || options === void 0 ? void 0 : options.rtl) === true ? /*#__PURE__*/React__default["default"].createElement(ChevronRightIcon__default["default"], null) : /*#__PURE__*/React__default["default"].createElement(ChevronLeftIcon__default["default"], null)), /*#__PURE__*/React__default["default"].createElement(material.Button, {
+    }), /*#__PURE__*/React__default["default"].createElement(ChevronLeftIcon__default["default"], null)), /*#__PURE__*/React__default["default"].createElement(material.Button, {
       size: "small",
       id: "basic-button",
       "aria-haspopup": "true"
@@ -626,7 +629,7 @@
       onClick: function onClick() {
         return handleChangeDate((options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? dateFnsJalali.add : dateFns.add);
       }
-    }), (options === null || options === void 0 ? void 0 : options.rtl) === true ? /*#__PURE__*/React__default["default"].createElement(ChevronLeftIcon__default["default"], null) : /*#__PURE__*/React__default["default"].createElement(ChevronRightIcon__default["default"], null))), /*#__PURE__*/React__default["default"].createElement(material.Hidden, {
+    }), /*#__PURE__*/React__default["default"].createElement(ChevronRightIcon__default["default"], null)))), /*#__PURE__*/React__default["default"].createElement(material.Hidden, {
       smUp: true
     }, /*#__PURE__*/React__default["default"].createElement(material.IconButton, _extends__default["default"]({
       sx: {
