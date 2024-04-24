@@ -876,6 +876,22 @@ var StyledTableRow$2 = styled(TableRow)(function (_ref3) {
     border: 0
   });
 });
+var StyledTableContainer$2 = styled(TableContainer)(function (_ref5) {
+  _ref5.theme;
+  return _defineProperty(_defineProperty(_defineProperty(_defineProperty({}, '&::-webkit-scrollbar', {
+    width: 7,
+    height: 6
+  }), '&::-webkit-scrollbar-track', {
+    WebkitBoxShadow: "inset 0 0 6px rgb(125, 161, 196, 0.5)"
+  }), '&::-webkit-scrollbar-thumb', {
+    WebkitBorderRadius: 4,
+    borderRadius: 4,
+    background: "rgba(0, 172, 193, .5)",
+    WebkitBoxShadow: "inset 0 0 6px rgba(25, 118, 210, .5)"
+  }), '&::-webkit-scrollbar-thumb:window-inactive', {
+    background: "rgba(125, 161, 196, 0.5)"
+  });
+});
 function MonthModeView(props) {
   var _columns$filter;
   var rows = props.rows;
@@ -1038,7 +1054,12 @@ function MonthModeView(props) {
     onTaskClick && onTaskClick(event, task);
   };
   var hiddenDays = (options === null || options === void 0 ? void 0 : options.hiddenDays) || [];
-  return /*#__PURE__*/React.createElement(TableContainer, {
+  return /*#__PURE__*/React.createElement(StyledTableContainer$2, {
+    component: Paper,
+    sx: {
+      maxHeight: (options === null || options === void 0 ? void 0 : options.maxHeight) || 540
+    }
+  }, /*#__PURE__*/React.createElement(TableContainer, {
     component: Paper,
     sx: {
       boxShadow: 'none'
@@ -1114,7 +1135,7 @@ function MonthModeView(props) {
         htmlColor: theme.palette.divider
       })));
     }));
-  }))));
+  })))));
 }
 MonthModeView.propTypes = {
   columns: PropTypes.array,
@@ -1851,7 +1872,7 @@ function TimeLineModeView(props) {
       color: "text.secondary"
     }, task !== null && task !== void 0 && task.date && (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? format(parse(task === null || task === void 0 ? void 0 : task.date, 'yyyy-MM-dd', new Date()), 'PPP', {
       locale: dateFnsLocale
-    }) : format$1(parse$1(task === null || task === void 0 ? void 0 : task.date, 'yyyy-MM-dd', new Date()), 'PPP', {
+    }) : (task === null || task === void 0 ? void 0 : task.date) && format$1(parse$1(task === null || task === void 0 ? void 0 : task.date, 'yyyy-MM-dd', new Date()), 'PPP', {
       locale: dateFnsLocale
     }), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement(Typography, {
       variant: "caption"

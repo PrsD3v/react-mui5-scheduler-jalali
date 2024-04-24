@@ -47,6 +47,25 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   }
 }))
 
+const StyledTableContainer = styled(TableContainer)(({ theme }) => ({
+  ['&::-webkit-scrollbar']: {
+    width: 7,
+    height: 6
+  },
+  ['&::-webkit-scrollbar-track']: {
+    WebkitBoxShadow: "inset 0 0 6px rgb(125, 161, 196, 0.5)"
+  },
+  ['&::-webkit-scrollbar-thumb']: {
+    WebkitBorderRadius: 4,
+    borderRadius: 4,
+    background: "rgba(0, 172, 193, .5)",
+    WebkitBoxShadow: "inset 0 0 6px rgba(25, 118, 210, .5)"
+  },
+  ['&::-webkit-scrollbar-thumb:window-inactive']: {
+    background: "rgba(125, 161, 196, 0.5)"
+  }
+}))
+
 function MonthModeView (props) {
   const {
     rows,
@@ -205,6 +224,10 @@ function MonthModeView (props) {
 
   const hiddenDays = options?.hiddenDays || []
   return (
+    <StyledTableContainer
+    component={Paper}
+    sx={{ maxHeight: options?.maxHeight || 540 }}
+  >
     <TableContainer component={Paper} sx={{ boxShadow: 'none' }}>
       <Table
         size="small"
@@ -284,6 +307,7 @@ function MonthModeView (props) {
         </TableBody>
       </Table>
     </TableContainer>
+    </StyledTableContainer>
   )
 }
 
