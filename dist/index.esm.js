@@ -448,6 +448,7 @@ function SchedulerToolbar(props) {
     onSearchResult = props.onSearchResult,
     onAlertCloseButtonClicked = props.onAlertCloseButtonClicked,
     options = props.options;
+    props.rtl;
   var theme = useTheme();
   var _useTranslation = useTranslation(['common']),
     t = _useTranslation.t;
@@ -601,7 +602,7 @@ function SchedulerToolbar(props) {
     onClick: function onClick() {
       return handleChangeDate((options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? sub : sub$1);
     }
-  }), /*#__PURE__*/React.createElement(ChevronLeftIcon, null)), /*#__PURE__*/React.createElement(Button, {
+  }), (options === null || options === void 0 ? void 0 : options.rtl) === true ? /*#__PURE__*/React.createElement(ChevronRightIcon, null) : /*#__PURE__*/React.createElement(ChevronLeftIcon, null)), /*#__PURE__*/React.createElement(Button, {
     size: "small",
     id: "basic-button",
     "aria-haspopup": "true"
@@ -625,7 +626,7 @@ function SchedulerToolbar(props) {
     onClick: function onClick() {
       return handleChangeDate((options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? add : add$1);
     }
-  }), /*#__PURE__*/React.createElement(ChevronRightIcon, null))), /*#__PURE__*/React.createElement(Hidden, {
+  }), (options === null || options === void 0 ? void 0 : options.rtl) === true ? /*#__PURE__*/React.createElement(ChevronLeftIcon, null) : /*#__PURE__*/React.createElement(ChevronRightIcon, null))), /*#__PURE__*/React.createElement(Hidden, {
     smUp: true
   }, /*#__PURE__*/React.createElement(IconButton, _extends({
     sx: {
@@ -901,7 +902,6 @@ function MonthModeView(props) {
     //padding: '1px 7px',
     //width: 'fit-content'
   };
-  console.log(props.rows);
   var onCellDragOver = function onCellDragOver(e) {
     e.preventDefault();
   };

@@ -40,7 +40,8 @@ function SchedulerToolbar (props) {
     onDateChange,
     onSearchResult,
     onAlertCloseButtonClicked,
-    options
+    options,
+    rtl
   } = props
 
   const theme = useTheme()
@@ -166,7 +167,12 @@ function SchedulerToolbar (props) {
                 {...commonIconButtonProps}
                 onClick={() => handleChangeDate(options?.adapter === 'jalali' ? jalaliSub : sub)}
               >
+                {options?.rtl === true 
+                ? 
+                <ChevronRightIcon />
+                :
                 <ChevronLeftIcon />
+              }
               </IconButton>
               <Button
                 size="small"
@@ -193,7 +199,12 @@ function SchedulerToolbar (props) {
                 {...commonIconButtonProps}
                 onClick={() => handleChangeDate(options?.adapter === 'jalali' ? jalaliAdd : add)}
               >
-                <ChevronRightIcon />
+            {options?.rtl === true 
+                ? 
+                <ChevronLeftIcon />
+                :
+              <ChevronRightIcon />
+              }
               </IconButton>
             </Hidden>
             <Hidden smUp>

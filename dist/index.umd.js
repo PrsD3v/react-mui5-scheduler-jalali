@@ -448,6 +448,7 @@
       onSearchResult = props.onSearchResult,
       onAlertCloseButtonClicked = props.onAlertCloseButtonClicked,
       options = props.options;
+      props.rtl;
     var theme = styles.useTheme();
     var _useTranslation = reactI18next.useTranslation(['common']),
       t = _useTranslation.t;
@@ -601,7 +602,7 @@
       onClick: function onClick() {
         return handleChangeDate((options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? dateFnsJalali.sub : dateFns.sub);
       }
-    }), /*#__PURE__*/React__default["default"].createElement(ChevronLeftIcon__default["default"], null)), /*#__PURE__*/React__default["default"].createElement(material.Button, {
+    }), (options === null || options === void 0 ? void 0 : options.rtl) === true ? /*#__PURE__*/React__default["default"].createElement(ChevronRightIcon__default["default"], null) : /*#__PURE__*/React__default["default"].createElement(ChevronLeftIcon__default["default"], null)), /*#__PURE__*/React__default["default"].createElement(material.Button, {
       size: "small",
       id: "basic-button",
       "aria-haspopup": "true"
@@ -625,7 +626,7 @@
       onClick: function onClick() {
         return handleChangeDate((options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? dateFnsJalali.add : dateFns.add);
       }
-    }), /*#__PURE__*/React__default["default"].createElement(ChevronRightIcon__default["default"], null))), /*#__PURE__*/React__default["default"].createElement(material.Hidden, {
+    }), (options === null || options === void 0 ? void 0 : options.rtl) === true ? /*#__PURE__*/React__default["default"].createElement(ChevronLeftIcon__default["default"], null) : /*#__PURE__*/React__default["default"].createElement(ChevronRightIcon__default["default"], null))), /*#__PURE__*/React__default["default"].createElement(material.Hidden, {
       smUp: true
     }, /*#__PURE__*/React__default["default"].createElement(material.IconButton, _extends__default["default"]({
       sx: {
@@ -901,7 +902,6 @@
       //padding: '1px 7px',
       //width: 'fit-content'
     };
-    console.log(props.rows);
     var onCellDragOver = function onCellDragOver(e) {
       e.preventDefault();
     };

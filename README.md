@@ -175,17 +175,18 @@ For more details about date formats, see [date-fns docs](https://date-fns.org/v2
 
 ## Options
 
-| Name           | Type   | Default     | Description                                                                   | Values                                          |
-| -------------- | ------ | ----------- | ----------------------------------------------------------------------------- | ----------------------------------------------- |
-| transitionMode | string | `zoom`      | This option is used to define the type of scheduler transition                | `zoom`, `fade`, `slide`                         |
-| startWeekOn    | string | `mon`       | This option is used to set the start of the calendar week to Monday or Sunday | `mon`, `sun`                                    |
-| adapter        | string | `christian` | This prop is used to set the adapter of the scheduler                         | `christian`, `jalali`                           |
-| hiddenDays     | array  | `[]`        | This prop allows to hide some days of week (columns of scheduler)             | `sun`, `mon`, `tue`, `wed`, `thu`, `fri`, `sat` |
-| defaultMode    | string | `week`      | This option allows you to define the type of view to display                  | `month`, `week`, `day`, `timeline`              |
-| minWidth       | number | `540`       | This option allows you to define the minimum width of the container           | `number`                                        |
-| maxWidth       | number | `540`       | This option allows you to define the maximum width of the container           | `number`                                        |
-| minHeight      | number | `540`       | This option allows you to define the minimum height of the container          | `number`                                        |
-| maxHeigh       | number | `540`       | This option allows you to define the maximum height of the container          | `number`                                        |
+| Name           | Type    | Default     | Description                                                                   | Values                                          |
+| -------------- | ------- | ----------- | ----------------------------------------------------------------------------- | ----------------------------------------------- |
+| transitionMode | string  | `zoom`      | This option is used to define the type of scheduler transition                | `zoom`, `fade`, `slide`                         |
+| startWeekOn    | string  | `mon`       | This option is used to set the start of the calendar week to Monday or Sunday | `mon`, `sun`                                    |
+| adapter        | string  | `christian` | This prop is used to set the adapter of the scheduler                         | `christian`, `jalali`                           |
+| hiddenDays     | array   | `[]`        | This prop allows to hide some days of week (columns of scheduler)             | `sun`, `mon`, `tue`, `wed`, `thu`, `fri`, `sat` |
+| rtl            | boolean | `false`     | after use rtl wrapper set this true to fix buttons                            | `true`, `false`                                 |
+| defaultMode    | string  | `week`      | This option allows you to define the type of view to display                  | `month`, `week`, `day`, `timeline`              |
+| minWidth       | number  | `540`       | This option allows you to define the minimum width of the container           | `number`                                        |
+| maxWidth       | number  | `540`       | This option allows you to define the maximum width of the container           | `number`                                        |
+| minHeight      | number  | `540`       | This option allows you to define the minimum height of the container          | `number`                                        |
+| maxHeigh       | number  | `540`       | This option allows you to define the maximum height of the container          | `number`                                        |
 
 ## alertProps
 
@@ -220,6 +221,8 @@ For more details about date formats, see [date-fns docs](https://date-fns.org/v2
 
 - Muller Roufaou ([rouftom](http://github.com/rouftom))
 - Mahdi Amiri ([OwlPro](http://github.com/owlpro))
+
+## 🛟 Sponsoring services
 
 ## 😁 Authors
 
