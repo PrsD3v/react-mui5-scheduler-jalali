@@ -89,7 +89,7 @@ function TimeLineModeView (props) {
                   ),
                   'PPP',
                   { locale: dateFnsLocale }
-                ) : format(
+                ) :task?.date && format(
                   parse(
                     task?.date,
                     'yyyy-MM-dd',
