@@ -1,6 +1,6 @@
 {
   "name": "react-mui5-scheduler-jalali",
-  "version": "1.3.12",
+  "version": "1.3.13",
   "description": "📅 React mui scheduler is a react component based on @mui v5 that allows you to manage data in a calendar",
   "main": "dist/index.esm.js",
   "scripts": {

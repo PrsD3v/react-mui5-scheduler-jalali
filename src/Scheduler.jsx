@@ -706,7 +706,7 @@ function Scheduler(props) {
   }, [options?.startWeekOn]);
 
   return (
-    <Paper variant="outlined" elevation={0} sx={{ p: 0 }}>
+    <Paper variant="outlined" elevation={0} sx={{ p: 0, height: '100%' }}>
       <DateFnsLocaleContext.Provider value={dateFnsLocale}>
         <SchedulerToolbar
           today={today}
@@ -721,10 +721,10 @@ function Scheduler(props) {
           onSearchResult={onSearchResult}
           onAlertCloseButtonClicked={onAlertCloseButtonClicked}
         />
-        <Grid container spacing={0} alignItems="center" justifyContent="start">
+        <Grid container spacing={0} alignItems="center" justifyContent="start" height='100%'>
           {isMonthMode && (
             <TransitionMode in>
-              <Grid item xs={12}>
+              <Grid item xs={12} height='100%'>
                 <MonthModeView
                   locale={locale}
                   options={options}
@@ -743,7 +743,7 @@ function Scheduler(props) {
           )}
           {isWeekMode && (
             <TransitionMode in>
-              <Grid item xs={12}>
+              <Grid item xs={12} height='100%'>
                 <WeekModeView
                   locale={locale}
                   events={events}
@@ -762,7 +762,7 @@ function Scheduler(props) {
           )}
           {isDayMode && (
             <TransitionMode in>
-              <Grid item xs={12}>
+              <Grid item xs={12} height='100%'>
                 <DayModeView
                   locale={locale}
                   events={events}
@@ -782,7 +782,7 @@ function Scheduler(props) {
         </Grid>
         {isTimelineMode && (
           <TransitionMode in>
-            <Grid container spacing={2} alignItems="start">
+            <Grid container spacing={2} alignItems="start" height='100%'>
               <Grid item xs={12}>
                 <TimeLineModeView
                   events={events}

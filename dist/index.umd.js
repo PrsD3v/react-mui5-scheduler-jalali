@@ -2504,7 +2504,8 @@
       variant: "outlined",
       elevation: 0,
       sx: {
-        p: 0
+        p: 0,
+        height: '100%'
       }
     }, /*#__PURE__*/React__default["default"].createElement(DateFnsLocaleContext.Provider, {
       value: dateFnsLocale
@@ -2524,12 +2525,14 @@
       container: true,
       spacing: 0,
       alignItems: "center",
-      justifyContent: "start"
+      justifyContent: "start",
+      height: "100%"
     }, isMonthMode && /*#__PURE__*/React__default["default"].createElement(TransitionMode, {
       "in": true
     }, /*#__PURE__*/React__default["default"].createElement(material.Grid, {
       item: true,
-      xs: 12
+      xs: 12,
+      height: "100%"
     }, /*#__PURE__*/React__default["default"].createElement(MonthModeView, {
       locale: locale$2,
       options: options,
@@ -2546,7 +2549,8 @@
       "in": true
     }, /*#__PURE__*/React__default["default"].createElement(material.Grid, {
       item: true,
-      xs: 12
+      xs: 12,
+      height: "100%"
     }, /*#__PURE__*/React__default["default"].createElement(WeekModeView, {
       locale: locale$2,
       events: events,
@@ -2563,7 +2567,8 @@
       "in": true
     }, /*#__PURE__*/React__default["default"].createElement(material.Grid, {
       item: true,
-      xs: 12
+      xs: 12,
+      height: "100%"
     }, /*#__PURE__*/React__default["default"].createElement(DayModeView, {
       locale: locale$2,
       events: events,
@@ -2581,7 +2586,8 @@
     }, /*#__PURE__*/React__default["default"].createElement(material.Grid, {
       container: true,
       spacing: 2,
-      alignItems: "start"
+      alignItems: "start",
+      height: "100%"
     }, /*#__PURE__*/React__default["default"].createElement(material.Grid, {
       item: true,
       xs: 12

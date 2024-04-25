@@ -2504,7 +2504,8 @@ function Scheduler(props) {
     variant: "outlined",
     elevation: 0,
     sx: {
-      p: 0
+      p: 0,
+      height: '100%'
     }
   }, /*#__PURE__*/React.createElement(DateFnsLocaleContext.Provider, {
     value: dateFnsLocale
@@ -2524,12 +2525,14 @@ function Scheduler(props) {
     container: true,
     spacing: 0,
     alignItems: "center",
-    justifyContent: "start"
+    justifyContent: "start",
+    height: "100%"
   }, isMonthMode && /*#__PURE__*/React.createElement(TransitionMode, {
     "in": true
   }, /*#__PURE__*/React.createElement(Grid, {
     item: true,
-    xs: 12
+    xs: 12,
+    height: "100%"
   }, /*#__PURE__*/React.createElement(MonthModeView, {
     locale: locale,
     options: options,
@@ -2546,7 +2549,8 @@ function Scheduler(props) {
     "in": true
   }, /*#__PURE__*/React.createElement(Grid, {
     item: true,
-    xs: 12
+    xs: 12,
+    height: "100%"
   }, /*#__PURE__*/React.createElement(WeekModeView, {
     locale: locale,
     events: events,
@@ -2563,7 +2567,8 @@ function Scheduler(props) {
     "in": true
   }, /*#__PURE__*/React.createElement(Grid, {
     item: true,
-    xs: 12
+    xs: 12,
+    height: "100%"
   }, /*#__PURE__*/React.createElement(DayModeView, {
     locale: locale,
     events: events,
@@ -2581,7 +2586,8 @@ function Scheduler(props) {
   }, /*#__PURE__*/React.createElement(Grid, {
     container: true,
     spacing: 2,
-    alignItems: "start"
+    alignItems: "start",
+    height: "100%"
   }, /*#__PURE__*/React.createElement(Grid, {
     item: true,
     xs: 12
