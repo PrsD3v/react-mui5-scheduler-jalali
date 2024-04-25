@@ -82,6 +82,12 @@ function WeekModeView (props) {
     e.preventDefault()
   }
 
+  const getJalali = (date,format) => {
+    if (date) {
+      return jalaliFormat(date, format)
+    }
+  }
+
   const onCellDragStart = (e, item, rowLabel, rowIndex, dayIndex) => {
     setState({
       ...state,
@@ -253,7 +259,13 @@ function WeekModeView (props) {
                 align="center"
                 key={`weekday-${column?.day}-${index}`}
               >
-                {column?.weekDay} {column?.month}/{column?.day}
+                {
+                  options.adapter === 'jalali'
+                  ?
+                  `${column?.weekDay} ${getJalali(column?.date, 'MM')}/${getJalali(column?.date, 'dd')}`
+                  :
+                  `${column?.weekDay} ${column?.month}/${column?.day}`
+                }
               </StyledTableCell>
             ))}
           </StyledTableRow>
