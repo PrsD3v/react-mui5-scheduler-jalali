@@ -1365,6 +1365,7 @@
       event.stopPropagation();
       onTaskClick && onTaskClick(event, task);
     };
+    var hiddenDays = (options === null || options === void 0 ? void 0 : options.hiddenDays) || [];
     return /*#__PURE__*/React__default["default"].createElement(StyledTableContainer$1, {
       component: material.Paper,
       sx: {
@@ -1383,12 +1384,21 @@
       }
     }, /*#__PURE__*/React__default["default"].createElement(StyledTableRow$1, null, /*#__PURE__*/React__default["default"].createElement(StyledTableCell$1, {
       align: "left"
-    }), columns === null || columns === void 0 ? void 0 : columns.map(function (column, index) {
+    }), columns === null || columns === void 0 ? void 0 : columns.filter(function (column) {
+      return (hiddenDays === null || hiddenDays === void 0 ? void 0 : hiddenDays.indexOf(column.dayName)) < 0;
+    }).map(function (column, index) {
       return /*#__PURE__*/React__default["default"].createElement(StyledTableCell$1, {
         align: "center",
         key: "weekday-".concat(column === null || column === void 0 ? void 0 : column.day, "-").concat(index)
       }, options.adapter === 'jalali' ? "".concat(column === null || column === void 0 ? void 0 : column.weekDay, " ").concat(getJalali(column === null || column === void 0 ? void 0 : column.date, 'MM'), "/").concat(getJalali(column === null || column === void 0 ? void 0 : column.date, 'dd')) : "".concat(column === null || column === void 0 ? void 0 : column.weekDay, " ").concat(column === null || column === void 0 ? void 0 : column.month, "/").concat(column === null || column === void 0 ? void 0 : column.day));
-    }))), /*#__PURE__*/React__default["default"].createElement(material.TableBody, null, rows === null || rows === void 0 ? void 0 : rows.map(function (row, rowIndex) {
+    }))), /*#__PURE__*/React__default["default"].createElement(material.TableBody, null, rows === null || rows === void 0 ? void 0 : rows.map(function (row) {
+      var days = row.days.filter(function (day) {
+        return (hiddenDays === null || hiddenDays === void 0 ? void 0 : hiddenDays.indexOf(day.dayName)) < 0;
+      });
+      return _objectSpread$2(_objectSpread$2({}, row), {}, {
+        days: days
+      });
+    }).map(function (row, rowIndex) {
       var _row$days, _row$data, _row$days2;
       var lineTasks = (_row$days = row.days) === null || _row$days === void 0 ? void 0 : _row$days.reduce(function (prev, curr) {
         var _curr$data;
@@ -2208,11 +2218,17 @@
      * @return {{headerClassName: string, headerAlign: string, headerName: string, field: string, flex: number, editable: boolean, id: string, sortable: boolean, align: string}[]}
      */
     var getWeekHeader = function getWeekHeader() {
+      var getDayName = function getDayName(date) {
+        var days = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
+        var d = new Date(date);
+        var dayName = days[d.getDay()];
+        return dayName;
+      };
       var data = [];
       var weekStart = (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? dateFnsJalali.startOfWeek(selectedDay, {
-        weekStartsOn: startWeekOn === "mon" ? 1 : 0
+        weekStartsOn: startWeekOn === "mon" ? 1 : startWeekOn === "sat" ? 6 : 0
       }) : dateFns.startOfWeek(selectedDay, {
-        weekStartsOn: startWeekOn === "mon" ? 1 : 0
+        weekStartsOn: startWeekOn === "mon" ? 1 : startWeekOn === "sat" ? 6 : 0
       });
       for (var i = 0; i < 7; i++) {
         var date = (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? dateFnsJalali.add(weekStart, {
@@ -2222,6 +2238,7 @@
         });
         data.push({
           date: date,
+          dayName: getDayName(date),
           weekDay: (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? dateFnsJalali.format(date, "iii", {
             locale: dateFnsLocale
           }) : dateFns.format(date, "iii", {
@@ -2257,6 +2274,13 @@
         // ...
 
         if (i > 0) {
+          var getDayName = function getDayName(date) {
+            var days = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
+            var d = new Date(date);
+            var dayName = days[d.getDay()];
+            return dayName;
+          };
+
           //Start processing bloc
           var obj = {
             id: id,
@@ -2274,7 +2298,8 @@
             obj.days.push({
               id: "column-".concat(index, "_m-").concat(column.month, "_d-").concat(column.day, "_").concat(id),
               date: column === null || column === void 0 ? void 0 : column.date,
-              data: data
+              data: data,
+              dayName: getDayName(column === null || column === void 0 ? void 0 : column.date)
             });
           });
           // Label affectation

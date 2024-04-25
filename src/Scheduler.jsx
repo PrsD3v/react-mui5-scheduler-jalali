@@ -405,14 +405,22 @@ function Scheduler(props) {
    * @return {{headerClassName: string, headerAlign: string, headerName: string, field: string, flex: number, editable: boolean, id: string, sortable: boolean, align: string}[]}
    */
   const getWeekHeader = () => {
+
+    const getDayName = (date) => {
+      const days = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
+      const d = new Date(date);
+      const dayName = days[d.getDay()];
+      return dayName;
+    };
+
     let data = [];
     let weekStart =
       options?.adapter === "jalali"
         ? jalaliStartOfWeek(selectedDay, {
-            weekStartsOn: startWeekOn === "mon" ? 1 : 0,
+            weekStartsOn: startWeekOn === "mon" ? 1 : startWeekOn === "sat" ? 6 : 0,
           })
         : startOfWeek(selectedDay, {
-            weekStartsOn: startWeekOn === "mon" ? 1 : 0,
+            weekStartsOn: startWeekOn === "mon" ? 1 : startWeekOn === "sat" ? 6 : 0,
           });
     for (let i = 0; i < 7; i++) {
       let date =
@@ -421,6 +429,7 @@ function Scheduler(props) {
           : add(weekStart, { days: i });
       data.push({
         date: date,
+        dayName: getDayName(date),
         weekDay:
           options?.adapter === "jalali"
             ? jalaliFormat(date, "iii", { locale: dateFnsLocale })
@@ -461,6 +470,14 @@ function Scheduler(props) {
       // ...
 
       if (i > 0) {
+
+        const getDayName = (date) => {
+          const days = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
+          const d = new Date(date);
+          const dayName = days[d.getDay()];
+          return dayName;
+        };
+
         //Start processing bloc
         let obj = { id: id, label: label, days: [] };
         let columns = getWeekHeader();
@@ -480,6 +497,7 @@ function Scheduler(props) {
             id: `column-${index}_m-${column.month}_d-${column.day}_${id}`,
             date: column?.date,
             data: data,
+            dayName: getDayName(column?.date),
           });
         });
         // Label affectation

@@ -240,6 +240,8 @@ function WeekModeView (props) {
     event.stopPropagation()
     onTaskClick && onTaskClick(event, task)
   }
+
+  const hiddenDays = options?.hiddenDays || []
   
   return (
     <StyledTableContainer
@@ -254,8 +256,8 @@ function WeekModeView (props) {
         <TableHead sx={{height: 24}}>
           <StyledTableRow>
             <StyledTableCell align="left" />
-            {columns?.map((column, index) => (
-              <StyledTableCell
+            {columns?.filter(column => hiddenDays?.indexOf(column.dayName) < 0).map((column, index) => {
+         return     <StyledTableCell
                 align="center"
                 key={`weekday-${column?.day}-${index}`}
               >
@@ -267,12 +269,15 @@ function WeekModeView (props) {
                   `${column?.weekDay} ${column?.month}/${column?.day}`
                 }
               </StyledTableCell>
-            ))}
+})}
           </StyledTableRow>
         </TableHead>
         <TableBody>
           {
-            rows?.map((row, rowIndex) => {
+            rows?.map(row => {
+              const days = row.days.filter(day => hiddenDays?.indexOf(day.dayName) < 0)
+              return {...row,days}
+            }).map((row, rowIndex) => {
               let lineTasks = row.days?.reduce(
                 (prev, curr) => prev + curr?.data?.length, 0
               )
