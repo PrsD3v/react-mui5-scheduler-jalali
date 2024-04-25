@@ -56,9 +56,9 @@ function SchedulerToolbar (props) {
   const openMenu = Boolean(anchorMenuEl)
   const openDateSelector = Boolean(anchorDateEl)
   const dateFnsLocale = useContext(DateFnsLocaleContext)
-  const isDayMode = mode.toLowerCase() === 'day'
-  const isWeekMode = mode.toLowerCase() === 'week'
-  const isMonthMode = mode.toLowerCase() === 'month'
+  const isDayMode = mode?.toLowerCase() === 'day'
+  const isWeekMode = mode?.toLowerCase() === 'week'
+  const isMonthMode = mode?.toLowerCase() === 'month'
 
   const commonIconButtonProps = {
     size: "medium",

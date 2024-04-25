@@ -479,9 +479,9 @@
     var openMenu = Boolean(anchorMenuEl);
     var openDateSelector = Boolean(anchorDateEl);
     var dateFnsLocale = React.useContext(DateFnsLocaleContext);
-    var isDayMode = mode.toLowerCase() === 'day';
-    var isWeekMode = mode.toLowerCase() === 'week';
-    var isMonthMode = mode.toLowerCase() === 'month';
+    var isDayMode = (mode === null || mode === void 0 ? void 0 : mode.toLowerCase()) === 'day';
+    var isWeekMode = (mode === null || mode === void 0 ? void 0 : mode.toLowerCase()) === 'week';
+    var isMonthMode = (mode === null || mode === void 0 ? void 0 : mode.toLowerCase()) === 'month';
     var commonIconButtonProps = {
       size: "medium",
       edge: "start",
@@ -1220,6 +1220,11 @@
     var onCellDragOver = function onCellDragOver(e) {
       e.preventDefault();
     };
+    var getJalali = function getJalali(date, format) {
+      if (date) {
+        return dateFnsJalali.format(date, format);
+      }
+    };
     var onCellDragStart = function onCellDragStart(e, item, rowLabel, rowIndex, dayIndex) {
       setState(_objectSpread$2(_objectSpread$2({}, state), {}, {
         itemTransfert: {
@@ -1382,7 +1387,7 @@
       return /*#__PURE__*/React__default["default"].createElement(StyledTableCell$1, {
         align: "center",
         key: "weekday-".concat(column === null || column === void 0 ? void 0 : column.day, "-").concat(index)
-      }, column === null || column === void 0 ? void 0 : column.weekDay, " ", column === null || column === void 0 ? void 0 : column.month, "/", column === null || column === void 0 ? void 0 : column.day);
+      }, options.adapter === 'jalali' ? "".concat(column === null || column === void 0 ? void 0 : column.weekDay, " ").concat(getJalali(column === null || column === void 0 ? void 0 : column.date, 'MM'), "/").concat(getJalali(column === null || column === void 0 ? void 0 : column.date, 'dd')) : "".concat(column === null || column === void 0 ? void 0 : column.weekDay, " ").concat(column === null || column === void 0 ? void 0 : column.month, "/").concat(column === null || column === void 0 ? void 0 : column.day));
     }))), /*#__PURE__*/React__default["default"].createElement(material.TableBody, null, rows === null || rows === void 0 ? void 0 : rows.map(function (row, rowIndex) {
       var _row$days, _row$data, _row$days2;
       var lineTasks = (_row$days = row.days) === null || _row$days === void 0 ? void 0 : _row$days.reduce(function (prev, curr) {
