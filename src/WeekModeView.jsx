@@ -104,6 +104,9 @@ function WeekModeView (props) {
   }
 
   const onCellDragEnd = (e) => {
+    if (!options?.draggable) {
+      return
+    }
     e.preventDefault()
     if (!state.itemTransfert || !state.transfertTarget) {
       return

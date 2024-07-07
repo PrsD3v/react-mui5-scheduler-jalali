@@ -121,6 +121,9 @@ function DayModeView (props) {
    * @return void
    */
   const onCellDragEnd = (e) => {
+    if (!options?.draggable) {
+      return
+    }
     e.preventDefault()
     if (!state.itemTransfert || !state.transfertTarget) {
       return
@@ -152,7 +155,7 @@ function DayModeView (props) {
       let endHourDate = options?.adapter === 'jalali' ? jalaliParse(endHour, 'HH:mm', day.date) : parse(endHour, 'HH:mm', day.date)
       // Event start hour
       let startHour =  hourRegExp.exec(transfert.item.startHour)[0]
-      let startHourDate = options?.adapter ? jalaliParse(startHour, 'HH:mm', day.date) : parse(startHour, 'HH:mm', day.date)
+      let startHourDate = options?.adapter === 'jalali' ? jalaliParse(startHour, 'HH:mm', day.date) : parse(startHour, 'HH:mm', day.date)
       // Minutes difference between end and start event hours
       let minutesDiff = options?.adapter === 'jalali' ? jalaliDifferenceInMinutes(endHourDate, startHourDate) :  differenceInMinutes(endHourDate, startHourDate)
       // New event end hour according to it new cell

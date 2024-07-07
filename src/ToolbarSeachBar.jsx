@@ -73,7 +73,7 @@ function ToolbarSearchbar (props) {
       }}
       renderOption={(props, option) => (
         <Box component="li" sx={{fontSize: 12}} {...props}>
-          {options?.adapter ? jalaliFormat(
+          {options?.adapter === 'jalali' ? jalaliFormat(
             jalaliParse(option?.date, 'yyyy-MM-dd', new Date()),
             'dd-MMMM-yyyy'
           ): format(

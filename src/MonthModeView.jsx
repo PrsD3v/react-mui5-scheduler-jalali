@@ -13,6 +13,7 @@ import EventItem from "./EventItem.jsx"
 import {useTranslation} from "react-i18next"
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  background: '#F6F6F7',
   [`&.${tableCellClasses.head}`]: {
     borderTop: `1px ${theme.palette.divider} solid !important`,
     borderBottom: `1px ${theme.palette.divider} solid !important`,
@@ -112,6 +113,9 @@ function MonthModeView (props) {
   }
 
   const onCellDragEnd = (e) => {
+    if (!options?.draggable) {
+      return
+    }
     e.preventDefault()
     if (!state.itemTransfert && !state.transfertTarget) return
     let transfert = state.itemTransfert
@@ -146,7 +150,7 @@ function MonthModeView (props) {
             }
             prevDayEvents?.data?.splice(itemIndexToRemove, 1)
             transfert.item.day = day?.day
-            transfert.item.date = format(day?.date, 'yyyy-MM-dd')
+            transfert.item.date = options?.adapter === 'jalali' ? jalaliFormat(day?.date, 'yyyy-MM-dd') : format(day?.date, 'yyyy-MM-dd')
             day.data.push(transfert.item)
             setState({
               ...state,

@@ -419,7 +419,7 @@ function ToolbarSearchbar(props) {
         sx: {
           fontSize: 12
         }
-      }, props), options !== null && options !== void 0 && options.adapter ? format(parse(option === null || option === void 0 ? void 0 : option.date, 'yyyy-MM-dd', new Date()), 'dd-MMMM-yyyy') : format$1(parse$1(option === null || option === void 0 ? void 0 : option.date, 'yyyy-MM-dd', new Date()), 'dd-MMMM-yyyy'), "(", (option === null || option === void 0 ? void 0 : option.startHour) || '', " - ", (option === null || option === void 0 ? void 0 : option.endHour) || '', ")");
+      }, props), (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? format(parse(option === null || option === void 0 ? void 0 : option.date, 'yyyy-MM-dd', new Date()), 'dd-MMMM-yyyy') : format$1(parse$1(option === null || option === void 0 ? void 0 : option.date, 'yyyy-MM-dd', new Date()), 'dd-MMMM-yyyy'), "(", (option === null || option === void 0 ? void 0 : option.startHour) || '', " - ", (option === null || option === void 0 ? void 0 : option.endHour) || '', ")");
     },
     renderInput: function renderInput(params) {
       return /*#__PURE__*/React.createElement(TextField, _extends({}, params, {
@@ -848,7 +848,9 @@ function ownKeys$3(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymb
 function _objectSpread$3(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$3(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$3(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 var StyledTableCell$2 = styled(TableCell)(function (_ref) {
   var theme = _ref.theme;
-  return _defineProperty(_defineProperty(_defineProperty({}, "&.".concat(tableCellClasses.head), _defineProperty({
+  return _defineProperty(_defineProperty(_defineProperty({
+    background: '#F6F6F7'
+  }, "&.".concat(tableCellClasses.head), _defineProperty({
     borderTop: "1px ".concat(theme.palette.divider, " solid !important"),
     borderBottom: "1px ".concat(theme.palette.divider, " solid !important"),
     borderLeft: "1px ".concat(theme.palette.divider, " solid !important")
@@ -942,6 +944,9 @@ function MonthModeView(props) {
     }));
   };
   var onCellDragEnd = function onCellDragEnd(e) {
+    if (!(options !== null && options !== void 0 && options.draggable)) {
+      return;
+    }
     e.preventDefault();
     if (!state.itemTransfert && !state.transfertTarget) return;
     var transfert = state.itemTransfert;
@@ -980,7 +985,7 @@ function MonthModeView(props) {
             }
             prevDayEvents === null || prevDayEvents === void 0 ? void 0 : (_prevDayEvents$data2 = prevDayEvents.data) === null || _prevDayEvents$data2 === void 0 ? void 0 : _prevDayEvents$data2.splice(itemIndexToRemove, 1);
             transfert.item.day = day === null || day === void 0 ? void 0 : day.day;
-            transfert.item.date = format$1(day === null || day === void 0 ? void 0 : day.date, 'yyyy-MM-dd');
+            transfert.item.date = (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? format(day === null || day === void 0 ? void 0 : day.date, 'yyyy-MM-dd') : format$1(day === null || day === void 0 ? void 0 : day.date, 'yyyy-MM-dd');
             day.data.push(transfert.item);
             setState(_objectSpread$3(_objectSpread$3({}, state), {}, {
               rows: rowsCopy,
@@ -1247,6 +1252,9 @@ function WeekModeView(props) {
   };
   var onCellDragEnd = function onCellDragEnd(e) {
     var _rowsData$transfertTa;
+    if (!(options !== null && options !== void 0 && options.draggable)) {
+      return;
+    }
     e.preventDefault();
     if (!state.itemTransfert || !state.transfertTarget) {
       return;
@@ -1592,6 +1600,9 @@ function DayModeView(props) {
    */
   var onCellDragEnd = function onCellDragEnd(e) {
     var _rowsData$transfertTa;
+    if (!(options !== null && options !== void 0 && options.draggable)) {
+      return;
+    }
     e.preventDefault();
     if (!state.itemTransfert || !state.transfertTarget) {
       return;
@@ -1621,7 +1632,7 @@ function DayModeView(props) {
       var endHourDate = (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? parse(endHour, 'HH:mm', day.date) : parse$1(endHour, 'HH:mm', day.date);
       // Event start hour
       var startHour = hourRegExp.exec(transfert.item.startHour)[0];
-      var startHourDate = options !== null && options !== void 0 && options.adapter ? parse(startHour, 'HH:mm', day.date) : parse$1(startHour, 'HH:mm', day.date);
+      var startHourDate = (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? parse(startHour, 'HH:mm', day.date) : parse$1(startHour, 'HH:mm', day.date);
       // Minutes difference between end and start event hours
       var minutesDiff = (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? differenceInMinutes(endHourDate, startHourDate) : differenceInMinutes$1(endHourDate, startHourDate);
       // New event end hour according to it new cell
