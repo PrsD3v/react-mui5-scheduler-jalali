@@ -1,20 +1,21 @@
 import React, {useContext, useState} from 'react'
 import PropTypes from 'prop-types'
-import { useTheme, styled } from '@mui/material/styles'
+import { useTheme, styled,alpha } from '@mui/material/styles'
 import {
   Paper, Typography, Table, TableBody, TableCell, Tooltip,
-  TableContainer, TableHead, TableRow, tableCellClasses,
+  TableContainer, TableHead, TableRow, tableCellClasses,Box
 } from "@mui/material"
 import { 
-  format, parse, add, differenceInMinutes, isValid 
+  format, parse, add, differenceInMinutes, isValid, isSameMonth 
 } from 'date-fns'
 import { 
-  format as jalaliFormat, parse as jalaliParse, add as jalaliAdd, differenceInMinutes as jalaliDifferenceInMinutes, isValid as jalaliIsValid 
+  format as jalaliFormat, parse as jalaliParse, add as jalaliAdd, differenceInMinutes as jalaliDifferenceInMinutes, isValid as jalaliIsValid ,isSameMonth as jalaliIsSameMonth
 } from 'date-fns-jalali'
 import EventItem from "./EventItem.jsx"
 
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  [`&.${tableCellClasses.head}`]: {
+const StyledTableCell = styled(TableCell)(({ theme, eynakology }) => ({
+  background: eynakology ? '#F6F6F7' : '#fff',
+  [`&.${tableCellClasses.head}`]: eynakology ? {} : {
     paddingLeft: 4,
     paddingRight: 4,
     borderTop: `1px solid #ccc !important`,
@@ -24,7 +25,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 12,
-    height: 16,
+    height: eynakology ? 96 : 16,
     width: 128,
     maxWidth: 128,
     cursor: 'pointer',
@@ -32,17 +33,23 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     ['&:nth-of-type(1)']: {
       width: 80,
       maxWidth: 80,
+      borderBottom: eynakology ? 0 : `1px solid #ccc`
     },
-    ['&:nth-of-type(8n+1)']: { borderLeft: 0 }
+    ['&:last-child']: {
+      borderRight: eynakology ? `1px ${theme.palette.divider} solid` : 0
+    },
+    ['&:nth-of-type(8n+1)']: { 
+      borderLeft:  0 
+    }
   },
   [`&.${tableCellClasses.body}:hover`]: {
     backgroundColor: "#eee"
   }
 }))
 
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
+const StyledTableRow = styled(TableRow)(({ theme, eynakology }) => ({
   ['&:last-child td, &:last-child th']: {
-    border: 0
+    borderBottom: eynakology ? `1px ${theme.palette.divider} solid !important` : 0
   }
 }))
 
@@ -77,7 +84,17 @@ function WeekModeView (props) {
   } = props
   const theme = useTheme()
   const [state, setState] = useState({columns, rows})
-
+  const today = new Date()
+  let currentDaySx = {
+    width: 24,
+    height: 22,
+    margin: 'auto',
+    display: 'block',
+    padding: '2px',
+    borderRadius: '50%',
+    //padding: '1px 7px',
+    //width: 'fit-content'
+  }
   const onCellDragOver = (e) => {
     e.preventDefault()
   }
@@ -245,22 +262,58 @@ function WeekModeView (props) {
   }
 
   const hiddenDays = options?.hiddenDays || []
-  
   return (
     <StyledTableContainer
       component={Paper}
-      sx={{ maxHeight: options?.maxHeight || 540 }}
+      sx={{ maxHeight: options?.maxHeight || 540, boxShadow: 'unset !important', borderRadius: options.theme === 'eynakology' ? 3 : 0} }
     >
       <Table
         size="small"
         aria-label="simple table"
-        stickyHeader sx={{ minWidth: options.minWidth || 540 }}
+        stickyHeader sx={{ minWidth: options.minWidth || 540,background: options.theme === 'eynakology' ? '#F6F6F7' : '#fff',p: options.theme === 'eynakology' ?  2 : 0 }}
       >
-        <TableHead sx={{height: 24}}>
-          <StyledTableRow>
-            <StyledTableCell align="left" />
+        {
+          options.theme === 'eynakology' ?
+          <TableHead sx={{height: 24}}>
+          <StyledTableRow eynakology={options.theme ==='eynakology' ? true: false}>
+            <StyledTableCell align="left" eynakology={options.theme ==='eynakology' ? true: false} />
+            {columns?.filter(column => hiddenDays?.indexOf(column.dayName) < 0).map((column, index) => {
+                const currentDay = (
+                  options?.adapter === 'jalali' ?  column.day === jalaliFormat(today, 'dd') && jalaliIsSameMonth(column.date, today) : column.day === today.getUTCDate() && isSameMonth(column.date, today) 
+                )
+         return     <StyledTableCell
+         eynakology={options.theme ==='eynakology' ? true: false}
+                align="center"
+                key={`weekday-${column?.day}-${index}`}
+              >
+                <Box>
+                  <Typography mb={1}>
+                      {column?.weekDay}
+                  </Typography>
+                  <Typography
+                         sx={{
+                          ...currentDaySx,
+                          background: (
+                            currentDay &&
+                            alpha(theme.palette.primary.main, 1)
+                          ),
+                          color: (currentDay && '#fff')
+                        }}
+                  >
+                     {column?.day}
+                  </Typography>
+                </Box>
+              </StyledTableCell>
+})}
+          </StyledTableRow>
+        </TableHead>
+          :
+          <TableHead sx={{height: 24}}>
+          <StyledTableRow eynakology={options.theme ==='eynakology' ? true: false}>
+            <StyledTableCell align="left" eynakology={options.theme ==='eynakology' ? true: false} />
             {columns?.filter(column => hiddenDays?.indexOf(column.dayName) < 0).map((column, index) => {
          return     <StyledTableCell
+         eynakology={options.theme ==='eynakology' ? true: false}
                 align="center"
                 key={`weekday-${column?.day}-${index}`}
               >
@@ -275,6 +328,8 @@ function WeekModeView (props) {
 })}
           </StyledTableRow>
         </TableHead>
+        }
+
         <TableBody>
           {
             rows?.map(row => {
@@ -286,27 +341,37 @@ function WeekModeView (props) {
               )
               return (
                 <StyledTableRow
+                eynakology={options.theme ==='eynakology' ? true: false}
                   key={`timeline-${rowIndex}`}
-                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 >
                   <Tooltip
                     placement="right"
                     title={`${lineTasks} event${lineTasks > 1 ? 's' : ''} on this week timeline`}
                   >
                     <StyledTableCell
+                    eynakology={options.theme ==='eynakology' ? true: false}
                       scope="row"
                       align="center"
                       component="th"
                       sx={{px: 1}}
                       onClick={(event) => handleCellClick(event, row)}
                     >
-                      <Typography variant="body2">{row?.label}</Typography>
+                      {
+                        options.theme === 'eynakology' 
+                        ?
+                        <Box display='flex' height='100%' alignItems='flex-end' justifyContent='center'>
+                          <Typography variant="body2">{row?.label?.[0] === '0' ? row?.label?.[1] : row?.label}</Typography>
+                        </Box>
+                        :
+                        <Typography variant="body2">{row?.label}</Typography>
+                      }
                       {row?.data?.length > 0 && renderTask(row?.data, row.id)}
                     </StyledTableCell>
                   </Tooltip>
                   {row?.days?.map((day, dayIndex) => {
                     return (
                       <StyledTableCell
+                      eynakology={options.theme ==='eynakology' ? true: false}
                         key={day?.id}
                         scope="row"
                         align="center"

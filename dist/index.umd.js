@@ -526,25 +526,24 @@
      * @return void
      */
     var handleChangeDate = function handleChangeDate(method) {
-      var _options;
       if (typeof method !== 'function') {
         return;
       }
-      var options = {
+      var option = {
         months: 1
       };
       if (isWeekMode) {
-        options = {
+        option = {
           weeks: 1
         };
       }
       if (isDayMode) {
-        options = {
+        option = {
           days: 1
         };
       }
-      var newDate = method(selectedDate, options);
-      setDaysInMonth(((_options = options) === null || _options === void 0 ? void 0 : _options.adapter) === 'jalali' ? dateFnsJalali.getDaysInMonth(newDate) : dateFns.getDaysInMonth(newDate));
+      var newDate = method(selectedDate, option);
+      setDaysInMonth((options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? dateFnsJalali.getDaysInMonth(newDate) : dateFns.getDaysInMonth(newDate));
       setSelectedDate(newDate);
     };
     var handleCloseAlert = function handleCloseAlert(e) {
@@ -569,11 +568,115 @@
         setMode(switchMode);
       }
     }, [switchMode]);
+    if (options.theme === 'eynakology') {
+      return /*#__PURE__*/React__default["default"].createElement(material.Toolbar, {
+        variant: "dense",
+        sx: {
+          px: '0px !important',
+          display: 'block',
+          py: options.theme === 'eynakology' ? 2 : 0,
+          borderBottom: "1px ".concat(theme.palette.divider, " solid")
+        }
+      }, /*#__PURE__*/React__default["default"].createElement(material.Grid, {
+        px: 2,
+        container: true,
+        spacing: 0,
+        alignItems: "center"
+        // justifyContent="space-between"
+      }, /*#__PURE__*/React__default["default"].createElement(material.Grid, {
+        item: true,
+        xs: 4
+      }, /*#__PURE__*/React__default["default"].createElement(material.Button, {
+        variant: "outlined",
+        size: 'large',
+        onClick: function onClick() {
+          setSelectedDate(today);
+        }
+      }, "\u0627\u0645\u0631\u0648\u0632")), /*#__PURE__*/React__default["default"].createElement(material.Grid, {
+        item: true,
+        xs: 4,
+        justifyContent: "center",
+        display: "flex"
+      }, toolbarProps.showDatePicker && /*#__PURE__*/React__default["default"].createElement(material.Typography, {
+        component: "div",
+        sx: {
+          fontWeight: 700,
+          fontSize: 26,
+          width: 350
+        }
+      }, /*#__PURE__*/React__default["default"].createElement(material.Box, {
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between"
+      }, /*#__PURE__*/React__default["default"].createElement(material.IconButton, _extends__default["default"]({
+        sx: {
+          mr: 1
+        }
+      }, commonIconButtonProps, {
+        onClick: function onClick() {
+          return handleChangeDate((options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? dateFnsJalali.add : dateFns.add);
+        }
+      }), /*#__PURE__*/React__default["default"].createElement(ChevronRightIcon__default["default"], null)), (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? dateFnsJalali.format(selectedDate, isMonthMode ? 'MMMM-yyyy' : 'PPP', {
+        locale: dateFnsLocale
+      }) : dateFns.format(selectedDate, isMonthMode ? 'MMMM-yyyy' : 'PPP', {
+        locale: dateFnsLocale
+      }), /*#__PURE__*/React__default["default"].createElement(material.IconButton, _extends__default["default"]({
+        sx: _defineProperty__default["default"]({
+          ml: 0
+        }, "ml", 1)
+      }, commonIconButtonProps, {
+        onClick: function onClick() {
+          return handleChangeDate((options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? dateFnsJalali.sub : dateFns.sub);
+        }
+      }), /*#__PURE__*/React__default["default"].createElement(ChevronLeftIcon__default["default"], null))))), /*#__PURE__*/React__default["default"].createElement(material.Grid, {
+        item: true,
+        xs: 4
+      }, /*#__PURE__*/React__default["default"].createElement(material.Stack, {
+        direction: "row",
+        sx: {
+          pr: .5,
+          alignItems: 'center',
+          justifyContent: 'flex-end'
+        }
+      }, (toolbarProps === null || toolbarProps === void 0 ? void 0 : toolbarProps.showSearchBar) && /*#__PURE__*/React__default["default"].createElement(ToolbarSearchbar, {
+        options: options,
+        events: events,
+        onInputChange: function onInputChange(newValue) {
+          var newDate = new Date();
+          if (newValue !== null && newValue !== void 0 && newValue.date) {
+            newDate = (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? dateFnsJalali.parse(newValue.date, 'yyyy-MM-dd', today) : dateFns.parse(newValue.date, 'yyyy-MM-dd', today);
+          }
+          setDaysInMonth((options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? dateFnsJalali.getDaysInMonth(newDate) : dateFns.getDaysInMonth(newDate));
+          setSelectedDate(newDate);
+          setSearchResult(newValue);
+        }
+      }), (toolbarProps === null || toolbarProps === void 0 ? void 0 : toolbarProps.showSwitchModeButtons) && options.theme === 'eynakology' && /*#__PURE__*/React__default["default"].createElement(material.Select, {
+        size: "small",
+        MenuProps: {
+          dir: "rtl"
+        },
+        sx: {
+          bgcolor: '#0000000A',
+          width: 160
+        },
+        value: mode,
+        onChange: function onChange(e) {
+          setMode(e.target.value);
+        }
+      }, /*#__PURE__*/React__default["default"].createElement(material.MenuItem, {
+        value: 'month'
+      }, "\u0645\u0627\u0647\u0627\u0646\u0647"), /*#__PURE__*/React__default["default"].createElement(material.MenuItem, {
+        value: 'week'
+      }, "\u0647\u0641\u062A\u06AF\u06CC"), /*#__PURE__*/React__default["default"].createElement(material.MenuItem, {
+        value: 'day'
+      }, "\u0631\u0648\u0632\u0627\u0646\u0647"))))));
+    }
     return /*#__PURE__*/React__default["default"].createElement(material.Toolbar, {
       variant: "dense",
       sx: {
         px: '0px !important',
         display: 'block',
+        py: options.theme === 'eynakology' ? 2 : 0,
         borderBottom: "1px ".concat(theme.palette.divider, " solid")
       }
     }, /*#__PURE__*/React__default["default"].createElement(material.Grid, {
@@ -847,16 +950,17 @@
   function ownKeys$3(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
   function _objectSpread$3(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$3(Object(t), !0).forEach(function (r) { _defineProperty__default["default"](e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$3(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
   var StyledTableCell$2 = styles.styled(material.TableCell)(function (_ref) {
-    var theme = _ref.theme;
+    var theme = _ref.theme,
+      eynakology = _ref.eynakology;
     return _defineProperty__default["default"](_defineProperty__default["default"](_defineProperty__default["default"]({
-      background: '#F6F6F7'
-    }, "&.".concat(material.tableCellClasses.head), _defineProperty__default["default"]({
+      background: eynakology ? '#F6F6F7' : '#fff'
+    }, "&.".concat(material.tableCellClasses.head), eynakology ? {} : _defineProperty__default["default"]({
       borderTop: "1px ".concat(theme.palette.divider, " solid !important"),
       borderBottom: "1px ".concat(theme.palette.divider, " solid !important"),
       borderLeft: "1px ".concat(theme.palette.divider, " solid !important")
     }, '&:nth-of-type(1)', {
       borderLeft: "0px !important"
-    })), "&.".concat(material.tableCellClasses.body), _defineProperty__default["default"](_defineProperty__default["default"]({
+    })), "&.".concat(material.tableCellClasses.body), _defineProperty__default["default"](_defineProperty__default["default"](_defineProperty__default["default"]({
       fontSize: 12,
       height: 96,
       width: 64,
@@ -865,21 +969,24 @@
       verticalAlign: "top",
       borderLeft: "1px ".concat(theme.palette.divider, " solid")
     }, '&:nth-of-type(7n+1)', {
-      borderLeft: 0
+      borderLeft: eynakology ? "1px ".concat(theme.palette.divider, " solid") : 0
+    }), '&:last-child', {
+      borderRight: eynakology ? "1px ".concat(theme.palette.divider, " solid") : 0
     }), '&:nth-of-type(even)', {
       //backgroundColor: theme.palette.action.hover
     })), "&.".concat(material.tableCellClasses.body, ":hover"), {
       //backgroundColor: "#eee"
     });
   });
-  var StyledTableRow$2 = styles.styled(material.TableRow)(function (_ref3) {
-    _ref3.theme;
+  var StyledTableRow$2 = styles.styled(material.TableRow)(function (_ref4) {
+    var theme = _ref4.theme,
+      eynakology = _ref4.eynakology;
     return _defineProperty__default["default"]({}, '&:last-child td, &:last-child th', {
-      border: 0
+      borderBottom: eynakology ? "1px ".concat(theme.palette.divider, " solid !important") : 0
     });
   });
-  var StyledTableContainer$2 = styles.styled(material.TableContainer)(function (_ref5) {
-    _ref5.theme;
+  var StyledTableContainer$2 = styles.styled(material.TableContainer)(function (_ref6) {
+    _ref6.theme;
     return _defineProperty__default["default"](_defineProperty__default["default"](_defineProperty__default["default"](_defineProperty__default["default"]({}, '&::-webkit-scrollbar', {
       width: 7,
       height: 6
@@ -895,7 +1002,7 @@
     });
   });
   function MonthModeView(props) {
-    var _columns$filter;
+    var _columns$filter, _columns$filter2;
     var rows = props.rows;
       props.locale;
       var options = props.options,
@@ -1062,7 +1169,8 @@
     return /*#__PURE__*/React__default["default"].createElement(StyledTableContainer$2, {
       component: material.Paper,
       sx: {
-        maxHeight: (options === null || options === void 0 ? void 0 : options.maxHeight) || 540
+        maxHeight: (options === null || options === void 0 ? void 0 : options.maxHeight) || 540,
+        borderRadius: options.theme === 'eynakology' ? 3 : 0
       }
     }, /*#__PURE__*/React__default["default"].createElement(material.TableContainer, {
       component: material.Paper,
@@ -1074,22 +1182,42 @@
       "aria-label": "simple table",
       stickyHeader: true,
       sx: {
-        minWidth: (options === null || options === void 0 ? void 0 : options.minWidth) || 650
+        minWidth: (options === null || options === void 0 ? void 0 : options.minWidth) || 650,
+        p: options.theme === 'eynakology' ? 2 : 0,
+        background: options.theme === 'eynakology' ? '#F6F6F7' : '#fff'
       }
-    }, legacyStyle && /*#__PURE__*/React__default["default"].createElement(material.TableHead, {
+    }, options.theme === 'eynakology' && /*#__PURE__*/React__default["default"].createElement(material.TableHead, {
       sx: {
-        height: 24
+        height: options.theme === 'eynakology' ? 48 : 24
       }
-    }, /*#__PURE__*/React__default["default"].createElement(StyledTableRow$2, null, columns === null || columns === void 0 ? void 0 : (_columns$filter = columns.filter(function (column) {
+    }, /*#__PURE__*/React__default["default"].createElement(StyledTableRow$2, {
+      eynakology: options.theme === 'eynakology' ? true : false
+    }, columns === null || columns === void 0 ? void 0 : (_columns$filter = columns.filter(function (column) {
       return (hiddenDays === null || hiddenDays === void 0 ? void 0 : hiddenDays.indexOf(column.dayName)) < 0;
     })) === null || _columns$filter === void 0 ? void 0 : _columns$filter.map(function (column, index) {
       return /*#__PURE__*/React__default["default"].createElement(StyledTableCell$2, {
+        eynakology: options.theme === 'eynakology' ? true : false,
+        align: "center",
+        key: (column === null || column === void 0 ? void 0 : column.headerName) + '-' + index
+      }, column === null || column === void 0 ? void 0 : column.headerName);
+    }))), legacyStyle && /*#__PURE__*/React__default["default"].createElement(material.TableHead, {
+      sx: {
+        height: 24
+      }
+    }, /*#__PURE__*/React__default["default"].createElement(StyledTableRow$2, {
+      eynakology: options.theme === 'eynakology' ? true : false
+    }, columns === null || columns === void 0 ? void 0 : (_columns$filter2 = columns.filter(function (column) {
+      return (hiddenDays === null || hiddenDays === void 0 ? void 0 : hiddenDays.indexOf(column.dayName)) < 0;
+    })) === null || _columns$filter2 === void 0 ? void 0 : _columns$filter2.map(function (column, index) {
+      return /*#__PURE__*/React__default["default"].createElement(StyledTableCell$2, {
+        eynakology: options.theme === 'eynakology' ? true : false,
         align: "center",
         key: (column === null || column === void 0 ? void 0 : column.headerName) + '-' + index
       }, column === null || column === void 0 ? void 0 : column.headerName);
     }))), /*#__PURE__*/React__default["default"].createElement(material.TableBody, null, rows === null || rows === void 0 ? void 0 : rows.map(function (row, index) {
       var _row$days;
       return /*#__PURE__*/React__default["default"].createElement(StyledTableRow$2, {
+        eynakology: options.theme === 'eynakology' ? true : false,
         key: "row-".concat(row.id, "-").concat(index),
         sx: {
           '&:last-child th': {
@@ -1106,6 +1234,7 @@
         var _columns$filter$index, _columns$filter$index2, _day$data2, _day$data3;
         var currentDay = (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? day.day === parseInt(dateFnsJalali.format(today, 'dd')) && dateFnsJalali.isSameMonth(day.date, today) : day.day === today.getUTCDate() && dateFns.isSameMonth(day.date, today);
         return /*#__PURE__*/React__default["default"].createElement(StyledTableCell$2, {
+          eynakology: options.theme === 'eynakology' ? true : false,
           scope: "row",
           align: "center",
           component: "th",
@@ -1127,9 +1256,9 @@
             height: '100%',
             overflowY: 'visible'
           }
-        }, !legacyStyle && index === 0 && (columns === null || columns === void 0 ? void 0 : (_columns$filter$index = columns.filter(function (column) {
+        }, !legacyStyle && options.theme !== 'eynakology' && index === 0 && (columns === null || columns === void 0 ? void 0 : (_columns$filter$index = columns.filter(function (column) {
           return (hiddenDays === null || hiddenDays === void 0 ? void 0 : hiddenDays.indexOf(column.dayName)) < 0;
-        })[indexD]) === null || _columns$filter$index === void 0 ? void 0 : (_columns$filter$index2 = _columns$filter$index.headerName) === null || _columns$filter$index2 === void 0 ? void 0 : _columns$filter$index2.toUpperCase()), ".", /*#__PURE__*/React__default["default"].createElement(material.Typography, {
+        })[indexD]) === null || _columns$filter$index === void 0 ? void 0 : (_columns$filter$index2 = _columns$filter$index.headerName) === null || _columns$filter$index2 === void 0 ? void 0 : _columns$filter$index2.toUpperCase()), /*#__PURE__*/React__default["default"].createElement(material.Typography, {
           variant: "body2",
           sx: _objectSpread$3(_objectSpread$3({}, currentDaySx), {}, {
             background: currentDay && styles.alpha(theme.palette.primary.main, 1),
@@ -1159,8 +1288,11 @@
   function ownKeys$2(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
   function _objectSpread$2(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$2(Object(t), !0).forEach(function (r) { _defineProperty__default["default"](e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$2(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
   var StyledTableCell$1 = styles.styled(material.TableCell)(function (_ref) {
-    _ref.theme;
-    return _defineProperty__default["default"](_defineProperty__default["default"](_defineProperty__default["default"]({}, "&.".concat(material.tableCellClasses.head), _defineProperty__default["default"]({
+    var theme = _ref.theme,
+      eynakology = _ref.eynakology;
+    return _defineProperty__default["default"](_defineProperty__default["default"](_defineProperty__default["default"]({
+      background: eynakology ? '#F6F6F7' : '#fff'
+    }, "&.".concat(material.tableCellClasses.head), eynakology ? {} : _defineProperty__default["default"]({
       paddingLeft: 4,
       paddingRight: 4,
       borderTop: "1px solid #ccc !important",
@@ -1168,30 +1300,34 @@
       borderLeft: "1px solid #ccc !important"
     }, '&:nth-of-type(1)', {
       borderLeft: "0px !important"
-    })), "&.".concat(material.tableCellClasses.body), _defineProperty__default["default"](_defineProperty__default["default"]({
+    })), "&.".concat(material.tableCellClasses.body), _defineProperty__default["default"](_defineProperty__default["default"](_defineProperty__default["default"]({
       fontSize: 12,
-      height: 16,
+      height: eynakology ? 96 : 16,
       width: 128,
       maxWidth: 128,
       cursor: 'pointer',
       borderLeft: "1px solid #ccc"
     }, '&:nth-of-type(1)', {
       width: 80,
-      maxWidth: 80
+      maxWidth: 80,
+      borderBottom: eynakology ? 0 : "1px solid #ccc"
+    }), '&:last-child', {
+      borderRight: eynakology ? "1px ".concat(theme.palette.divider, " solid") : 0
     }), '&:nth-of-type(8n+1)', {
       borderLeft: 0
     })), "&.".concat(material.tableCellClasses.body, ":hover"), {
       backgroundColor: "#eee"
     });
   });
-  var StyledTableRow$1 = styles.styled(material.TableRow)(function (_ref3) {
-    _ref3.theme;
+  var StyledTableRow$1 = styles.styled(material.TableRow)(function (_ref4) {
+    var theme = _ref4.theme,
+      eynakology = _ref4.eynakology;
     return _defineProperty__default["default"]({}, '&:last-child td, &:last-child th', {
-      border: 0
+      borderBottom: eynakology ? "1px ".concat(theme.palette.divider, " solid !important") : 0
     });
   });
-  var StyledTableContainer$1 = styles.styled(material.TableContainer)(function (_ref5) {
-    _ref5.theme;
+  var StyledTableContainer$1 = styles.styled(material.TableContainer)(function (_ref6) {
+    _ref6.theme;
     return _defineProperty__default["default"](_defineProperty__default["default"](_defineProperty__default["default"](_defineProperty__default["default"]({}, '&::-webkit-scrollbar', {
       width: 7,
       height: 6
@@ -1222,6 +1358,17 @@
       _useState2 = _slicedToArray__default["default"](_useState, 2),
       state = _useState2[0],
       setState = _useState2[1];
+    var today = new Date();
+    var currentDaySx = {
+      width: 24,
+      height: 22,
+      margin: 'auto',
+      display: 'block',
+      padding: '2px',
+      borderRadius: '50%'
+      //padding: '1px 7px',
+      //width: 'fit-content'
+    };
     var onCellDragOver = function onCellDragOver(e) {
       e.preventDefault();
     };
@@ -1377,25 +1524,58 @@
     return /*#__PURE__*/React__default["default"].createElement(StyledTableContainer$1, {
       component: material.Paper,
       sx: {
-        maxHeight: (options === null || options === void 0 ? void 0 : options.maxHeight) || 540
+        maxHeight: (options === null || options === void 0 ? void 0 : options.maxHeight) || 540,
+        boxShadow: 'unset !important',
+        borderRadius: options.theme === 'eynakology' ? 3 : 0
       }
     }, /*#__PURE__*/React__default["default"].createElement(material.Table, {
       size: "small",
       "aria-label": "simple table",
       stickyHeader: true,
       sx: {
-        minWidth: options.minWidth || 540
+        minWidth: options.minWidth || 540,
+        background: options.theme === 'eynakology' ? '#F6F6F7' : '#fff',
+        p: options.theme === 'eynakology' ? 2 : 0
       }
-    }, /*#__PURE__*/React__default["default"].createElement(material.TableHead, {
+    }, options.theme === 'eynakology' ? /*#__PURE__*/React__default["default"].createElement(material.TableHead, {
       sx: {
         height: 24
       }
-    }, /*#__PURE__*/React__default["default"].createElement(StyledTableRow$1, null, /*#__PURE__*/React__default["default"].createElement(StyledTableCell$1, {
-      align: "left"
+    }, /*#__PURE__*/React__default["default"].createElement(StyledTableRow$1, {
+      eynakology: options.theme === 'eynakology' ? true : false
+    }, /*#__PURE__*/React__default["default"].createElement(StyledTableCell$1, {
+      align: "left",
+      eynakology: options.theme === 'eynakology' ? true : false
+    }), columns === null || columns === void 0 ? void 0 : columns.filter(function (column) {
+      return (hiddenDays === null || hiddenDays === void 0 ? void 0 : hiddenDays.indexOf(column.dayName)) < 0;
+    }).map(function (column, index) {
+      var currentDay = (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? column.day === dateFnsJalali.format(today, 'dd') && dateFnsJalali.isSameMonth(column.date, today) : column.day === today.getUTCDate() && dateFns.isSameMonth(column.date, today);
+      return /*#__PURE__*/React__default["default"].createElement(StyledTableCell$1, {
+        eynakology: options.theme === 'eynakology' ? true : false,
+        align: "center",
+        key: "weekday-".concat(column === null || column === void 0 ? void 0 : column.day, "-").concat(index)
+      }, /*#__PURE__*/React__default["default"].createElement(material.Box, null, /*#__PURE__*/React__default["default"].createElement(material.Typography, {
+        mb: 1
+      }, column === null || column === void 0 ? void 0 : column.weekDay), /*#__PURE__*/React__default["default"].createElement(material.Typography, {
+        sx: _objectSpread$2(_objectSpread$2({}, currentDaySx), {}, {
+          background: currentDay && styles.alpha(theme.palette.primary.main, 1),
+          color: currentDay && '#fff'
+        })
+      }, column === null || column === void 0 ? void 0 : column.day)));
+    }))) : /*#__PURE__*/React__default["default"].createElement(material.TableHead, {
+      sx: {
+        height: 24
+      }
+    }, /*#__PURE__*/React__default["default"].createElement(StyledTableRow$1, {
+      eynakology: options.theme === 'eynakology' ? true : false
+    }, /*#__PURE__*/React__default["default"].createElement(StyledTableCell$1, {
+      align: "left",
+      eynakology: options.theme === 'eynakology' ? true : false
     }), columns === null || columns === void 0 ? void 0 : columns.filter(function (column) {
       return (hiddenDays === null || hiddenDays === void 0 ? void 0 : hiddenDays.indexOf(column.dayName)) < 0;
     }).map(function (column, index) {
       return /*#__PURE__*/React__default["default"].createElement(StyledTableCell$1, {
+        eynakology: options.theme === 'eynakology' ? true : false,
         align: "center",
         key: "weekday-".concat(column === null || column === void 0 ? void 0 : column.day, "-").concat(index)
       }, options.adapter === 'jalali' ? "".concat(column === null || column === void 0 ? void 0 : column.weekDay, " ").concat(getJalali(column === null || column === void 0 ? void 0 : column.date, 'MM'), "/").concat(getJalali(column === null || column === void 0 ? void 0 : column.date, 'dd')) : "".concat(column === null || column === void 0 ? void 0 : column.weekDay, " ").concat(column === null || column === void 0 ? void 0 : column.month, "/").concat(column === null || column === void 0 ? void 0 : column.day));
@@ -1407,22 +1587,19 @@
         days: days
       });
     }).map(function (row, rowIndex) {
-      var _row$days, _row$data, _row$days2;
+      var _row$days, _row$label, _row$label2, _row$data, _row$days2;
       var lineTasks = (_row$days = row.days) === null || _row$days === void 0 ? void 0 : _row$days.reduce(function (prev, curr) {
         var _curr$data;
         return prev + (curr === null || curr === void 0 ? void 0 : (_curr$data = curr.data) === null || _curr$data === void 0 ? void 0 : _curr$data.length);
       }, 0);
       return /*#__PURE__*/React__default["default"].createElement(StyledTableRow$1, {
-        key: "timeline-".concat(rowIndex),
-        sx: {
-          '&:last-child td, &:last-child th': {
-            border: 0
-          }
-        }
+        eynakology: options.theme === 'eynakology' ? true : false,
+        key: "timeline-".concat(rowIndex)
       }, /*#__PURE__*/React__default["default"].createElement(material.Tooltip, {
         placement: "right",
         title: "".concat(lineTasks, " event").concat(lineTasks > 1 ? 's' : '', " on this week timeline")
       }, /*#__PURE__*/React__default["default"].createElement(StyledTableCell$1, {
+        eynakology: options.theme === 'eynakology' ? true : false,
         scope: "row",
         align: "center",
         component: "th",
@@ -1432,11 +1609,19 @@
         onClick: function onClick(event) {
           return handleCellClick(event, row);
         }
+      }, options.theme === 'eynakology' ? /*#__PURE__*/React__default["default"].createElement(material.Box, {
+        display: "flex",
+        height: "100%",
+        alignItems: "flex-end",
+        justifyContent: "center"
       }, /*#__PURE__*/React__default["default"].createElement(material.Typography, {
+        variant: "body2"
+      }, (row === null || row === void 0 ? void 0 : (_row$label = row.label) === null || _row$label === void 0 ? void 0 : _row$label[0]) === '0' ? row === null || row === void 0 ? void 0 : (_row$label2 = row.label) === null || _row$label2 === void 0 ? void 0 : _row$label2[1] : row === null || row === void 0 ? void 0 : row.label)) : /*#__PURE__*/React__default["default"].createElement(material.Typography, {
         variant: "body2"
       }, row === null || row === void 0 ? void 0 : row.label), (row === null || row === void 0 ? void 0 : (_row$data = row.data) === null || _row$data === void 0 ? void 0 : _row$data.length) > 0 && renderTask(row === null || row === void 0 ? void 0 : row.data, row.id))), row === null || row === void 0 ? void 0 : (_row$days2 = row.days) === null || _row$days2 === void 0 ? void 0 : _row$days2.map(function (day, dayIndex) {
         var _day$data;
         return /*#__PURE__*/React__default["default"].createElement(StyledTableCell$1, {
+          eynakology: options.theme === 'eynakology' ? true : false,
           key: day === null || day === void 0 ? void 0 : day.id,
           scope: "row",
           align: "center",
@@ -1481,8 +1666,13 @@
   function ownKeys$1(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
   function _objectSpread$1(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$1(Object(t), !0).forEach(function (r) { _defineProperty__default["default"](e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$1(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
   var StyledTableCell = system.styled(material.TableCell)(function (_ref) {
-    _ref.theme;
-    return _defineProperty__default["default"](_defineProperty__default["default"](_defineProperty__default["default"]({}, "&.".concat(material.tableCellClasses.head), _defineProperty__default["default"]({
+    var theme = _ref.theme,
+      eynakology = _ref.eynakology;
+    return _defineProperty__default["default"](_defineProperty__default["default"](_defineProperty__default["default"](_defineProperty__default["default"]({
+      background: eynakology ? '#F6F6F7' : '#fff'
+    }, "&.".concat(material.tableCellClasses.head), eynakology ? {
+      border: '0 !important'
+    } : _defineProperty__default["default"]({
       paddingLeft: 4,
       paddingRight: 4,
       borderTop: "1px solid #ccc !important",
@@ -1492,25 +1682,28 @@
       borderLeft: "0px !important"
     })), "&.".concat(material.tableCellClasses.body), _defineProperty__default["default"]({
       fontSize: 12,
-      height: 16,
+      height: eynakology ? 96 : 16,
       width: 128,
       maxWidth: 128,
       cursor: 'pointer',
       borderLeft: "1px solid #ccc"
     }, '&:nth-of-type(1)', {
       borderLeft: 0
-    })), "&.".concat(material.tableCellClasses.body, ":hover"), {
+    })), '&:last-child', {
+      borderRight: eynakology ? "1px ".concat(theme.palette.divider, " solid") : 0
+    }), "&.".concat(material.tableCellClasses.body, ":hover"), {
       backgroundColor: "#eee"
     });
   });
-  var StyledTableRow = system.styled(material.TableRow)(function (_ref3) {
-    _ref3.theme;
+  var StyledTableRow = system.styled(material.TableRow)(function (_ref4) {
+    var theme = _ref4.theme,
+      eynakology = _ref4.eynakology;
     return _defineProperty__default["default"]({}, '&:last-child td, &:last-child th', {
-      border: 0
+      borderBottom: eynakology ? "1px ".concat(theme.palette.divider, " solid !important") : 0
     });
   });
-  var StyledTableContainer = system.styled(material.TableContainer)(function (_ref5) {
-    _ref5.theme;
+  var StyledTableContainer = system.styled(material.TableContainer)(function (_ref6) {
+    _ref6.theme;
     return _defineProperty__default["default"](_defineProperty__default["default"](_defineProperty__default["default"](_defineProperty__default["default"]({}, '&::-webkit-scrollbar', {
       width: 7,
       height: 6
@@ -1541,7 +1734,17 @@
       _useState2 = _slicedToArray__default["default"](_useState, 2),
       state = _useState2[0],
       setState = _useState2[1];
-
+    var today = new Date();
+    var currentDaySx = {
+      width: 24,
+      height: 22,
+      margin: 'auto',
+      display: 'block',
+      padding: '2px',
+      borderRadius: '50%'
+      //padding: '1px 7px',
+      //width: 'fit-content'
+    };
     /**
      * @name onCellDragOver
      * @param e
@@ -1734,44 +1937,75 @@
     return /*#__PURE__*/React__default["default"].createElement(StyledTableContainer, {
       component: material.Paper,
       sx: {
-        maxHeight: (options === null || options === void 0 ? void 0 : options.maxHeight) || 540
+        maxHeight: (options === null || options === void 0 ? void 0 : options.maxHeight) || 540,
+        boxShadow: 'unset !important',
+        borderRadius: options.theme === 'eynakology' ? 3 : 0
       }
     }, /*#__PURE__*/React__default["default"].createElement(material.Table, {
       size: "small",
       "aria-label": "simple table",
       stickyHeader: true,
       sx: {
-        minWidth: options.minWidth || 540
+        minWidth: options.minWidth || 540,
+        background: options.theme === 'eynakology' ? '#F6F6F7' : '#fff',
+        p: options.theme === 'eynakology' ? 2 : 0
       }
-    }, /*#__PURE__*/React__default["default"].createElement(material.TableHead, {
+    }, options.theme === 'eynakology' ? /*#__PURE__*/React__default["default"].createElement(material.TableHead, {
       sx: {
         height: 24
       }
-    }, /*#__PURE__*/React__default["default"].createElement(StyledTableRow, null, /*#__PURE__*/React__default["default"].createElement(StyledTableCell, {
-      align: "left"
+    }, /*#__PURE__*/React__default["default"].createElement(StyledTableRow, {
+      eynakology: options.theme === 'eynakology' ? true : false
+    }, /*#__PURE__*/React__default["default"].createElement(StyledTableCell, {
+      align: "left",
+      eynakology: options.theme === 'eynakology' ? true : false
+    }), columns === null || columns === void 0 ? void 0 : columns.map(function (column, index) {
+      var currentDay = (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? column.day === dateFnsJalali.format(today, 'dd') && dateFnsJalali.isSameMonth(column.date, today) : column.day === today.getUTCDate() && dateFns.isSameMonth(column.date, today);
+      return /*#__PURE__*/React__default["default"].createElement(StyledTableCell, {
+        eynakology: options.theme === 'eynakology' ? true : false,
+        align: "center",
+        colSpan: 2,
+        key: "weekday-".concat(column === null || column === void 0 ? void 0 : column.day, "-").concat(index)
+      }, /*#__PURE__*/React__default["default"].createElement(material.Box, {
+        mr: '144px'
+      }, /*#__PURE__*/React__default["default"].createElement(material.Typography, {
+        mb: 1
+      }, column === null || column === void 0 ? void 0 : column.weekDay), /*#__PURE__*/React__default["default"].createElement(material.Typography, {
+        sx: _objectSpread$1(_objectSpread$1({}, currentDaySx), {}, {
+          background: currentDay && system.alpha(theme.palette.primary.main, 1),
+          color: currentDay && '#fff'
+        })
+      }, column === null || column === void 0 ? void 0 : column.day)));
+    }))) : /*#__PURE__*/React__default["default"].createElement(material.TableHead, {
+      sx: {
+        height: 24
+      }
+    }, /*#__PURE__*/React__default["default"].createElement(StyledTableRow, {
+      eynakology: options.theme === 'eynakology' ? true : false
+    }, /*#__PURE__*/React__default["default"].createElement(StyledTableCell, {
+      align: "left",
+      eynakology: options.theme === 'eynakology' ? true : false
     }), columns === null || columns === void 0 ? void 0 : columns.map(function (column, index) {
       return /*#__PURE__*/React__default["default"].createElement(StyledTableCell, {
+        eynakology: options.theme === 'eynakology' ? true : false,
         align: "center",
         colSpan: 2,
         key: "weekday-".concat(column === null || column === void 0 ? void 0 : column.day, "-").concat(index)
       }, column === null || column === void 0 ? void 0 : column.weekDay, " ", column === null || column === void 0 ? void 0 : column.month, "/", column === null || column === void 0 ? void 0 : column.day);
     }))), /*#__PURE__*/React__default["default"].createElement(material.TableBody, null, rows === null || rows === void 0 ? void 0 : rows.map(function (row, rowIndex) {
-      var _row$days, _row$data, _row$days2;
+      var _row$days, _row$label, _row$label2, _row$data, _row$days2;
       var lineTasks = (_row$days = row.days) === null || _row$days === void 0 ? void 0 : _row$days.reduce(function (prev, curr) {
         var _curr$data;
         return prev + (curr === null || curr === void 0 ? void 0 : (_curr$data = curr.data) === null || _curr$data === void 0 ? void 0 : _curr$data.length);
       }, 0);
       return /*#__PURE__*/React__default["default"].createElement(StyledTableRow, {
-        key: "timeline-".concat(rowIndex),
-        sx: {
-          '&:last-child td, &:last-child th': {
-            border: 0
-          }
-        }
+        eynakology: options.theme === 'eynakology' ? true : false,
+        key: "timeline-".concat(rowIndex)
       }, /*#__PURE__*/React__default["default"].createElement(material.Tooltip, {
         placement: "right",
         title: "".concat(lineTasks, " event").concat(lineTasks > 1 ? 's' : '', " on this week timeline")
       }, /*#__PURE__*/React__default["default"].createElement(StyledTableCell, {
+        eynakology: options.theme === 'eynakology' ? true : false,
         scope: "row",
         align: "center",
         component: "th",
@@ -1781,11 +2015,19 @@
         onClick: function onClick(event) {
           return handleCellClick(event, row);
         }
+      }, options.theme === 'eynakology' ? /*#__PURE__*/React__default["default"].createElement(material.Box, {
+        display: "flex",
+        height: "100%",
+        alignItems: "flex-end",
+        justifyContent: "center"
       }, /*#__PURE__*/React__default["default"].createElement(material.Typography, {
+        variant: "body2"
+      }, (row === null || row === void 0 ? void 0 : (_row$label = row.label) === null || _row$label === void 0 ? void 0 : _row$label[0]) === '0' ? row === null || row === void 0 ? void 0 : (_row$label2 = row.label) === null || _row$label2 === void 0 ? void 0 : _row$label2[1] : row === null || row === void 0 ? void 0 : row.label)) : /*#__PURE__*/React__default["default"].createElement(material.Typography, {
         variant: "body2"
       }, row === null || row === void 0 ? void 0 : row.label), (row === null || row === void 0 ? void 0 : (_row$data = row.data) === null || _row$data === void 0 ? void 0 : _row$data.length) > 0 && renderTask(row === null || row === void 0 ? void 0 : row.data, row.id))), row === null || row === void 0 ? void 0 : (_row$days2 = row.days) === null || _row$days2 === void 0 ? void 0 : _row$days2.map(function (day, dayIndex) {
         var _day$data;
         return /*#__PURE__*/React__default["default"].createElement(StyledTableCell, {
+          eynakology: options.theme === 'eynakology' ? true : false,
           key: day === null || day === void 0 ? void 0 : day.id,
           scope: "row",
           align: "center",
@@ -2161,7 +2403,7 @@
         var _loop3 = function _loop3() {
           var date = (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? dateFnsJalali.parse("".concat(dateDay, "-").concat(selectedDate), "dd-MMMM-yyyy", new Date()) : dateFns.parse("".concat(dateDay, "-").concat(selectedDate), "dd-MMMM-yyyy", new Date());
           var data = events.filter(function (event) {
-            return (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? dateFnsJalali.isSameDay(date, (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? dateFnsJalali.parse(event === null || event === void 0 ? void 0 : event.date, "yyyy-MM-dd", new Date()) : dateFns.parse(event === null || event === void 0 ? void 0 : event.date, "yyyy-MM-dd", new Date())) : dateFns.isSameDay(date, (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? dateFnsJalali.parse(event === null || event === void 0 ? void 0 : event.date, "yyyy-MM-dd", new Date()) : dateFns.parse(event === null || event === void 0 ? void 0 : event.date, "yyyy-MM-dd", new Date()));
+            return (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? dateFnsJalali.isSameDay(date, dateFnsJalali.parse(event === null || event === void 0 ? void 0 : event.date, "yyyy-MM-dd", new Date())) : dateFns.isSameDay(date, dateFns.parse(event === null || event === void 0 ? void 0 : event.date, "yyyy-MM-dd", new Date()));
           });
           obj.push({
             id: "day_-".concat(dateDay),
@@ -2275,7 +2517,7 @@
       var dayStartHour = (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? dateFnsJalali.startOfDay(selectedDay) : dateFns.startOfDay(selectedDay);
       var _loop4 = function _loop4() {
         var id = "line_".concat(i);
-        var label = (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? dateFnsJalali.format(dayStartHour, "HH:mm aaa") : dateFns.format(dayStartHour, "HH:mm aaa");
+        var label = options.theme === 'eynakology' ? (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? dateFnsJalali.format(dayStartHour, "HH") : dateFns.format(dayStartHour, "HH") : (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? dateFnsJalali.format(dayStartHour, "HH:mm aaa") : dateFns.format(dayStartHour, "HH:mm aaa");
 
         //TODO Add everyday event capability
         //if (i === 0) {
@@ -2356,7 +2598,7 @@
       var dayStartHour = (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? dateFnsJalali.startOfDay(selectedDay) : dateFns.startOfDay(selectedDay);
       var _loop5 = function _loop5() {
         var id = "line_".concat(i);
-        var label = (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? dateFnsJalali.format(dayStartHour, "HH:mm aaa") : dateFns.format(dayStartHour, "HH:mm aaa");
+        var label = options.theme === 'eynakology' ? (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? dateFnsJalali.format(dayStartHour, "HH") : dateFns.format(dayStartHour, "HH") : (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? dateFnsJalali.format(dayStartHour, "HH:mm aaa") : dateFns.format(dayStartHour, "HH:mm aaa");
         if (i > 0) {
           var obj = {
             id: id,
@@ -2512,7 +2754,7 @@
       updateWeekDays();
     }, [options === null || options === void 0 ? void 0 : options.startWeekOn]);
     return /*#__PURE__*/React__default["default"].createElement(material.Paper, {
-      variant: "outlined",
+      variant: options.theme === 'eynakology' ? '' : "outlined",
       elevation: 0,
       sx: {
         p: 0,
@@ -2543,7 +2785,8 @@
     }, /*#__PURE__*/React__default["default"].createElement(material.Grid, {
       item: true,
       xs: 12,
-      height: "100%"
+      height: "100%",
+      p: options.theme === 'eynakology' ? 2 : 0
     }, /*#__PURE__*/React__default["default"].createElement(MonthModeView, {
       locale: locale$2,
       options: options,
@@ -2561,7 +2804,8 @@
     }, /*#__PURE__*/React__default["default"].createElement(material.Grid, {
       item: true,
       xs: 12,
-      height: "100%"
+      height: "100%",
+      p: options.theme === 'eynakology' ? 2 : 0
     }, /*#__PURE__*/React__default["default"].createElement(WeekModeView, {
       locale: locale$2,
       events: events,
@@ -2579,7 +2823,8 @@
     }, /*#__PURE__*/React__default["default"].createElement(material.Grid, {
       item: true,
       xs: 12,
-      height: "100%"
+      height: "100%",
+      p: options.theme === 'eynakology' ? 2 : 0
     }, /*#__PURE__*/React__default["default"].createElement(DayModeView, {
       locale: locale$2,
       events: events,

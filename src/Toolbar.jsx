@@ -8,7 +8,7 @@ import AdapterJalali from "@date-io/date-fns-jalali";
 import {
   Typography, Toolbar, IconButton, Button, ToggleButton,
   TextField, Hidden, Alert, Collapse, ToggleButtonGroup,
-  Divider, ListItemIcon, Menu, MenuItem, Grid, Stack, Box
+  Divider, ListItemIcon, Menu, MenuItem, Grid, Stack, Box, Select 
 } from "@mui/material"
 import { useTheme } from "@mui/material/styles"
 import LocalizationProvider from '@mui/lab/LocalizationProvider'
@@ -107,14 +107,14 @@ function SchedulerToolbar (props) {
     if (typeof method !== 'function') {
       return
     }
-    let options = { months: 1 }
+    let option = { months: 1 }
     if (isWeekMode) { 
-      options = { weeks: 1 } 
+      option = { weeks: 1 } 
     }
     if (isDayMode) { 
-      options = { days: 1 }  
+      option = { days: 1 }  
     }
-    let newDate = method(selectedDate, options)
+    let newDate = method(selectedDate, option)
     setDaysInMonth(options?.adapter === 'jalali' ? jalaliGetDaysInMonth(newDate) : getDaysInMonth(newDate))
     setSelectedDate(newDate)
   }
@@ -143,12 +143,110 @@ function SchedulerToolbar (props) {
       setMode(switchMode)
     }
   }, [switchMode])
+  if (options.theme === 'eynakology') {
+    return     <Toolbar 
+    variant="dense" 
+    sx={{
+      px: '0px !important', 
+      display: 'block',
+      py: options.theme === 'eynakology' ? 2 : 0,
+      borderBottom: `1px ${theme.palette.divider} solid`,
+    }}
+  >
+          <Grid
+          px={2}
+        container
+        spacing={0}
+        alignItems="center"
+        // justifyContent="space-between"
+      >
+        <Grid item xs={4}>
+          <Button variant='outlined' size={'large'} onClick={() => {setSelectedDate(today)}}>
+            امروز
+          </Button>
+        </Grid>
+        <Grid item xs={4} justifyContent='center' display='flex'>
+          {toolbarProps.showDatePicker &&
+          <Typography component="div" sx={{ fontWeight: 700, fontSize: 26, width: 350 }}>
+            <Box display='flex' alignItems='center' justifyContent='space-between' >
+            <IconButton
+                sx={{ mr: 1 }}
+                {...commonIconButtonProps}
+                onClick={() => handleChangeDate(options?.adapter === 'jalali' ? jalaliAdd : add)}
+              >
+              <ChevronRightIcon />
+              </IconButton>
+    
+                {options?.adapter === 'jalali' ? jalaliFormat(
+                  selectedDate, 
+                  isMonthMode ? 'MMMM-yyyy' : 'PPP',
+                  { locale: dateFnsLocale }
+                ) : format(
+                  selectedDate, 
+                  isMonthMode ? 'MMMM-yyyy' : 'PPP',
+                  { locale: dateFnsLocale }
+                )}
+                <IconButton
+                sx={{  ml: 0, ml: 1 }}
+                {...commonIconButtonProps}
+                onClick={() => handleChangeDate(options?.adapter === 'jalali' ? jalaliSub : sub)}
+              >
+                <ChevronLeftIcon />
+              </IconButton>
+            </Box>
+          </Typography>}
+        </Grid>
+        <Grid item xs={4}>
+          <Stack
+            direction="row"
+            sx={{
+              pr: .5,
+              alignItems: 'center',
+              justifyContent: 'flex-end'
+            }}>
+            {toolbarProps?.showSearchBar &&
+            <ToolbarSearchbar
+              options={options}
+              events={events}
+              onInputChange={(newValue) => {
+                let newDate = new Date()
+                if (newValue?.date) {
+                  newDate = options?.adapter === 'jalali' ? jalaliParse(newValue.date, 'yyyy-MM-dd', today) : parse(newValue.date, 'yyyy-MM-dd', today)
+                }
+                setDaysInMonth(options?.adapter === 'jalali' ? jalaliGetDaysInMonth(newDate) :getDaysInMonth(newDate))
+                setSelectedDate(newDate)
+                setSearchResult(newValue)
+              }}
+            />}
+            {toolbarProps?.showSwitchModeButtons && options.theme === 'eynakology' &&
+              <Select
+              size='small'
+              MenuProps={{dir: "rtl"}}
+                sx={{
+                  bgcolor: '#0000000A',
+                  width: 160,
+                }}
+                value={mode}
+                onChange={(e) => {setMode(e.target.value)}}
+              >
+                <MenuItem value={'month'}>ماهانه</MenuItem>
+                <MenuItem value={'week'}>هفتگی</MenuItem>
+                <MenuItem value={'day'}>روزانه</MenuItem>
+              </Select>
+   
+              }
+          </Stack>
+        </Grid>
+      </Grid>
+    </Toolbar>
+  }
   return (
     <Toolbar 
       variant="dense" 
       sx={{
         px: '0px !important', 
         display: 'block',
+        py: options.theme === 'eynakology' ? 2 : 0,
         borderBottom: `1px ${theme.palette.divider} solid`,
       }}
     >

@@ -309,7 +309,6 @@ function Scheduler(props) {
     // Add days and events data
     for (let i = 0; i < iteration; i++) {
       let obj = [];
-
       for (
         let j = 0;
         // This condition ensure that days will not exceed 31
@@ -330,15 +329,11 @@ function Scheduler(props) {
           options?.adapter === "jalali"
             ? jalaliIsSameDay(
                 date,
-                options?.adapter === "jalali"
-                  ? jalaliParse(event?.date, "yyyy-MM-dd", new Date())
-                  : parse(event?.date, "yyyy-MM-dd", new Date())
+                jalaliParse(event?.date, "yyyy-MM-dd", new Date())
               )
             : isSameDay(
                 date,
-                options?.adapter === "jalali"
-                  ? jalaliParse(event?.date, "yyyy-MM-dd", new Date())
-                  : parse(event?.date, "yyyy-MM-dd", new Date())
+                parse(event?.date, "yyyy-MM-dd", new Date())
               )
         );
         obj.push({
@@ -457,7 +452,11 @@ function Scheduler(props) {
 
     for (let i = 0; i <= HOURS; i++) {
       let id = `line_${i}`;
-      let label =
+      let label = options.theme === 'eynakology' ?
+      options?.adapter === "jalali" ?
+       jalaliFormat(dayStartHour, "HH")
+      : format(dayStartHour, "HH")
+      :
         options?.adapter === "jalali"
           ? jalaliFormat(dayStartHour, "HH:mm aaa")
           : format(dayStartHour, "HH:mm aaa");
@@ -542,10 +541,15 @@ function Scheduler(props) {
 
     for (let i = 0; i <= HOURS; i++) {
       let id = `line_${i}`;
-      let label =
+      let label =options.theme === 'eynakology' ?
+      options?.adapter === "jalali" ?
+       jalaliFormat(dayStartHour, "HH")
+      : format(dayStartHour, "HH")
+      :
         options?.adapter === "jalali"
           ? jalaliFormat(dayStartHour, "HH:mm aaa")
           : format(dayStartHour, "HH:mm aaa");
+
 
       if (i > 0) {
         let obj = { id: id, label: label, days: [] };
@@ -706,7 +710,7 @@ function Scheduler(props) {
   }, [options?.startWeekOn]);
 
   return (
-    <Paper variant="outlined" elevation={0} sx={{ p: 0, height: '100%' }}>
+    <Paper variant={options.theme === 'eynakology' ? '' : "outlined"} elevation={0} sx={{ p: 0, height: '100%', }}>
       <DateFnsLocaleContext.Provider value={dateFnsLocale}>
         <SchedulerToolbar
           today={today}
@@ -724,7 +728,7 @@ function Scheduler(props) {
         <Grid container spacing={0} alignItems="center" justifyContent="start" height='100%'>
           {isMonthMode && (
             <TransitionMode in>
-              <Grid item xs={12} height='100%'>
+              <Grid item xs={12} height='100%' p={ options.theme === 'eynakology' ? 2 : 0}>
                 <MonthModeView
                   locale={locale}
                   options={options}
@@ -743,7 +747,7 @@ function Scheduler(props) {
           )}
           {isWeekMode && (
             <TransitionMode in>
-              <Grid item xs={12} height='100%'>
+              <Grid item xs={12} height='100%' p={ options.theme === 'eynakology' ? 2 : 0} >
                 <WeekModeView
                   locale={locale}
                   events={events}
@@ -762,7 +766,7 @@ function Scheduler(props) {
           )}
           {isDayMode && (
             <TransitionMode in>
-              <Grid item xs={12} height='100%'>
+              <Grid item xs={12} height='100%' p={ options.theme === 'eynakology' ? 2 : 0} >
                 <DayModeView
                   locale={locale}
                   events={events}

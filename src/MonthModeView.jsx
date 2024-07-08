@@ -12,9 +12,9 @@ import EventNoteRoundedIcon from '@mui/icons-material/EventNoteRounded'
 import EventItem from "./EventItem.jsx"
 import {useTranslation} from "react-i18next"
 
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  background: '#F6F6F7',
-  [`&.${tableCellClasses.head}`]: {
+const StyledTableCell = styled(TableCell)(({ theme, eynakology }) => ({
+  background: eynakology ? '#F6F6F7' : '#fff',
+  [`&.${tableCellClasses.head}`]: eynakology ? {} : {
     borderTop: `1px ${theme.palette.divider} solid !important`,
     borderBottom: `1px ${theme.palette.divider} solid !important`,
     borderLeft: `1px ${theme.palette.divider} solid !important`,
@@ -31,7 +31,10 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     verticalAlign: "top",
     borderLeft: `1px ${theme.palette.divider} solid`,
     ['&:nth-of-type(7n+1)']: {
-      borderLeft: 0
+      borderLeft: eynakology ? `1px ${theme.palette.divider} solid` : 0
+    },
+    ['&:last-child']: {
+      borderRight: eynakology ? `1px ${theme.palette.divider} solid` : 0
     },
     ['&:nth-of-type(even)']: {
       //backgroundColor: theme.palette.action.hover
@@ -42,9 +45,9 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   }
 }))
 
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
+const StyledTableRow = styled(TableRow)(({ theme, eynakology }) => ({
   ['&:last-child td, &:last-child th']: {
-    border: 0
+    borderBottom: eynakology ? `1px ${theme.palette.divider} solid !important` : 0
   }
 }))
 
@@ -230,18 +233,32 @@ function MonthModeView (props) {
   return (
     <StyledTableContainer
     component={Paper}
-    sx={{ maxHeight: options?.maxHeight || 540 }}
+    sx={{ maxHeight: options?.maxHeight || 540, borderRadius: options.theme === 'eynakology' ? 3 : 0}}
   >
-    <TableContainer component={Paper} sx={{ boxShadow: 'none' }}>
+    <TableContainer component={Paper} sx={{ boxShadow: 'none', }}>
       <Table
         size="small"
         aria-label="simple table"
-        stickyHeader sx={{ minWidth: options?.minWidth || 650 }}
+        stickyHeader sx={{ minWidth: options?.minWidth || 650, p: options.theme === 'eynakology' ?  2 : 0,   background: options.theme === 'eynakology' ? '#F6F6F7' : '#fff',}}
       >
-        {legacyStyle && <TableHead sx={{height: 24}}>
-          <StyledTableRow>
+        {options.theme === 'eynakology' && <TableHead sx={{height: options.theme === 'eynakology' ? 48 : 24,}}>
+          <StyledTableRow eynakology={options.theme ==='eynakology' ? true: false}>
             {columns?.filter(column => hiddenDays?.indexOf(column.dayName) < 0 )?.map((column, index) => (
                 <StyledTableCell 
+                eynakology={options.theme ==='eynakology' ? true: false}
+                  align="center" 
+                  key={column?.headerName+ '-' +index}
+                >
+                  {column?.headerName}
+                </StyledTableCell>
+              ))}
+          </StyledTableRow>
+        </TableHead>}
+        {legacyStyle && <TableHead sx={{height: 24,}}>
+          <StyledTableRow eynakology={options.theme ==='eynakology' ? true: false}>
+            {columns?.filter(column => hiddenDays?.indexOf(column.dayName) < 0 )?.map((column, index) => (
+                <StyledTableCell 
+                eynakology={options.theme ==='eynakology' ? true: false}
                   align="center" 
                   key={column?.headerName+ '-' +index}
                 >
@@ -253,6 +270,7 @@ function MonthModeView (props) {
         <TableBody>
           {rows?.map((row, index) => (
               <StyledTableRow
+              eynakology={options.theme ==='eynakology' ? true: false}
                 key={`row-${row.id}-${index}`}
                 sx={{ 
                   '&:last-child th': { 
@@ -270,6 +288,7 @@ function MonthModeView (props) {
                   )
                   return (
                     <StyledTableCell
+                    eynakology={options.theme ==='eynakology' ? true: false}
                       scope="row"
                       align="center"
                       component="th"
@@ -281,8 +300,8 @@ function MonthModeView (props) {
                       onClick={(event) => handleCellClick(event, row, day)}
                     >
                       <Box sx={{height: '100%', overflowY: 'visible'}}>
-                        {!legacyStyle &&
-                        index === 0 && columns?.filter(column => hiddenDays?.indexOf(column.dayName) < 0 )[indexD]?.headerName?.toUpperCase()}.
+                        {!legacyStyle && options.theme !== 'eynakology' &&
+                        index === 0 && columns?.filter(column => hiddenDays?.indexOf(column.dayName) < 0 )[indexD]?.headerName?.toUpperCase()}
                         <Typography
                           variant="body2"
                           sx={{
