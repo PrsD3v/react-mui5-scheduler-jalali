@@ -184,10 +184,10 @@ function WeekModeView (props) {
       transfert.item.startHour = label
       transfert.item.endHour = options?.adapter === 'jalali' ? jalaliFormat(
         newEndHour,
-        'HH:mm aaa'
+        'HH:mm'
       ) : format(
         newEndHour,
-        'HH:mm aaa'
+        'HH:mm'
       )
       transfert.item.date = options?.adapter === 'jalali' ? jalaliFormat(
         day.date,
@@ -360,7 +360,7 @@ function WeekModeView (props) {
                         options.theme === 'eynakology' 
                         ?
                         <Box display='flex' height='100%' alignItems='flex-end' justifyContent='center'>
-                          <Typography variant="body2">{row?.label?.[0] === '0' ? row?.label?.[1] : row?.label}</Typography>
+                          <Typography variant="body2">{row?.label?.[0] === '0' ? row?.label?.[1] : row?.label?.[0] + row.label?.[1]}</Typography>
                         </Box>
                         :
                         <Typography variant="body2">{row?.label}</Typography>

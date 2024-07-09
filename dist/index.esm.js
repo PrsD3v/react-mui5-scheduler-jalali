@@ -8,7 +8,7 @@ import i18n from 'i18next';
 import { initReactI18next, useTranslation } from 'react-i18next';
 import { styled, useTheme, alpha } from '@mui/material/styles';
 import { Autocomplete, Box, TextField, Toolbar, Grid, Button, Typography, IconButton, Stack, Select, MenuItem, Hidden, Menu, ToggleButtonGroup, ToggleButton, ListItemIcon, Divider, Collapse, Alert, Paper, TableCell, tableCellClasses, TableRow, TableContainer, Table, TableHead, TableBody, Tooltip, Zoom, Fade, Slide } from '@mui/material';
-import { format as format$1, parse as parse$1, getDaysInMonth as getDaysInMonth$1, add as add$1, sub as sub$1, isSameMonth as isSameMonth$1, differenceInMinutes as differenceInMinutes$1, isValid, getWeeksInMonth as getWeeksInMonth$1, startOfMonth as startOfMonth$1, getDay as getDay$1, isSameDay as isSameDay$1, startOfWeek as startOfWeek$1, startOfDay as startOfDay$1 } from 'date-fns';
+import { format as format$1, parse as parse$1, getDaysInMonth as getDaysInMonth$1, add as add$1, sub as sub$1, isSameMonth as isSameMonth$1, differenceInMinutes as differenceInMinutes$1, isValid, getWeeksInMonth as getWeeksInMonth$1, startOfMonth as startOfMonth$1, getDay as getDay$1, isSameDay as isSameDay$1, startOfWeek as startOfWeek$1, startOfDay as startOfDay$1, isBefore, isEqual, isAfter, roundToNearestHours } from 'date-fns';
 import { format, parse, getDaysInMonth, add, sub, isSameMonth, differenceInMinutes, isValid as isValid$1, getWeeksInMonth, startOfMonth, getDay, isSameDay, startOfWeek, startOfDay } from 'date-fns-jalali';
 import _extends from '@babel/runtime/helpers/extends';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
@@ -259,12 +259,12 @@ var week = "هفته";
 var month = "ماه";
 var timeline = "خط زمان";
 var mon = "دوشنبه";
-var tue = "سه شنبه";
+var tue = "سه‌شنبه";
 var wed = "چهارشنبه";
-var thu = "پنجشنبه";
+var thu = "پنج‌شنبه";
 var fri = "جمعه";
 var sat = "شنبه";
-var sun = "یکشنبه";
+var sun = "یک‌شنبه";
 var search = "جستجو ...";
 var trFA = {
 	day: day,
@@ -1455,7 +1455,7 @@ function WeekModeView(props) {
       }
       prevEventCell === null || prevEventCell === void 0 ? void 0 : (_prevEventCell$data = prevEventCell.data) === null || _prevEventCell$data === void 0 ? void 0 : _prevEventCell$data.splice(transfert.item.itemIndex, 1);
       transfert.item.startHour = label;
-      transfert.item.endHour = (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? format(newEndHour, 'HH:mm aaa') : format$1(newEndHour, 'HH:mm aaa');
+      transfert.item.endHour = (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? format(newEndHour, 'HH:mm') : format$1(newEndHour, 'HH:mm');
       transfert.item.date = (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? format(day.date, 'yyyy-MM-dd') : format$1(day.date, 'yyyy-MM-dd');
       day.data.push(transfert.item);
       setState(_objectSpread$2(_objectSpread$2({}, state), {}, {
@@ -1587,7 +1587,7 @@ function WeekModeView(props) {
       days: days
     });
   }).map(function (row, rowIndex) {
-    var _row$days, _row$label, _row$label2, _row$data, _row$days2;
+    var _row$days, _row$label, _row$label2, _row$label3, _row$label4, _row$data, _row$days2;
     var lineTasks = (_row$days = row.days) === null || _row$days === void 0 ? void 0 : _row$days.reduce(function (prev, curr) {
       var _curr$data;
       return prev + (curr === null || curr === void 0 ? void 0 : (_curr$data = curr.data) === null || _curr$data === void 0 ? void 0 : _curr$data.length);
@@ -1616,7 +1616,7 @@ function WeekModeView(props) {
       justifyContent: "center"
     }, /*#__PURE__*/React.createElement(Typography, {
       variant: "body2"
-    }, (row === null || row === void 0 ? void 0 : (_row$label = row.label) === null || _row$label === void 0 ? void 0 : _row$label[0]) === '0' ? row === null || row === void 0 ? void 0 : (_row$label2 = row.label) === null || _row$label2 === void 0 ? void 0 : _row$label2[1] : row === null || row === void 0 ? void 0 : row.label)) : /*#__PURE__*/React.createElement(Typography, {
+    }, (row === null || row === void 0 ? void 0 : (_row$label = row.label) === null || _row$label === void 0 ? void 0 : _row$label[0]) === '0' ? row === null || row === void 0 ? void 0 : (_row$label2 = row.label) === null || _row$label2 === void 0 ? void 0 : _row$label2[1] : (row === null || row === void 0 ? void 0 : (_row$label3 = row.label) === null || _row$label3 === void 0 ? void 0 : _row$label3[0]) + ((_row$label4 = row.label) === null || _row$label4 === void 0 ? void 0 : _row$label4[1]))) : /*#__PURE__*/React.createElement(Typography, {
       variant: "body2"
     }, row === null || row === void 0 ? void 0 : row.label), (row === null || row === void 0 ? void 0 : (_row$data = row.data) === null || _row$data === void 0 ? void 0 : _row$data.length) > 0 && renderTask(row === null || row === void 0 ? void 0 : row.data, row.id))), row === null || row === void 0 ? void 0 : (_row$days2 = row.days) === null || _row$days2 === void 0 ? void 0 : _row$days2.map(function (day, dayIndex) {
       var _day$data;
@@ -1859,7 +1859,7 @@ function DayModeView(props) {
       }
       prevEventCell === null || prevEventCell === void 0 ? void 0 : (_prevEventCell$data = prevEventCell.data) === null || _prevEventCell$data === void 0 ? void 0 : _prevEventCell$data.splice(transfert === null || transfert === void 0 ? void 0 : (_transfert$item = transfert.item) === null || _transfert$item === void 0 ? void 0 : _transfert$item.itemIndex, 1);
       transfert.item.startHour = label;
-      transfert.item.endHour = (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? format(newEndHour, 'HH:mm aaa') : format$1(newEndHour, 'HH:mm aaa');
+      transfert.item.endHour = (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? format(newEndHour, 'HH:mm') : format$1(newEndHour, 'HH:mm');
       transfert.item.date = (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? format(day.date, 'yyyy-MM-dd') : format$1(day.date, 'yyyy-MM-dd');
       day.data.push(transfert.item);
       setState(_objectSpread$1(_objectSpread$1({}, state), {}, {
@@ -1993,7 +1993,7 @@ function DayModeView(props) {
       key: "weekday-".concat(column === null || column === void 0 ? void 0 : column.day, "-").concat(index)
     }, column === null || column === void 0 ? void 0 : column.weekDay, " ", column === null || column === void 0 ? void 0 : column.month, "/", column === null || column === void 0 ? void 0 : column.day);
   }))), /*#__PURE__*/React.createElement(TableBody, null, rows === null || rows === void 0 ? void 0 : rows.map(function (row, rowIndex) {
-    var _row$days, _row$label, _row$label2, _row$data, _row$days2;
+    var _row$days, _row$label, _row$label2, _row$label3, _row$label4, _row$data, _row$days2;
     var lineTasks = (_row$days = row.days) === null || _row$days === void 0 ? void 0 : _row$days.reduce(function (prev, curr) {
       var _curr$data;
       return prev + (curr === null || curr === void 0 ? void 0 : (_curr$data = curr.data) === null || _curr$data === void 0 ? void 0 : _curr$data.length);
@@ -2022,7 +2022,7 @@ function DayModeView(props) {
       justifyContent: "center"
     }, /*#__PURE__*/React.createElement(Typography, {
       variant: "body2"
-    }, (row === null || row === void 0 ? void 0 : (_row$label = row.label) === null || _row$label === void 0 ? void 0 : _row$label[0]) === '0' ? row === null || row === void 0 ? void 0 : (_row$label2 = row.label) === null || _row$label2 === void 0 ? void 0 : _row$label2[1] : row === null || row === void 0 ? void 0 : row.label)) : /*#__PURE__*/React.createElement(Typography, {
+    }, (row === null || row === void 0 ? void 0 : (_row$label = row.label) === null || _row$label === void 0 ? void 0 : _row$label[0]) === '0' ? row === null || row === void 0 ? void 0 : (_row$label2 = row.label) === null || _row$label2 === void 0 ? void 0 : _row$label2[1] : (row === null || row === void 0 ? void 0 : (_row$label3 = row.label) === null || _row$label3 === void 0 ? void 0 : _row$label3[0]) + ((_row$label4 = row.label) === null || _row$label4 === void 0 ? void 0 : _row$label4[1]))) : /*#__PURE__*/React.createElement(Typography, {
       variant: "body2"
     }, row === null || row === void 0 ? void 0 : row.label), (row === null || row === void 0 ? void 0 : (_row$data = row.data) === null || _row$data === void 0 ? void 0 : _row$data.length) > 0 && renderTask(row === null || row === void 0 ? void 0 : row.data, row.id))), row === null || row === void 0 ? void 0 : (_row$days2 = row.days) === null || _row$days2 === void 0 ? void 0 : _row$days2.map(function (day, dayIndex) {
       var _day$data;
@@ -2185,6 +2185,9 @@ function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t =
  */
 function Scheduler(props) {
   var events = props.events,
+    timeMin = props.timeMin,
+    timeMax = props.timeMax,
+    times = props.times,
     locale = props.locale,
     options = props.options,
     alertProps = props.alertProps,
@@ -2517,7 +2520,7 @@ function Scheduler(props) {
     var dayStartHour = (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? startOfDay(selectedDay) : startOfDay$1(selectedDay);
     var _loop4 = function _loop4() {
       var id = "line_".concat(i);
-      var label = options.theme === 'eynakology' ? (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? format(dayStartHour, "HH") : format$1(dayStartHour, "HH") : (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? format(dayStartHour, "HH:mm aaa") : format$1(dayStartHour, "HH:mm aaa");
+      var label = format$1(dayStartHour, "HH:mm");
 
       //TODO Add everyday event capability
       //if (i === 0) {
@@ -2544,9 +2547,13 @@ function Scheduler(props) {
         // eslint-disable-next-line
         columns.map(function (column, index) {
           var data = events.filter(function (event) {
-            var _event$startHour;
+            var _format, _format2, _event$startHour, _event$startHour2;
             var eventDate = (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? parse(event === null || event === void 0 ? void 0 : event.date, "yyyy-MM-dd", new Date()) : parse$1(event === null || event === void 0 ? void 0 : event.date, "yyyy-MM-dd", new Date());
-            return (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? isSameDay(column === null || column === void 0 ? void 0 : column.date, eventDate) : isSameDay$1(column === null || column === void 0 ? void 0 : column.date, eventDate) && (event === null || event === void 0 ? void 0 : (_event$startHour = event.startHour) === null || _event$startHour === void 0 ? void 0 : _event$startHour.toUpperCase()) === (label === null || label === void 0 ? void 0 : label.toUpperCase());
+            return options.theme === 'eynakology' ? (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? isSameDay(column === null || column === void 0 ? void 0 : column.date, eventDate) && ((_format = format$1(roundToNearestHours(parse$1((event === null || event === void 0 ? void 0 : event.startHour) || '00:00', 'HH:mm', new Date()), {
+              roundingMethod: 'floor'
+            }), 'HH:mm')) === null || _format === void 0 ? void 0 : _format.toUpperCase()) === (label === null || label === void 0 ? void 0 : label.toUpperCase()) : isSameDay$1(column === null || column === void 0 ? void 0 : column.date, eventDate) && ((_format2 = format$1(roundToNearestHours(parse$1((event === null || event === void 0 ? void 0 : event.startHour) || '00:00', 'HH:mm', new Date()), {
+              roundingMethod: 'floor'
+            }), 'HH:mm')) === null || _format2 === void 0 ? void 0 : _format2.toUpperCase()) === (label === null || label === void 0 ? void 0 : label.toUpperCase()) : (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? isSameDay(column === null || column === void 0 ? void 0 : column.date, eventDate) && (event === null || event === void 0 ? void 0 : (_event$startHour = event.startHour) === null || _event$startHour === void 0 ? void 0 : _event$startHour.toUpperCase()) === (label === null || label === void 0 ? void 0 : label.toUpperCase()) : isSameDay$1(column === null || column === void 0 ? void 0 : column.date, eventDate) && (event === null || event === void 0 ? void 0 : (_event$startHour2 = event.startHour) === null || _event$startHour2 === void 0 ? void 0 : _event$startHour2.toUpperCase()) === (label === null || label === void 0 ? void 0 : label.toUpperCase());
           });
           obj.days.push({
             id: "column-".concat(index, "_m-").concat(column.month, "_d-").concat(column.day, "_").concat(id),
@@ -2570,7 +2577,14 @@ function Scheduler(props) {
     for (var i = 0; i <= HOURS; i++) {
       _loop4();
     }
-    return data;
+    var max = parse$1(timeMax || '23:00', 'HH:mm', new Date());
+    var min = add$1(parse$1(timeMin || '00:00', 'HH:mm', new Date()), {
+      hours: 1
+    });
+    var arr = data.filter(function (item) {
+      return (isBefore(parse$1(item.label, 'HH:mm', new Date()), max) || isEqual(parse$1(item.label, 'HH:mm', new Date()), max)) && (isAfter(parse$1(item.label, 'HH:mm', new Date()), min) || isEqual(parse$1(item.label, 'HH:mm', new Date()), min));
+    });
+    return (options === null || options === void 0 ? void 0 : options.theme) === 'eynakology' ? arr : data;
   };
   var getDayHeader = function getDayHeader() {
     return [{
@@ -2597,38 +2611,55 @@ function Scheduler(props) {
     var data = [];
     var dayStartHour = (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? startOfDay(selectedDay) : startOfDay$1(selectedDay);
     var _loop5 = function _loop5() {
-      var id = "line_".concat(i);
-      var label = options.theme === 'eynakology' ? (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? format(dayStartHour, "HH") : format$1(dayStartHour, "HH") : (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? format(dayStartHour, "HH:mm aaa") : format$1(dayStartHour, "HH:mm aaa");
-      if (i > 0) {
-        var obj = {
-          id: id,
-          label: label,
-          days: []
-        };
-        var columns = getDayHeader();
-        var column = columns[0];
-        var matchedEvents = events.filter(function (event) {
-          var _event$startHour2;
-          var eventDate = (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? parse(event === null || event === void 0 ? void 0 : event.date, "yyyy-MM-dd", new Date()) : parse$1(event === null || event === void 0 ? void 0 : event.date, "yyyy-MM-dd", new Date());
-          return (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? isSameDay(column === null || column === void 0 ? void 0 : column.date, eventDate) : isSameDay$1(column === null || column === void 0 ? void 0 : column.date, eventDate) && (event === null || event === void 0 ? void 0 : (_event$startHour2 = event.startHour) === null || _event$startHour2 === void 0 ? void 0 : _event$startHour2.toUpperCase()) === (label === null || label === void 0 ? void 0 : label.toUpperCase());
-        });
-        obj.days.push({
-          id: "column-_m-".concat(column === null || column === void 0 ? void 0 : column.month, "_d-").concat(column === null || column === void 0 ? void 0 : column.day, "_").concat(id),
-          date: column === null || column === void 0 ? void 0 : column.date,
-          data: matchedEvents
-        });
-        data.push(obj);
-        dayStartHour = (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? add(dayStartHour, {
-          minutes: 60
-        }) : add$1(dayStartHour, {
-          minutes: 60
-        });
-      }
-    };
+        var id = "line_".concat(i);
+        var label = format$1(dayStartHour, "HH:mm");
+        if (i > 0) {
+          var _column5, _column6, _column7;
+          var obj = {
+            id: id,
+            label: label,
+            days: []
+          };
+          var columns = getDayHeader();
+          column = columns[0];
+          var matchedEvents = events.filter(function (event) {
+            var _column, _format3, _column2, _format4, _column3, _event$startHour3, _column4, _event$startHour4;
+            var eventDate = (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? parse(event === null || event === void 0 ? void 0 : event.date, "yyyy-MM-dd", new Date()) : parse$1(event === null || event === void 0 ? void 0 : event.date, "yyyy-MM-dd", new Date());
+            return options.theme === 'eynakology' ? (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? isSameDay((_column = column) === null || _column === void 0 ? void 0 : _column.date, eventDate) && ((_format3 = format$1(roundToNearestHours(parse$1((event === null || event === void 0 ? void 0 : event.startHour) || '00:00', 'HH:mm', new Date()), {
+              roundingMethod: 'floor'
+            }), 'HH:mm')) === null || _format3 === void 0 ? void 0 : _format3.toUpperCase()) === (label === null || label === void 0 ? void 0 : label.toUpperCase()) : isSameDay$1((_column2 = column) === null || _column2 === void 0 ? void 0 : _column2.date, eventDate) && ((_format4 = format$1(roundToNearestHours(parse$1((event === null || event === void 0 ? void 0 : event.startHour) || '00:00', 'HH:mm', new Date()), {
+              roundingMethod: 'floor'
+            }), 'HH:mm')) === null || _format4 === void 0 ? void 0 : _format4.toUpperCase()) === (label === null || label === void 0 ? void 0 : label.toUpperCase()) : (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? isSameDay((_column3 = column) === null || _column3 === void 0 ? void 0 : _column3.date, eventDate) && (event === null || event === void 0 ? void 0 : (_event$startHour3 = event.startHour) === null || _event$startHour3 === void 0 ? void 0 : _event$startHour3.toUpperCase()) === (label === null || label === void 0 ? void 0 : label.toUpperCase()) : isSameDay$1((_column4 = column) === null || _column4 === void 0 ? void 0 : _column4.date, eventDate) && (event === null || event === void 0 ? void 0 : (_event$startHour4 = event.startHour) === null || _event$startHour4 === void 0 ? void 0 : _event$startHour4.toUpperCase()) === (label === null || label === void 0 ? void 0 : label.toUpperCase());
+          });
+          obj.days.push({
+            id: "column-_m-".concat((_column5 = column) === null || _column5 === void 0 ? void 0 : _column5.month, "_d-").concat((_column6 = column) === null || _column6 === void 0 ? void 0 : _column6.day, "_").concat(id),
+            date: (_column7 = column) === null || _column7 === void 0 ? void 0 : _column7.date,
+            data: matchedEvents
+          });
+          data.push(obj);
+          dayStartHour = (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? add(dayStartHour, {
+            minutes: 60
+          }) : add$1(dayStartHour, {
+            minutes: 60
+          });
+        }
+      },
+      column;
     for (var i = 0; i <= HOURS; i++) {
       _loop5();
     }
-    return data;
+    var weekDay = weekDays.indexOf(column.weekDay) + 1;
+    var time = times.find(function (time) {
+      return time.weekDay === weekDay;
+    });
+    var max = parse$1((time === null || time === void 0 ? void 0 : time.max) || '23:00', 'HH:mm', new Date());
+    var min = add$1(parse$1((time === null || time === void 0 ? void 0 : time.min) || '00:00', 'HH:mm', new Date()), {
+      hours: 1
+    });
+    var arr = data.filter(function (item) {
+      return (isBefore(parse$1(item.label, 'HH:mm', new Date()), max) || isEqual(parse$1(item.label, 'HH:mm', new Date()), max)) && (isAfter(parse$1(item.label, 'HH:mm', new Date()), min) || isEqual(parse$1(item.label, 'HH:mm', new Date()), min));
+    });
+    return (options === null || options === void 0 ? void 0 : options.theme) === 'eynakology' ? arr : data;
   };
   var getTimeLineRows = function getTimeLineRows() {
     return (

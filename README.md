@@ -152,8 +152,8 @@ ReactDOM.render(<App />, document.querySelector("#yourComponentRootId"));
 | label      | `string` | `true`   |                                                              |
 | color      | `string` | `true`   | If not set, the primary color of the theme will be applied   |
 | groupLabel | `string` | `true`   |                                                              |
-| startHour  | `string` | `true`   | Hour string format with `HH:mm aaa`                          |
-| endHour    | `string` | `true`   | Hour string format with `HH:mm aaa`                          |
+| startHour  | `string` | `true`   | Hour string format with `HH:mm`                              |
+| endHour    | `string` | `true`   | Hour string format with `HH:mm`                              |
 | date       | `string` | `true`   | Date string, must be formatted with `yyyy-MM-dd` date format |
 
 For more details about date formats, see [date-fns docs](https://date-fns.org/v2.24.0/docs/)

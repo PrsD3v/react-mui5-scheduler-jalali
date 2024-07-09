@@ -198,7 +198,7 @@ function DayModeView (props) {
 
       prevEventCell?.data?.splice(transfert?.item?.itemIndex, 1)
       transfert.item.startHour = label
-      transfert.item.endHour = options?.adapter === 'jalali' ? jalaliFormat(newEndHour, 'HH:mm aaa') :  format(newEndHour, 'HH:mm aaa')
+      transfert.item.endHour = options?.adapter === 'jalali' ? jalaliFormat(newEndHour, 'HH:mm') :  format(newEndHour, 'HH:mm')
       transfert.item.date = options?.adapter === 'jalali' ? jalaliFormat(day.date, 'yyyy-MM-dd') : format(day.date, 'yyyy-MM-dd')
       day.data.push(transfert.item)
       setState({...state, rows: rowsData})
@@ -364,7 +364,7 @@ function DayModeView (props) {
                         options.theme === 'eynakology' 
                         ?
                         <Box display='flex' height='100%' alignItems='flex-end' justifyContent='center'>
-                          <Typography variant="body2">{row?.label?.[0] === '0' ? row?.label?.[1] : row?.label}</Typography>
+                          <Typography variant="body2">{row?.label?.[0] === '0' ? row?.label?.[1] : row?.label?.[0] + row.label?.[1]}</Typography>
                         </Box>
                         :
                         <Typography variant="body2">{row?.label}</Typography>

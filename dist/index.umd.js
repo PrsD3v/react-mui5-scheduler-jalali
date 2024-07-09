@@ -259,12 +259,12 @@
   var month = "ماه";
   var timeline = "خط زمان";
   var mon = "دوشنبه";
-  var tue = "سه شنبه";
+  var tue = "سه‌شنبه";
   var wed = "چهارشنبه";
-  var thu = "پنجشنبه";
+  var thu = "پنج‌شنبه";
   var fri = "جمعه";
   var sat = "شنبه";
-  var sun = "یکشنبه";
+  var sun = "یک‌شنبه";
   var search = "جستجو ...";
   var trFA = {
   	day: day,
@@ -1455,7 +1455,7 @@
         }
         prevEventCell === null || prevEventCell === void 0 ? void 0 : (_prevEventCell$data = prevEventCell.data) === null || _prevEventCell$data === void 0 ? void 0 : _prevEventCell$data.splice(transfert.item.itemIndex, 1);
         transfert.item.startHour = label;
-        transfert.item.endHour = (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? dateFnsJalali.format(newEndHour, 'HH:mm aaa') : dateFns.format(newEndHour, 'HH:mm aaa');
+        transfert.item.endHour = (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? dateFnsJalali.format(newEndHour, 'HH:mm') : dateFns.format(newEndHour, 'HH:mm');
         transfert.item.date = (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? dateFnsJalali.format(day.date, 'yyyy-MM-dd') : dateFns.format(day.date, 'yyyy-MM-dd');
         day.data.push(transfert.item);
         setState(_objectSpread$2(_objectSpread$2({}, state), {}, {
@@ -1587,7 +1587,7 @@
         days: days
       });
     }).map(function (row, rowIndex) {
-      var _row$days, _row$label, _row$label2, _row$data, _row$days2;
+      var _row$days, _row$label, _row$label2, _row$label3, _row$label4, _row$data, _row$days2;
       var lineTasks = (_row$days = row.days) === null || _row$days === void 0 ? void 0 : _row$days.reduce(function (prev, curr) {
         var _curr$data;
         return prev + (curr === null || curr === void 0 ? void 0 : (_curr$data = curr.data) === null || _curr$data === void 0 ? void 0 : _curr$data.length);
@@ -1616,7 +1616,7 @@
         justifyContent: "center"
       }, /*#__PURE__*/React__default["default"].createElement(material.Typography, {
         variant: "body2"
-      }, (row === null || row === void 0 ? void 0 : (_row$label = row.label) === null || _row$label === void 0 ? void 0 : _row$label[0]) === '0' ? row === null || row === void 0 ? void 0 : (_row$label2 = row.label) === null || _row$label2 === void 0 ? void 0 : _row$label2[1] : row === null || row === void 0 ? void 0 : row.label)) : /*#__PURE__*/React__default["default"].createElement(material.Typography, {
+      }, (row === null || row === void 0 ? void 0 : (_row$label = row.label) === null || _row$label === void 0 ? void 0 : _row$label[0]) === '0' ? row === null || row === void 0 ? void 0 : (_row$label2 = row.label) === null || _row$label2 === void 0 ? void 0 : _row$label2[1] : (row === null || row === void 0 ? void 0 : (_row$label3 = row.label) === null || _row$label3 === void 0 ? void 0 : _row$label3[0]) + ((_row$label4 = row.label) === null || _row$label4 === void 0 ? void 0 : _row$label4[1]))) : /*#__PURE__*/React__default["default"].createElement(material.Typography, {
         variant: "body2"
       }, row === null || row === void 0 ? void 0 : row.label), (row === null || row === void 0 ? void 0 : (_row$data = row.data) === null || _row$data === void 0 ? void 0 : _row$data.length) > 0 && renderTask(row === null || row === void 0 ? void 0 : row.data, row.id))), row === null || row === void 0 ? void 0 : (_row$days2 = row.days) === null || _row$days2 === void 0 ? void 0 : _row$days2.map(function (day, dayIndex) {
         var _day$data;
@@ -1859,7 +1859,7 @@
         }
         prevEventCell === null || prevEventCell === void 0 ? void 0 : (_prevEventCell$data = prevEventCell.data) === null || _prevEventCell$data === void 0 ? void 0 : _prevEventCell$data.splice(transfert === null || transfert === void 0 ? void 0 : (_transfert$item = transfert.item) === null || _transfert$item === void 0 ? void 0 : _transfert$item.itemIndex, 1);
         transfert.item.startHour = label;
-        transfert.item.endHour = (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? dateFnsJalali.format(newEndHour, 'HH:mm aaa') : dateFns.format(newEndHour, 'HH:mm aaa');
+        transfert.item.endHour = (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? dateFnsJalali.format(newEndHour, 'HH:mm') : dateFns.format(newEndHour, 'HH:mm');
         transfert.item.date = (options === null || options === void 0 ? void 0 : options.adapter) === 'jalali' ? dateFnsJalali.format(day.date, 'yyyy-MM-dd') : dateFns.format(day.date, 'yyyy-MM-dd');
         day.data.push(transfert.item);
         setState(_objectSpread$1(_objectSpread$1({}, state), {}, {
@@ -1993,7 +1993,7 @@
         key: "weekday-".concat(column === null || column === void 0 ? void 0 : column.day, "-").concat(index)
       }, column === null || column === void 0 ? void 0 : column.weekDay, " ", column === null || column === void 0 ? void 0 : column.month, "/", column === null || column === void 0 ? void 0 : column.day);
     }))), /*#__PURE__*/React__default["default"].createElement(material.TableBody, null, rows === null || rows === void 0 ? void 0 : rows.map(function (row, rowIndex) {
-      var _row$days, _row$label, _row$label2, _row$data, _row$days2;
+      var _row$days, _row$label, _row$label2, _row$label3, _row$label4, _row$data, _row$days2;
       var lineTasks = (_row$days = row.days) === null || _row$days === void 0 ? void 0 : _row$days.reduce(function (prev, curr) {
         var _curr$data;
         return prev + (curr === null || curr === void 0 ? void 0 : (_curr$data = curr.data) === null || _curr$data === void 0 ? void 0 : _curr$data.length);
@@ -2022,7 +2022,7 @@
         justifyContent: "center"
       }, /*#__PURE__*/React__default["default"].createElement(material.Typography, {
         variant: "body2"
-      }, (row === null || row === void 0 ? void 0 : (_row$label = row.label) === null || _row$label === void 0 ? void 0 : _row$label[0]) === '0' ? row === null || row === void 0 ? void 0 : (_row$label2 = row.label) === null || _row$label2 === void 0 ? void 0 : _row$label2[1] : row === null || row === void 0 ? void 0 : row.label)) : /*#__PURE__*/React__default["default"].createElement(material.Typography, {
+      }, (row === null || row === void 0 ? void 0 : (_row$label = row.label) === null || _row$label === void 0 ? void 0 : _row$label[0]) === '0' ? row === null || row === void 0 ? void 0 : (_row$label2 = row.label) === null || _row$label2 === void 0 ? void 0 : _row$label2[1] : (row === null || row === void 0 ? void 0 : (_row$label3 = row.label) === null || _row$label3 === void 0 ? void 0 : _row$label3[0]) + ((_row$label4 = row.label) === null || _row$label4 === void 0 ? void 0 : _row$label4[1]))) : /*#__PURE__*/React__default["default"].createElement(material.Typography, {
         variant: "body2"
       }, row === null || row === void 0 ? void 0 : row.label), (row === null || row === void 0 ? void 0 : (_row$data = row.data) === null || _row$data === void 0 ? void 0 : _row$data.length) > 0 && renderTask(row === null || row === void 0 ? void 0 : row.data, row.id))), row === null || row === void 0 ? void 0 : (_row$days2 = row.days) === null || _row$days2 === void 0 ? void 0 : _row$days2.map(function (day, dayIndex) {
         var _day$data;
@@ -2185,6 +2185,9 @@
    */
   function Scheduler(props) {
     var events = props.events,
+      timeMin = props.timeMin,
+      timeMax = props.timeMax,
+      times = props.times,
       locale$2 = props.locale,
       options = props.options,
       alertProps = props.alertProps,
@@ -2517,7 +2520,7 @@
       var dayStartHour = (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? dateFnsJalali.startOfDay(selectedDay) : dateFns.startOfDay(selectedDay);
       var _loop4 = function _loop4() {
         var id = "line_".concat(i);
-        var label = options.theme === 'eynakology' ? (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? dateFnsJalali.format(dayStartHour, "HH") : dateFns.format(dayStartHour, "HH") : (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? dateFnsJalali.format(dayStartHour, "HH:mm aaa") : dateFns.format(dayStartHour, "HH:mm aaa");
+        var label = dateFns.format(dayStartHour, "HH:mm");
 
         //TODO Add everyday event capability
         //if (i === 0) {
@@ -2544,9 +2547,13 @@
           // eslint-disable-next-line
           columns.map(function (column, index) {
             var data = events.filter(function (event) {
-              var _event$startHour;
+              var _format, _format2, _event$startHour, _event$startHour2;
               var eventDate = (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? dateFnsJalali.parse(event === null || event === void 0 ? void 0 : event.date, "yyyy-MM-dd", new Date()) : dateFns.parse(event === null || event === void 0 ? void 0 : event.date, "yyyy-MM-dd", new Date());
-              return (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? dateFnsJalali.isSameDay(column === null || column === void 0 ? void 0 : column.date, eventDate) : dateFns.isSameDay(column === null || column === void 0 ? void 0 : column.date, eventDate) && (event === null || event === void 0 ? void 0 : (_event$startHour = event.startHour) === null || _event$startHour === void 0 ? void 0 : _event$startHour.toUpperCase()) === (label === null || label === void 0 ? void 0 : label.toUpperCase());
+              return options.theme === 'eynakology' ? (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? dateFnsJalali.isSameDay(column === null || column === void 0 ? void 0 : column.date, eventDate) && ((_format = dateFns.format(dateFns.roundToNearestHours(dateFns.parse((event === null || event === void 0 ? void 0 : event.startHour) || '00:00', 'HH:mm', new Date()), {
+                roundingMethod: 'floor'
+              }), 'HH:mm')) === null || _format === void 0 ? void 0 : _format.toUpperCase()) === (label === null || label === void 0 ? void 0 : label.toUpperCase()) : dateFns.isSameDay(column === null || column === void 0 ? void 0 : column.date, eventDate) && ((_format2 = dateFns.format(dateFns.roundToNearestHours(dateFns.parse((event === null || event === void 0 ? void 0 : event.startHour) || '00:00', 'HH:mm', new Date()), {
+                roundingMethod: 'floor'
+              }), 'HH:mm')) === null || _format2 === void 0 ? void 0 : _format2.toUpperCase()) === (label === null || label === void 0 ? void 0 : label.toUpperCase()) : (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? dateFnsJalali.isSameDay(column === null || column === void 0 ? void 0 : column.date, eventDate) && (event === null || event === void 0 ? void 0 : (_event$startHour = event.startHour) === null || _event$startHour === void 0 ? void 0 : _event$startHour.toUpperCase()) === (label === null || label === void 0 ? void 0 : label.toUpperCase()) : dateFns.isSameDay(column === null || column === void 0 ? void 0 : column.date, eventDate) && (event === null || event === void 0 ? void 0 : (_event$startHour2 = event.startHour) === null || _event$startHour2 === void 0 ? void 0 : _event$startHour2.toUpperCase()) === (label === null || label === void 0 ? void 0 : label.toUpperCase());
             });
             obj.days.push({
               id: "column-".concat(index, "_m-").concat(column.month, "_d-").concat(column.day, "_").concat(id),
@@ -2570,7 +2577,14 @@
       for (var i = 0; i <= HOURS; i++) {
         _loop4();
       }
-      return data;
+      var max = dateFns.parse(timeMax || '23:00', 'HH:mm', new Date());
+      var min = dateFns.add(dateFns.parse(timeMin || '00:00', 'HH:mm', new Date()), {
+        hours: 1
+      });
+      var arr = data.filter(function (item) {
+        return (dateFns.isBefore(dateFns.parse(item.label, 'HH:mm', new Date()), max) || dateFns.isEqual(dateFns.parse(item.label, 'HH:mm', new Date()), max)) && (dateFns.isAfter(dateFns.parse(item.label, 'HH:mm', new Date()), min) || dateFns.isEqual(dateFns.parse(item.label, 'HH:mm', new Date()), min));
+      });
+      return (options === null || options === void 0 ? void 0 : options.theme) === 'eynakology' ? arr : data;
     };
     var getDayHeader = function getDayHeader() {
       return [{
@@ -2597,38 +2611,55 @@
       var data = [];
       var dayStartHour = (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? dateFnsJalali.startOfDay(selectedDay) : dateFns.startOfDay(selectedDay);
       var _loop5 = function _loop5() {
-        var id = "line_".concat(i);
-        var label = options.theme === 'eynakology' ? (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? dateFnsJalali.format(dayStartHour, "HH") : dateFns.format(dayStartHour, "HH") : (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? dateFnsJalali.format(dayStartHour, "HH:mm aaa") : dateFns.format(dayStartHour, "HH:mm aaa");
-        if (i > 0) {
-          var obj = {
-            id: id,
-            label: label,
-            days: []
-          };
-          var columns = getDayHeader();
-          var column = columns[0];
-          var matchedEvents = events.filter(function (event) {
-            var _event$startHour2;
-            var eventDate = (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? dateFnsJalali.parse(event === null || event === void 0 ? void 0 : event.date, "yyyy-MM-dd", new Date()) : dateFns.parse(event === null || event === void 0 ? void 0 : event.date, "yyyy-MM-dd", new Date());
-            return (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? dateFnsJalali.isSameDay(column === null || column === void 0 ? void 0 : column.date, eventDate) : dateFns.isSameDay(column === null || column === void 0 ? void 0 : column.date, eventDate) && (event === null || event === void 0 ? void 0 : (_event$startHour2 = event.startHour) === null || _event$startHour2 === void 0 ? void 0 : _event$startHour2.toUpperCase()) === (label === null || label === void 0 ? void 0 : label.toUpperCase());
-          });
-          obj.days.push({
-            id: "column-_m-".concat(column === null || column === void 0 ? void 0 : column.month, "_d-").concat(column === null || column === void 0 ? void 0 : column.day, "_").concat(id),
-            date: column === null || column === void 0 ? void 0 : column.date,
-            data: matchedEvents
-          });
-          data.push(obj);
-          dayStartHour = (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? dateFnsJalali.add(dayStartHour, {
-            minutes: 60
-          }) : dateFns.add(dayStartHour, {
-            minutes: 60
-          });
-        }
-      };
+          var id = "line_".concat(i);
+          var label = dateFns.format(dayStartHour, "HH:mm");
+          if (i > 0) {
+            var _column5, _column6, _column7;
+            var obj = {
+              id: id,
+              label: label,
+              days: []
+            };
+            var columns = getDayHeader();
+            column = columns[0];
+            var matchedEvents = events.filter(function (event) {
+              var _column, _format3, _column2, _format4, _column3, _event$startHour3, _column4, _event$startHour4;
+              var eventDate = (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? dateFnsJalali.parse(event === null || event === void 0 ? void 0 : event.date, "yyyy-MM-dd", new Date()) : dateFns.parse(event === null || event === void 0 ? void 0 : event.date, "yyyy-MM-dd", new Date());
+              return options.theme === 'eynakology' ? (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? dateFnsJalali.isSameDay((_column = column) === null || _column === void 0 ? void 0 : _column.date, eventDate) && ((_format3 = dateFns.format(dateFns.roundToNearestHours(dateFns.parse((event === null || event === void 0 ? void 0 : event.startHour) || '00:00', 'HH:mm', new Date()), {
+                roundingMethod: 'floor'
+              }), 'HH:mm')) === null || _format3 === void 0 ? void 0 : _format3.toUpperCase()) === (label === null || label === void 0 ? void 0 : label.toUpperCase()) : dateFns.isSameDay((_column2 = column) === null || _column2 === void 0 ? void 0 : _column2.date, eventDate) && ((_format4 = dateFns.format(dateFns.roundToNearestHours(dateFns.parse((event === null || event === void 0 ? void 0 : event.startHour) || '00:00', 'HH:mm', new Date()), {
+                roundingMethod: 'floor'
+              }), 'HH:mm')) === null || _format4 === void 0 ? void 0 : _format4.toUpperCase()) === (label === null || label === void 0 ? void 0 : label.toUpperCase()) : (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? dateFnsJalali.isSameDay((_column3 = column) === null || _column3 === void 0 ? void 0 : _column3.date, eventDate) && (event === null || event === void 0 ? void 0 : (_event$startHour3 = event.startHour) === null || _event$startHour3 === void 0 ? void 0 : _event$startHour3.toUpperCase()) === (label === null || label === void 0 ? void 0 : label.toUpperCase()) : dateFns.isSameDay((_column4 = column) === null || _column4 === void 0 ? void 0 : _column4.date, eventDate) && (event === null || event === void 0 ? void 0 : (_event$startHour4 = event.startHour) === null || _event$startHour4 === void 0 ? void 0 : _event$startHour4.toUpperCase()) === (label === null || label === void 0 ? void 0 : label.toUpperCase());
+            });
+            obj.days.push({
+              id: "column-_m-".concat((_column5 = column) === null || _column5 === void 0 ? void 0 : _column5.month, "_d-").concat((_column6 = column) === null || _column6 === void 0 ? void 0 : _column6.day, "_").concat(id),
+              date: (_column7 = column) === null || _column7 === void 0 ? void 0 : _column7.date,
+              data: matchedEvents
+            });
+            data.push(obj);
+            dayStartHour = (options === null || options === void 0 ? void 0 : options.adapter) === "jalali" ? dateFnsJalali.add(dayStartHour, {
+              minutes: 60
+            }) : dateFns.add(dayStartHour, {
+              minutes: 60
+            });
+          }
+        },
+        column;
       for (var i = 0; i <= HOURS; i++) {
         _loop5();
       }
-      return data;
+      var weekDay = weekDays.indexOf(column.weekDay) + 1;
+      var time = times.find(function (time) {
+        return time.weekDay === weekDay;
+      });
+      var max = dateFns.parse((time === null || time === void 0 ? void 0 : time.max) || '23:00', 'HH:mm', new Date());
+      var min = dateFns.add(dateFns.parse((time === null || time === void 0 ? void 0 : time.min) || '00:00', 'HH:mm', new Date()), {
+        hours: 1
+      });
+      var arr = data.filter(function (item) {
+        return (dateFns.isBefore(dateFns.parse(item.label, 'HH:mm', new Date()), max) || dateFns.isEqual(dateFns.parse(item.label, 'HH:mm', new Date()), max)) && (dateFns.isAfter(dateFns.parse(item.label, 'HH:mm', new Date()), min) || dateFns.isEqual(dateFns.parse(item.label, 'HH:mm', new Date()), min));
+      });
+      return (options === null || options === void 0 ? void 0 : options.theme) === 'eynakology' ? arr : data;
     };
     var getTimeLineRows = function getTimeLineRows() {
       return (

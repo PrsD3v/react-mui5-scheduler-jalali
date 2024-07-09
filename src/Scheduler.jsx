@@ -16,6 +16,10 @@ import {
   startOfWeek,
   getWeeksInMonth,
   isSameDay,
+  isBefore,
+  isAfter,
+  isEqual,
+  roundToNearestHours
 } from "date-fns";
 import {
   format as jalaliFormat,
@@ -48,6 +52,9 @@ import { faIR as jalaliFaIR } from "date-fns-jalali/locale";
 function Scheduler(props) {
   const {
     events,
+    timeMin,
+    timeMax,
+    times,
     locale,
     options,
     alertProps,
@@ -452,14 +459,7 @@ function Scheduler(props) {
 
     for (let i = 0; i <= HOURS; i++) {
       let id = `line_${i}`;
-      let label = options.theme === 'eynakology' ?
-      options?.adapter === "jalali" ?
-       jalaliFormat(dayStartHour, "HH")
-      : format(dayStartHour, "HH")
-      :
-        options?.adapter === "jalali"
-          ? jalaliFormat(dayStartHour, "HH:mm aaa")
-          : format(dayStartHour, "HH:mm aaa");
+      let label = format(dayStartHour, "HH:mm")
 
       //TODO Add everyday event capability
       //if (i === 0) {
@@ -484,11 +484,20 @@ function Scheduler(props) {
         columns.map((column, index) => {
           let data = events.filter((event) => {
             let eventDate =
-              options?.adapter === "jalali"
-                ? jalaliParse(event?.date, "yyyy-MM-dd", new Date())
-                : parse(event?.date, "yyyy-MM-dd", new Date());
-            return options?.adapter === "jalali"
-              ? jalaliIsSameDay(column?.date, eventDate)
+            options?.adapter === "jalali"
+            ? jalaliParse(event?.date, "yyyy-MM-dd", new Date())
+            : parse(event?.date, "yyyy-MM-dd", new Date());
+            return options.theme === 'eynakology'
+            ?
+            options?.adapter === "jalali"
+            ? jalaliIsSameDay(column?.date, eventDate) &&
+            format(roundToNearestHours(parse(event?.startHour || '00:00', 'HH:mm', new Date()), { roundingMethod: 'floor' }), 'HH:mm')?.toUpperCase() === label?.toUpperCase()
+            : isSameDay(column?.date, eventDate) &&
+            format(roundToNearestHours(parse(event?.startHour || '00:00', 'HH:mm', new Date()), { roundingMethod: 'floor' }), 'HH:mm')?.toUpperCase() === label?.toUpperCase()
+                :
+            options?.adapter === "jalali"
+              ? jalaliIsSameDay(column?.date, eventDate) &&
+              event?.startHour?.toUpperCase() === label?.toUpperCase()
               : isSameDay(column?.date, eventDate) &&
                   event?.startHour?.toUpperCase() === label?.toUpperCase();
           });
@@ -510,7 +519,10 @@ function Scheduler(props) {
       //  dayStartHour = add(dayStartHour, {minutes: 30})
       //}
     }
-    return data;
+    const max = parse(timeMax || '23:00', 'HH:mm', new Date())
+    const min = add(parse(timeMin || '00:00', 'HH:mm', new Date()), {hours: 1})
+    const arr = data.filter(item =>  (isBefore(parse(item.label, 'HH:mm', new Date()), max) || isEqual(parse(item.label, 'HH:mm', new Date()), max)) && (isAfter(parse(item.label, 'HH:mm', new Date()), min) || isEqual(parse(item.label, 'HH:mm', new Date()), min)));
+    return options?.theme === 'eynakology' ?  arr : data;;
   };
 
   const getDayHeader = () => [
@@ -541,27 +553,29 @@ function Scheduler(props) {
 
     for (let i = 0; i <= HOURS; i++) {
       let id = `line_${i}`;
-      let label =options.theme === 'eynakology' ?
-      options?.adapter === "jalali" ?
-       jalaliFormat(dayStartHour, "HH")
-      : format(dayStartHour, "HH")
-      :
-        options?.adapter === "jalali"
-          ? jalaliFormat(dayStartHour, "HH:mm aaa")
-          : format(dayStartHour, "HH:mm aaa");
+      let label = format(dayStartHour, "HH:mm");
 
 
       if (i > 0) {
         let obj = { id: id, label: label, days: [] };
         let columns = getDayHeader();
-        let column = columns[0];
+        var column = columns[0];
         let matchedEvents = events.filter((event) => {
           let eventDate =
             options?.adapter === "jalali"
               ? jalaliParse(event?.date, "yyyy-MM-dd", new Date())
               : parse(event?.date, "yyyy-MM-dd", new Date());
-          return options?.adapter === "jalali"
-            ? jalaliIsSameDay(column?.date, eventDate)
+          return options.theme === 'eynakology'
+          ?
+          options?.adapter === "jalali"
+          ? jalaliIsSameDay(column?.date, eventDate) &&
+          format(roundToNearestHours(parse(event?.startHour || '00:00', 'HH:mm', new Date()), { roundingMethod: 'floor' }), 'HH:mm')?.toUpperCase() === label?.toUpperCase()
+          : isSameDay(column?.date, eventDate) &&
+          format(roundToNearestHours(parse(event?.startHour || '00:00', 'HH:mm', new Date()), { roundingMethod: 'floor' }), 'HH:mm')?.toUpperCase() === label?.toUpperCase()
+              :
+          options?.adapter === "jalali"
+            ? jalaliIsSameDay(column?.date, eventDate) &&
+            event?.startHour?.toUpperCase() === label?.toUpperCase()
             : isSameDay(column?.date, eventDate) &&
                 event?.startHour?.toUpperCase() === label?.toUpperCase();
         });
@@ -578,7 +592,13 @@ function Scheduler(props) {
             : add(dayStartHour, { minutes: 60 });
       }
     }
-    return data;
+
+    const weekDay = weekDays.indexOf(column.weekDay) + 1
+    const time = times.find(time => time.weekDay === weekDay)
+    const max = parse(time?.max || '23:00', 'HH:mm', new Date())
+    const min = add(parse(time?.min || '00:00', 'HH:mm', new Date()), {hours: 1})
+    const arr = data.filter(item =>  (isBefore(parse(item.label, 'HH:mm', new Date()), max) || isEqual(parse(item.label, 'HH:mm', new Date()), max)) && (isAfter(parse(item.label, 'HH:mm', new Date()), min) || isEqual(parse(item.label, 'HH:mm', new Date()), min)));
+    return options?.theme === 'eynakology' ?  arr : data;
   };
 
   const getTimeLineRows = () =>
